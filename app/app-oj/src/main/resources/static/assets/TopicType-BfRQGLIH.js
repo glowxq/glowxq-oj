@@ -1,0 +1,1 @@
+const t={EXERCISE:{code:"Exercise",name:"练习",tooltip:"默认设置 无限制的随意测试",text:"默认设置 无限制的随意测试"},HOMEWORK:{code:"Homework",name:"作业",tooltip:"默认设置 明确提交时间,过期可以补交但是扣分",text:"默认设置 明确提交时间,过期可以补交但是扣分"},CONTEST:{code:"Contest",name:"比赛",tooltip:"默认设置 过期禁止提交",text:"默认设置 过期禁止提交"}};export{t as T};

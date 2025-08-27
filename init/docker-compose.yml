@@ -1,0 +1,232 @@
+# GlowXQ OJ 系统 Docker Compose 配置文件（Host网络模式）
+# 包含 MySQL 8.0、Redis 7.0 和 OJ 应用服务
+#
+# 使用说明：
+# 1. 确保宿主机端口 3307(MySQL)、6380(Redis)、7101(OJ) 未被占用
+# 2. 前端可直接访问 127.0.0.1:7101
+# 3. 启动命令: docker-compose up -d
+
+# 定义服务组件
+services:
+
+  # MySQL 8.0 数据库服务
+  mysql:
+    # 使用官方 MySQL 8.0 镜像
+    image: mysql:8.0
+    # 容器命名便于管理
+    container_name: glowxq-mysql
+    # 重启策略：总是自动重启（保障服务高可用）
+    restart: always
+    # 环境变量配置
+    environment:
+      # 时区设置
+      - TZ=Asia/Shanghai
+      # MySQL root 用户密码
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD:-glowxq-oj-123}
+      # 默认创建的数据库
+      - MYSQL_DATABASE=${MYSQL_DATABASE:-glowxq_oj}
+      # 创建远程连接用户
+      - MYSQL_USER=${MYSQL_USER:-glowxq}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD:-glowxq-oj-123}
+      # 默认字符集
+      - MYSQL_CHARSET=utf8mb4
+      - MYSQL_COLLATION=utf8mb4_general_ci
+      # 强制初始化标志
+      - MYSQL_INITDB_SKIP_TZINFO=1
+    # 端口映射（将容器内部端口暴露给宿主机）
+    ports:
+      - "${MYSQL_PORT:-3307}:3306"
+    # 数据卷映射配置（重要持久化数据）
+    volumes:
+      # MySQL 数据持久化
+      - mysql-data:/var/lib/mysql
+      # 初始化SQL脚本（仅在首次启动时执行）
+      - ./init.sql:/docker-entrypoint-initdb.d/01-init.sql:ro
+      # MySQL 配置文件
+      - mysql-config:/etc/mysql/conf.d
+
+    # MySQL 启动命令参数
+    command: >
+      --default-authentication-plugin=mysql_native_password
+      --character-set-server=utf8mb4
+      --collation-server=utf8mb4_general_ci
+      --explicit_defaults_for_timestamp=true
+      --lower_case_table_names=1
+      --max_allowed_packet=128M
+      --sql_mode="STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION,NO_ZERO_DATE,NO_ZERO_IN_DATE,ERROR_FOR_DIVISION_BY_ZERO"
+      --bind-address=0.0.0.0
+    # 健康检查
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${MYSQL_ROOT_PASSWORD:-glowxq-oj-123}"]
+      timeout: 20s
+      retries: 10
+      interval: 10s
+      start_period: 40s
+    # 网络配置
+    networks:
+      - glowxq-network
+
+  # Redis 7.0 缓存服务
+  redis:
+    # 使用官方 Redis 7.0 镜像
+    image: redis:7.0-alpine
+    # 容器命名便于管理
+    container_name: glowxq-redis
+    # 重启策略：总是自动重启（保障服务高可用）
+    restart: always
+    # 环境变量配置
+    environment:
+      # 时区设置
+      - TZ=Asia/Shanghai
+    # 端口映射（将容器内部端口暴露给宿主机）
+    ports:
+      - "${REDIS_PORT:-6380}:6379"
+    # 数据卷映射配置（重要持久化数据）
+    volumes:
+      # Redis 数据持久化
+      - redis-data:/data
+      # Redis 日志
+      - redis-logs:/var/log/redis
+    # Redis 启动命令参数
+    command: >
+      redis-server
+      --requirepass ${REDIS_PASSWORD:-glowxq-oj-123}
+      --bind 0.0.0.0
+      --port 6379
+      --tcp-keepalive 300
+      --timeout 0
+      --save 900 1
+      --save 300 10
+      --save 60 10000
+      --rdbcompression yes
+      --rdbchecksum yes
+      --dbfilename dump.rdb
+      --dir /data
+      --appendonly yes
+      --appendfilename appendonly.aof
+      --appendfsync everysec
+      --maxmemory 512mb
+      --maxmemory-policy allkeys-lru
+      --maxclients 1000
+    # 健康检查
+    healthcheck:
+      test: ["CMD", "redis-cli", "-a", "${REDIS_PASSWORD:-glowxq-oj-123}", "ping"]
+      timeout: 3s
+      retries: 5
+      interval: 10s
+      start_period: 20s
+    # 网络配置
+    networks:
+      - glowxq-network
+
+  # oj接口业务服务
+  glowxq-oj:
+    # 使用阿里云镜像仓库的定制镜像
+    image: registry.cn-guangzhou.aliyuncs.com/glowxq/public:glowxq-oj
+    # 容器命名便于管理
+    container_name: glowxq-oj
+    # 重启策略：总是自动重启（保障服务高可用）
+    restart: always
+    # 使用host网络模式，解决前端127.0.0.1访问问题
+    network_mode: host
+    # 服务依赖：等待数据库和Redis启动完成
+    depends_on:
+      mysql:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    # 数据卷映射配置（重要持久化数据）
+    volumes:
+      # 测试用例目录（使用Docker卷）
+      - oj-testcase:/goj/testcase
+      - oj-testcase:/judge/testcase
+      # 文件存储目录
+      - oj-data:/goj/file
+      # 日志目录
+      - oj-logs:/goj/log
+      - oj-logs:/judge/log
+      # 判题相关目录
+      - oj-data:/judge/run
+      - oj-data:/judge/spj
+      - oj-data:/judge/interactive
+
+    # 环境变量配置（关键参数通过环境注入）
+    environment:
+      # 时区设置
+      - TZ=Asia/Shanghai
+      # JVM 内存参数
+      - JAVA_OPTS=${JAVA_OPTS:--Xms1024m -Xmx2048m -XX:+UseG1GC}
+      # Spring 配置
+      - SPRING_PROFILES_ACTIVE=docker
+      # 数据库连接（host网络模式下使用localhost）
+      - SPRING_DATASOURCE_URL=jdbc:mysql://localhost:${MYSQL_PORT:-3307}/${MYSQL_DATABASE:-glowxq_oj}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=GMT%2B8&useSSL=false&allowPublicKeyRetrieval=true
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=${MYSQL_ROOT_PASSWORD:-glowxq-oj-123}
+      # Redis 连接（host网络模式下使用localhost）
+      - SPRING_DATA_REDIS_HOST=localhost
+      - SPRING_DATA_REDIS_PORT=${REDIS_PORT:-6380}
+      - SPRING_DATA_REDIS_PASSWORD=${REDIS_PASSWORD:-glowxq-oj-123}
+      - SPRING_DATA_REDIS_DATABASE=1
+
+    # host网络模式下不需要端口映射
+    # ports:
+    #   - "${OJ_PORT:-7101}:7101"
+
+    privileged: true  # 启用特权模式（需访问系统级功能如 cgroup）
+    shm_size: 1024mb   # 共享内存大小（影响判题效率）
+
+    # 健康检查
+    healthcheck:
+      test: ["CMD-SHELL", "wget --no-verbose --tries=1 --spider http://localhost:7101/health || exit 1"]
+      timeout: 30s
+      retries: 8
+      interval: 30s
+      start_period: 120s
+
+    # host网络模式下不需要自定义网络
+    # networks:
+    #   - glowxq-network
+
+# 定义网络
+networks:
+  glowxq-network:
+    driver: bridge
+    name: glowxq-network
+
+# 定义数据卷（持久化存储）
+volumes:
+  # MySQL 数据卷
+  mysql-data:
+    driver: local
+    name: glowxq-mysql-data
+
+  # MySQL 配置卷
+  mysql-config:
+    driver: local
+    name: glowxq-mysql-config
+
+  # Redis 数据卷
+  redis-data:
+    driver: local
+    name: glowxq-redis-data
+
+  # Redis 日志卷
+  redis-logs:
+    driver: local
+    name: glowxq-redis-logs
+
+  # OJ 测试用例卷
+  oj-testcase:
+    driver: local
+    name: glowxq-oj-testcase
+
+  # OJ 数据卷
+  oj-data:
+    driver: local
+    name: glowxq-oj-data
+
+  # OJ 日志卷
+  oj-logs:
+    driver: local
+    name: glowxq-oj-logs
+

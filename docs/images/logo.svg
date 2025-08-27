@@ -1,0 +1,161 @@
+<svg width="200" height="80" viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- 主渐变：绿色到蓝色 -->
+    <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#10B981;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#06B6D4;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#3B82F6;stop-opacity:1" />
+    </linearGradient>
+
+    <!-- 萤火虫发光渐变 -->
+    <radialGradient id="fireflyGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#FBBF24;stop-opacity:1" />
+      <stop offset="30%" style="stop-color:#10B981;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#10B981;stop-opacity:0" />
+    </radialGradient>
+
+    <!-- 萤火虫身体渐变 -->
+    <linearGradient id="fireflyBody" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#065F46;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#047857;stop-opacity:1" />
+    </linearGradient>
+
+    <!-- 发光效果滤镜 -->
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- 强发光效果 -->
+    <filter id="strongGlow" x="-100%" y="-100%" width="300%" height="300%">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- 背景圆角矩形 -->
+  <rect x="2" y="2" width="196" height="76" rx="12" ry="12"
+        fill="url(#logoGradient)" opacity="0.08" stroke="url(#logoGradient)" stroke-width="1"/>
+
+  <!-- 主图标 - 代码符号与萤火虫结合 -->
+  <g transform="translate(15, 20)">
+    <!-- 左括号 -->
+    <path d="M8 5 L3 15 L3 25 L8 35"
+          stroke="url(#logoGradient)" stroke-width="3"
+          fill="none" stroke-linecap="round" filter="url(#glow)"/>
+
+    <!-- 右括号 -->
+    <path d="M32 5 L37 15 L37 25 L32 35"
+          stroke="url(#logoGradient)" stroke-width="3"
+          fill="none" stroke-linecap="round" filter="url(#glow)"/>
+
+    <!-- 中间的代码线条 -->
+    <line x1="12" y1="12" x2="28" y2="12"
+          stroke="url(#logoGradient)" stroke-width="2"
+          stroke-linecap="round" opacity="0.7"/>
+    <line x1="12" y1="20" x2="25" y2="20"
+          stroke="url(#logoGradient)" stroke-width="2"
+          stroke-linecap="round" opacity="0.5"/>
+    <line x1="12" y1="28" x2="30" y2="28"
+          stroke="url(#logoGradient)" stroke-width="2"
+          stroke-linecap="round" opacity="0.7"/>
+
+    <!-- 萤火虫1 - 在代码行间飞舞 -->
+    <g transform="translate(18, 8)">
+      <!-- 萤火虫发光光晕 -->
+      <circle cx="0" cy="0" r="6" fill="url(#fireflyGlow)" opacity="0.6" filter="url(#strongGlow)">
+        <animate attributeName="opacity" values="0.3;0.8;0.3" dur="2s" repeatCount="indefinite"/>
+      </circle>
+      <!-- 萤火虫身体 -->
+      <ellipse cx="0" cy="0" rx="2" ry="3" fill="url(#fireflyBody)"/>
+      <!-- 萤火虫发光点 -->
+      <circle cx="0" cy="1" r="1" fill="#FBBF24" opacity="0.9">
+        <animate attributeName="opacity" values="0.5;1;0.5" dur="1.5s" repeatCount="indefinite"/>
+      </circle>
+      <!-- 萤火虫翅膀 -->
+      <ellipse cx="-1.5" cy="-1" rx="1" ry="2" fill="#10B981" opacity="0.3"/>
+      <ellipse cx="1.5" cy="-1" rx="1" ry="2" fill="#10B981" opacity="0.3"/>
+    </g>
+
+    <!-- 萤火虫2 - 较小的萤火虫 -->
+    <g transform="translate(22, 24)">
+      <circle cx="0" cy="0" r="4" fill="url(#fireflyGlow)" opacity="0.4" filter="url(#glow)">
+        <animate attributeName="opacity" values="0.2;0.6;0.2" dur="2.5s" repeatCount="indefinite"/>
+      </circle>
+      <ellipse cx="0" cy="0" rx="1.5" ry="2" fill="url(#fireflyBody)"/>
+      <circle cx="0" cy="0.5" r="0.8" fill="#FBBF24" opacity="0.8">
+        <animate attributeName="opacity" values="0.4;0.9;0.4" dur="1.8s" repeatCount="indefinite"/>
+      </circle>
+      <ellipse cx="-1" cy="-0.5" rx="0.8" ry="1.5" fill="#06B6D4" opacity="0.3"/>
+      <ellipse cx="1" cy="-0.5" rx="0.8" ry="1.5" fill="#06B6D4" opacity="0.3"/>
+    </g>
+  </g>
+
+  <!-- 文字部分 -->
+  <g transform="translate(65, 25)">
+    <!-- Glowxq 文字 -->
+    <text x="0" y="20" font-family="Arial, sans-serif" font-size="18"
+          font-weight="bold" fill="url(#logoGradient)" filter="url(#glow)">
+      Glowxq
+    </text>
+
+    <!-- OJ 文字 -->
+    <text x="68" y="20" font-family="Arial, sans-serif" font-size="18"
+          font-weight="bold" fill="url(#logoGradient)">
+      -OJ
+    </text>
+
+    <!-- 副标题 -->
+    <text x="0" y="38" font-family="Arial, sans-serif" font-size="10"
+          fill="#6B7280" opacity="0.8">
+      Online Judge Platform
+    </text>
+  </g>
+
+  <!-- 装饰性萤火虫群 -->
+  <!-- 萤火虫3 - 右上角 -->
+  <g transform="translate(175, 20)">
+    <circle cx="0" cy="0" r="3" fill="url(#fireflyGlow)" opacity="0.5" filter="url(#glow)">
+      <animate attributeName="opacity" values="0.3;0.7;0.3" dur="3s" repeatCount="indefinite"/>
+    </circle>
+    <ellipse cx="0" cy="0" rx="1" ry="1.5" fill="url(#fireflyBody)"/>
+    <circle cx="0" cy="0.5" r="0.6" fill="#FBBF24" opacity="0.8">
+      <animate attributeName="opacity" values="0.4;1;0.4" dur="2.2s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+
+  <!-- 萤火虫4 - 右中 -->
+  <g transform="translate(185, 35)">
+    <circle cx="0" cy="0" r="2.5" fill="url(#fireflyGlow)" opacity="0.4" filter="url(#glow)">
+      <animate attributeName="opacity" values="0.2;0.6;0.2" dur="2.8s" repeatCount="indefinite"/>
+    </circle>
+    <ellipse cx="0" cy="0" rx="0.8" ry="1.2" fill="url(#fireflyBody)"/>
+    <circle cx="0" cy="0.3" r="0.5" fill="#10B981" opacity="0.9">
+      <animate attributeName="opacity" values="0.5;1;0.5" dur="1.9s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+
+  <!-- 萤火虫5 - 右下角 -->
+  <g transform="translate(178, 50)">
+    <circle cx="0" cy="0" r="2" fill="url(#fireflyGlow)" opacity="0.6" filter="url(#glow)">
+      <animate attributeName="opacity" values="0.4;0.8;0.4" dur="2.3s" repeatCount="indefinite"/>
+    </circle>
+    <ellipse cx="0" cy="0" rx="0.7" ry="1" fill="url(#fireflyBody)"/>
+    <circle cx="0" cy="0.2" r="0.4" fill="#06B6D4" opacity="0.9">
+      <animate attributeName="opacity" values="0.6;1;0.6" dur="1.7s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+
+  <!-- 飞行轨迹线条 - 模拟萤火虫飞行路径 -->
+  <path d="M170 25 Q180 30 175 40 Q185 45 178 52"
+        stroke="url(#logoGradient)" stroke-width="0.5"
+        fill="none" opacity="0.3" stroke-dasharray="2,2">
+    <animate attributeName="opacity" values="0.1;0.4;0.1" dur="4s" repeatCount="indefinite"/>
+  </path>
+</svg>

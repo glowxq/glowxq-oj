@@ -1,0 +1,102 @@
+<svg width="150" height="150" viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- 绿蓝渐变，与logo保持一致 -->
+    <linearGradient id="qrGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#10B981;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#06B6D4;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#3B82F6;stop-opacity:1" />
+    </linearGradient>
+
+    <!-- 萤火虫发光效果 -->
+    <radialGradient id="glowEffect" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#FBBF24;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#10B981;stop-opacity:0" />
+    </radialGradient>
+  </defs>
+  
+  <!-- 背景 -->
+  <rect width="150" height="150" fill="white" stroke="#E5E7EB" stroke-width="2" rx="8"/>
+  
+  <!-- 模拟二维码图案 -->
+  <!-- 左上角定位点 -->
+  <rect x="10" y="10" width="30" height="30" fill="url(#qrGradient)" rx="2"/>
+  <rect x="15" y="15" width="20" height="20" fill="white" rx="1"/>
+  <rect x="20" y="20" width="10" height="10" fill="url(#qrGradient)" rx="1"/>
+  
+  <!-- 右上角定位点 -->
+  <rect x="110" y="10" width="30" height="30" fill="url(#qrGradient)" rx="2"/>
+  <rect x="115" y="15" width="20" height="20" fill="white" rx="1"/>
+  <rect x="120" y="20" width="10" height="10" fill="url(#qrGradient)" rx="1"/>
+  
+  <!-- 左下角定位点 -->
+  <rect x="10" y="110" width="30" height="30" fill="url(#qrGradient)" rx="2"/>
+  <rect x="15" y="115" width="20" height="20" fill="white" rx="1"/>
+  <rect x="20" y="120" width="10" height="10" fill="url(#qrGradient)" rx="1"/>
+  
+  <!-- 模拟数据点 -->
+  <g fill="url(#qrGradient)">
+    <!-- 第一行 -->
+    <rect x="50" y="10" width="5" height="5" rx="1"/>
+    <rect x="60" y="10" width="5" height="5" rx="1"/>
+    <rect x="70" y="10" width="5" height="5" rx="1"/>
+    <rect x="85" y="10" width="5" height="5" rx="1"/>
+    <rect x="95" y="10" width="5" height="5" rx="1"/>
+    
+    <!-- 第二行 -->
+    <rect x="45" y="20" width="5" height="5" rx="1"/>
+    <rect x="55" y="20" width="5" height="5" rx="1"/>
+    <rect x="75" y="20" width="5" height="5" rx="1"/>
+    <rect x="90" y="20" width="5" height="5" rx="1"/>
+    
+    <!-- 中间区域 -->
+    <rect x="50" y="50" width="5" height="5" rx="1"/>
+    <rect x="60" y="50" width="5" height="5" rx="1"/>
+    <rect x="70" y="50" width="5" height="5" rx="1"/>
+    <rect x="80" y="50" width="5" height="5" rx="1"/>
+    <rect x="90" y="50" width="5" height="5" rx="1"/>
+    <rect x="100" y="50" width="5" height="5" rx="1"/>
+    
+    <rect x="45" y="60" width="5" height="5" rx="1"/>
+    <rect x="65" y="60" width="5" height="5" rx="1"/>
+    <rect x="85" y="60" width="5" height="5" rx="1"/>
+    <rect x="105" y="60" width="5" height="5" rx="1"/>
+    
+    <rect x="50" y="70" width="5" height="5" rx="1"/>
+    <rect x="70" y="70" width="5" height="5" rx="1"/>
+    <rect x="90" y="70" width="5" height="5" rx="1"/>
+    <rect x="110" y="70" width="5" height="5" rx="1"/>
+    
+    <!-- 底部区域 -->
+    <rect x="50" y="110" width="5" height="5" rx="1"/>
+    <rect x="60" y="110" width="5" height="5" rx="1"/>
+    <rect x="80" y="110" width="5" height="5" rx="1"/>
+    <rect x="100" y="110" width="5" height="5" rx="1"/>
+    <rect x="120" y="110" width="5" height="5" rx="1"/>
+    
+    <rect x="45" y="120" width="5" height="5" rx="1"/>
+    <rect x="65" y="120" width="5" height="5" rx="1"/>
+    <rect x="85" y="120" width="5" height="5" rx="1"/>
+    <rect x="105" y="120" width="5" height="5" rx="1"/>
+    <rect x="125" y="120" width="5" height="5" rx="1"/>
+  </g>
+  
+  <!-- 中心logo区域 -->
+  <circle cx="75" cy="75" r="15" fill="white" stroke="url(#qrGradient)" stroke-width="2"/>
+
+  <!-- 中心萤火虫图标 -->
+  <g transform="translate(75, 75)">
+    <!-- 萤火虫发光 -->
+    <circle cx="0" cy="0" r="8" fill="url(#glowEffect)" opacity="0.6">
+      <animate attributeName="opacity" values="0.4;0.8;0.4" dur="2s" repeatCount="indefinite"/>
+    </circle>
+    <!-- 萤火虫身体 -->
+    <ellipse cx="0" cy="0" rx="3" ry="4" fill="url(#qrGradient)"/>
+    <!-- 萤火虫发光点 -->
+    <circle cx="0" cy="2" r="1.5" fill="#FBBF24" opacity="0.9">
+      <animate attributeName="opacity" values="0.6;1;0.6" dur="1.5s" repeatCount="indefinite"/>
+    </circle>
+    <!-- 萤火虫翅膀 -->
+    <ellipse cx="-2" cy="-1" rx="1.5" ry="3" fill="#10B981" opacity="0.4"/>
+    <ellipse cx="2" cy="-1" rx="1.5" ry="3" fill="#06B6D4" opacity="0.4"/>
+  </g>
+</svg>

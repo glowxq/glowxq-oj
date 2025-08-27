@@ -1,0 +1,1 @@
+const o={GlowOJ:{code:"GlowOJ",name:"GlowOJ",tooltip:"GlowOJ自建题目",text:"GlowOJ自建题目"},HOJ:{code:"Hoj",name:"Hoj",tooltip:"Hoj",text:"Hoj来源的题目"},HYDRO:{code:"Hydro",name:"Hydro",tooltip:"Hydro",text:"Hydro来源的题目"},OTHER:{code:"Other",name:"Other",tooltip:"Other",text:"其他来源的题目"}};export{o as P};

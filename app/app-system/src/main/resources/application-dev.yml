@@ -1,0 +1,9 @@
+server:
+  servlet:
+    context-path: /api
+  port: 7100
+  shutdown: graceful
+web:
+  cors:
+    allowed-origins:
+      - "*"

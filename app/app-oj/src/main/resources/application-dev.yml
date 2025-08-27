@@ -1,0 +1,7 @@
+server:
+  port: 7101
+  shutdown: graceful
+web:
+  cors:
+    allowed-origins:
+      - "*"

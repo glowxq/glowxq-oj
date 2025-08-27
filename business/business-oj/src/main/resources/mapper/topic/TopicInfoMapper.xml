@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.glowxq.oj.topic.mapper.TopicInfoMapper">
+    <!-- 通用映射 -->
+    <resultMap id="BaseResultMap" type="com.glowxq.oj.topic.pojo.po.TopicInfo">
+        <id column="id" property="id"/>
+        <result column="topic_id" property="topicId"/>
+        <result column="user_id" property="userId"/>
+        <result column="avatar" property="avatar"/>
+        <result column="name" property="name"/>
+        <result column="nick_name" property="nickName"/>
+        <result column="score" property="score"/>
+        <result column="ac_num" property="acNum"/>
+        <result column="submit_num" property="submitNum"/>
+        <result column="use_time" property="useTime"/>
+        <result column="punishment_time" property="punishmentTime"/>
+        <result column="status" property="status"/>
+        <result column="start_time" property="startTime"/>
+        <result column="end_time" property="endTime"/>
+        <result column="auto_submit" property="autoSubmit"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="del_flag" property="delFlag"/>
+        <result column="create_id" property="createId"/>
+        <result column="update_id" property="updateId"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, topic_id, user_id, avatar, name, nick_name, score, ac_num, submit_num, use_time, punishment_time, status, start_time, end_time, auto_submit, create_time, update_time, del_flag, create_id, update_id
+    </sql>
+
+</mapper>

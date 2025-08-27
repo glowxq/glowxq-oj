@@ -1,0 +1,1 @@
+import{h as s,aP as t}from"./index-DTkCE7MD.js";const r=e=>s.get(t+"/sys-role",e),n=e=>s.post(t+"/sys-role",e),l=e=>s.put(t+"/sys-role",e),u=e=>s.delete(t+"/sys-role",e),a=e=>s.get(t+"/sys-role/menu",e),c=e=>s.put(t+"/sys-role/menu",e);export{a,n as b,u as d,l as e,r as g,c as s};

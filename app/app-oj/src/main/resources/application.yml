@@ -1,0 +1,73 @@
+spring:
+  threads:
+    virtual:
+      # 启用虚拟线程
+      enabled: true
+  profiles:
+    active: dev
+  config:
+    import:
+      - optional:classpath:/config/${spring.profiles.active}/flyway.yml
+      - optional:classpath:/config/${spring.profiles.active}/knife4j.yml
+      - optional:classpath:/config/${spring.profiles.active}/oss.yml
+      - optional:classpath:/config/${spring.profiles.active}/mybatis-flex.yml
+      - optional:classpath:/config/${spring.profiles.active}/mysql.yml
+      - optional:classpath:/config/${spring.profiles.active}/page-helper.yml
+      - optional:classpath:/config/${spring.profiles.active}/redis.yml
+      - optional:classpath:/config/${spring.profiles.active}/sa-token.yml
+      - optional:classpath:/config/${spring.profiles.active}/feishu.yml
+      - optional:classpath:/config/${spring.profiles.active}/tenant.yml
+
+  mvc:
+    path-match:
+      matching-strategy: ant_path_matcher
+  application:
+    name: glowxq-oj
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 15MB
+
+app:
+  version: @project.version@
+  name: ${spring.application.name}
+  environment: ${spring.profiles.active}
+  business: oj
+
+web:
+  # 是否启用数据权限拼接
+  data-scope:
+    enabled: true
+    # 数据逻辑实现最小验证（查询）单位：dept 部门（dept_scope字段）、user 用户 (create_id 字段),默认user。
+    logic-min-unit: user
+  debounce:
+    # 是否启用防抖功能
+    enabled: true
+    # 全局防抖时间，单位毫秒（默认1000ms）
+    global-lock-time: 500
+    # 是否忽略GET请求
+    ignore-get-method: true
+  # 生成工具
+  generator:
+    overwrite: true
+    path:
+      # 前端项目地址
+      web: D:\project\glowxq-nexus\glowxq-web
+      # 后端项目地址，默认自动检测springboot项目路径，无需配置。
+      api: D:\project\glowxq-nexus\glowxq-api
+    # 模块名，指定代码生成的模块
+    module-name: business
+    service-name: business-oj
+    global:
+      author: glowxq
+      packages: com.glowxq.oj
+
+  cors:
+    # 定义允许跨域请求的源（Origin）。可以设置为特定的域名、IP 地址或通配符。
+    allowed-origins:
+      - "*"
+
+# 日志配置
+logging:
+  level:
+    root: INFO

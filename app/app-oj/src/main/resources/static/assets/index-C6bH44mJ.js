@@ -1,0 +1,1 @@
+import{_ as o}from"./welcome-CPWIB7Mc.js";import{_ as s,o as c,c as a,a as t}from"./index-DTkCE7MD.js";const r={},_={class:"home card"};function n(m,e){return c(),a("div",_,e[0]||(e[0]=[t("img",{class:"home-bg",src:o,alt:"welcome"},null,-1)]))}const i=s(r,[["render",n],["__scopeId","data-v-6b5c1ac8"]]);export{i as default};

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.glowxq.oj.problem.mapper.ProblemMapper">
+    <!-- 通用映射 -->
+    <resultMap id="BaseResultMap" type="com.glowxq.oj.problem.pojo.po.Problem">
+        <id column="id" property="id"/>
+        <result column="problem_key" property="problemKey"/>
+        <result column="title" property="title"/>
+        <result column="author" property="author"/>
+        <result column="program_type" property="programType"/>
+        <result column="problem_type" property="problemType"/>
+        <result column="source_type" property="sourceType"/>
+        <result column="time_limit" property="timeLimit"/>
+        <result column="memory_limit" property="memoryLimit"/>
+        <result column="stack_limit" property="stackLimit"/>
+        <result column="description" property="description"/>
+        <result column="input" property="input"/>
+        <result column="output" property="output"/>
+        <result column="examples" property="examples"/>
+        <result column="difficulty" property="difficulty"/>
+        <result column="hint" property="hint"/>
+        <result column="auth" property="auth"/>
+        <result column="io_score" property="ioScore"/>
+        <result column="score" property="score"/>
+        <result column="source" property="source"/>
+        <result column="judge_mode" property="judgeMode"/>
+        <result column="judge_case_mode" property="judgeCaseMode"/>
+        <result column="user_extra_file" property="userExtraFile"/>
+        <result column="judge_extra_file" property="judgeExtraFile"/>
+        <result column="spj_code" property="spjCode"/>
+        <result column="spj_language" property="spjLanguage"/>
+        <result column="remote" property="remote"/>
+        <result column="code_share" property="codeShare"/>
+        <result column="remove_end_blank" property="removeEndBlank"/>
+        <result column="open_case_result" property="openCaseResult"/>
+        <result column="upload_case" property="uploadCase"/>
+        <result column="group_problem" property="groupProblem"/>
+        <result column="file_io" property="fileIo"/>
+        <result column="require_image" property="requireImage"/>
+        <result column="case_version" property="caseVersion"/>
+        <result column="modified_user" property="modifiedUser"/>
+        <result column="apply_public_progress" property="applyPublicProgress"/>
+        <result column="io_read_file_name" property="ioReadFileName"/>
+        <result column="io_write_file_name" property="ioWriteFileName"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="del_flag" property="delFlag"/>
+        <result column="create_id" property="createId"/>
+        <result column="update_id" property="updateId"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, problem_key, title, author, program_type, problem_type, source_type, time_limit, memory_limit, stack_limit, description, input, output, examples, difficulty, hint, auth, io_score, score, source, judge_mode, judge_case_mode, user_extra_file, judge_extra_file, spj_code, spj_language, remote, code_share, remove_end_blank, open_case_result, upload_case, group_problem, file_io, require_image, case_version, modified_user, apply_public_progress, io_read_file_name, io_write_file_name, create_time, update_time, del_flag, create_id, update_id
+    </sql>
+
+</mapper>

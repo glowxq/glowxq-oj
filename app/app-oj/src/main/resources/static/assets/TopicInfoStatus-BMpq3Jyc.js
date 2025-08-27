@@ -1,0 +1,1 @@
+const e={NOT_STARTED:{code:"NotStarted",name:"未开始",tagType:"info"},IN_PROGRESS:{code:"InProgress",name:"进行中",tagType:"success"},COMPLETED:{code:"Completed",name:"已完成",tagType:"warning"}};export{e as T};

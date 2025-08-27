@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.glowxq.oj.judge.mapper.JudgeMapper">
+    <!-- 通用映射 -->
+    <resultMap id="BaseResultMap" type="com.glowxq.oj.judge.pojo.po.Judge">
+        <id column="id" property="id"/>
+        <result column="judge_key" property="judgeKey"/>
+        <result column="problem_id" property="problemId"/>
+        <result column="problem_key" property="problemKey"/>
+        <result column="user_id" property="userId"/>
+        <result column="group_id" property="groupId"/>
+        <result column="contest_id" property="contestId"/>
+        <result column="problem_type" property="problemType"/>
+        <result column="submit_time" property="submitTime"/>
+        <result column="start_time" property="startTime"/>
+        <result column="end_time" property="endTime"/>
+        <result column="status" property="status"/>
+        <result column="error_message" property="errorMessage"/>
+        <result column="time" property="time"/>
+        <result column="memory" property="memory"/>
+        <result column="score" property="score"/>
+        <result column="length" property="length"/>
+        <result column="flow_image" property="flowImage"/>
+        <result column="code" property="code"/>
+        <result column="reply_options" property="replyOptions"/>
+        <result column="language" property="language"/>
+        <result column="judge_server" property="judgeServer"/>
+        <result column="submit_ip" property="submitIp"/>
+        <result column="version" property="version"/>
+        <result column="oi_rank_score" property="oiRankScore"/>
+        <result column="share_enable" property="shareEnable"/>
+        <result column="manual_evaluation" property="manualEvaluation"/>
+        <result column="other_judge_submit_id" property="otherJudgeSubmitId"/>
+        <result column="other_judge_username" property="otherJudgeUsername"/>
+        <result column="other_judge_password" property="otherJudgePassword"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="del_flag" property="delFlag"/>
+        <result column="create_id" property="createId"/>
+        <result column="update_id" property="updateId"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, judge_key, problem_id, problem_key, user_id, group_id, contest_id, contest_problem_id, username, type, problem_type, submit_time, start_time, end_time, status, error_message, time, memory, score, length, flow_image, code, reply_options, language, judge_server, submit_ip, version, oi_rank_score, share_enable, manual_evaluation, other_judge_submit_id, other_judge_username, other_judge_password, create_time, update_time, del_flag, create_id, update_id
+    </sql>
+
+</mapper>

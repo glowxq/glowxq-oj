@@ -1,0 +1,32 @@
+/.idea/
+# 忽略所有target文件夹
+/**/target/
+# 排除logs日志文件夹
+/logs/
+
+# 忽略大文件 - OpenJDK安装包
+app/app-oj/openjdk-*.tar.gz
+app/app-oj/openjdk-*.zip
+**/openjdk-*.tar.gz
+**/openjdk-*.zip
+
+# 忽略其他大文件
+*.tar.gz
+*.zip
+*.rar
+*.7z
+*.iso
+*.dmg
+
+# 忽略临时文件
+*.tmp
+*.temp
+*.log
+*.cache
+
+# 忽略系统文件
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~

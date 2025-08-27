@@ -1,0 +1,11 @@
+oss:
+  # 支持S3协议的厂商
+  provider: ALIYUN
+  endpoint: "oss-cn-guangzhou.aliyuncs.com"
+  accessKey: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+  secretKey: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+  bucketName: ${app.name}
+  domain:
+  # 命名方式: UUID、ORIGINAL原文件名偏好，冲突会补充时间
+  naming: original
+  scheme: https

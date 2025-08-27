@@ -1,0 +1,8 @@
+server:
+  servlet:
+    context-path: /api
+  port: 7100
+web:
+  cors:
+    allowed-origins:
+      - "*"

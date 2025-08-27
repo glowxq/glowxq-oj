@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.glowxq.oj.code.mapper.CodeMonitorMapper">
+    <!-- 通用映射 -->
+    <resultMap id="BaseResultMap" type="com.glowxq.oj.code.pojo.po.CodeMonitor">
+        <id column="id" property="id"/>
+        <result column="monitor_user_id" property="monitorUserId"/>
+        <result column="overlay_user_id" property="overlayUserId"/>
+        <result column="monitor_phone" property="monitorPhone"/>
+        <result column="overlay_phone" property="overlayPhone"/>
+        <result column="monitor_name" property="monitorName"/>
+        <result column="overlay_name" property="overlayName"/>
+        <result column="monitor_code" property="monitorCode"/>
+        <result column="overlay_code" property="overlayCode"/>
+        <result column="code_mode" property="codeMode"/>
+        <result column="monitor_status" property="monitorStatus"/>
+        <result column="version" property="version"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="del_flag" property="delFlag"/>
+        <result column="create_id" property="createId"/>
+        <result column="update_id" property="updateId"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, monitor_user_id, overlay_user_id, monitor_phone, overlay_phone, monitor_name, overlay_name, monitor_code, overlay_code, code_mode, monitor_status, version, create_time, update_time, del_flag, create_id, update_id
+    </sql>
+
+</mapper>

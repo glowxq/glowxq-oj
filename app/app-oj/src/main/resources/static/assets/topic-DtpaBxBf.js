@@ -1,0 +1,1 @@
+import{h as o,O as p}from"./index-DTkCE7MD.js";const e=t=>o.post(p+"/topic/topicPage",t),r=t=>o.post(p+"/topic",t),s=t=>o.put(p+"/topic",t),a=t=>o.delete(p+"/topic",t),n=t=>{const{id:i}=t;return o.get(p+`/topic/${i}`)},u=(t,i)=>o.upload(p+"/topic/import",t,i),A=t=>o.download(p+"/topic/export",t);export{e as a,r as c,A as e,n as g,u as i,a as r,s as u};

@@ -1,0 +1,1 @@
+const t={MARKDOWN:{code:"Markdown",name:"Markdown",tooltip:"Markdown格式文本",text:"Markdown格式文本"},RICH_TEXT:{code:"RichText",name:"富文本",tooltip:"富文本格式",text:"富文本格式"},NORMAL_TEXT:{code:"NormalText",name:"普通文本",tooltip:"普通文本格式",text:"普通文本格式"}};export{t as T};

@@ -1,0 +1,43 @@
+# redis
+spring:
+  data:
+    redis:
+      #单机配置
+      host: 127.0.0.1
+      port: 6379
+      password: glowxq-oj-123
+      # 数据索引
+      database: 3
+      # 连接超时时间（毫秒）
+      timeout: 50000
+      # 命令超时时间（毫秒）
+      command-timeout: 10000
+      ###Lettuce连接池配置（Spring Boot 2.x+ 默认使用）###
+      lettuce:
+        pool:
+          # 连接池最大连接数（使用负值表示没有限制）
+          max-active: 100
+          # 连接池最大阻塞等待时间（使用负值表示没有限制）
+          max-wait: -1
+          # 连接池中的最大空闲连接
+          max-idle: 30
+          # 连接池中的最小空闲连接
+          min-idle: 10
+        # 关闭超时时间
+        shutdown-timeout: 100ms
+      ###Jedis连接池配置（备用）###
+      jedis:
+        pool:
+          # 连接池最大连接数（使用负值表示没有限制）
+          max-active: 100
+          # 连接池最大阻塞等待时间（使用负值表示没有限制）
+          max-wait: -1
+          # 连接池中的最大空闲连接
+          max-idle: 30
+          # 连接池中的最小空闲连接
+          min-idle: 10
+
+# 开启redis监听
+redis:
+  listener:
+    enable: true

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <groupId>com.glowxq</groupId>
+        <artifactId>business</artifactId>
+        <version>${revision}</version>
+    </parent>
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>business-system</artifactId>
+
+    <!-- 全局公用dependency版本管理 -->
+    <properties>
+        <flyway.version>10.12.0</flyway.version>
+    </properties>
+
+    <dependencies>
+        <!-- 全局common-core模块 -->
+        <dependency>
+            <groupId>com.glowxq</groupId>
+            <artifactId>common-core</artifactId>
+            <version>${revision}</version>
+        </dependency>
+        <!-- knife4j swagger文档 -->
+        <dependency>
+            <groupId>com.github.xiaoymin</groupId>
+            <artifactId>knife4j-openapi3-jakarta-spring-boot-starter</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springdoc</groupId>
+                    <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <!-- 数据库依赖尽量独立引用，因为每个service引用的数据库有可能不同，因此就不再parent中配置公共的mysql依赖-->
+        <!-- mysql数据库模块 -->
+        <dependency>
+            <groupId>com.glowxq</groupId>
+            <artifactId>common-tenant</artifactId>
+            <version>${revision}</version>
+        </dependency>
+        <!-- mysql数据库模块 -->
+        <dependency>
+            <groupId>com.glowxq</groupId>
+            <artifactId>common-db-mysql</artifactId>
+            <version>${revision}</version>
+        </dependency>
+        <!--鉴权模块-->
+        <dependency>
+            <groupId>com.glowxq</groupId>
+            <artifactId>common-security</artifactId>
+            <version>${revision}</version>
+        </dependency>
+        <!--代码生成模块-->
+        <dependency>
+            <groupId>com.glowxq.generator</groupId>
+            <artifactId>common-generator</artifactId>
+            <version>${revision}</version>
+        </dependency>
+        <!--日志模块-->
+        <dependency>
+            <groupId>com.glowxq</groupId>
+            <artifactId>common-log</artifactId>
+            <version>${revision}</version>
+        </dependency>
+        <!--redis模块-->
+        <dependency>
+            <groupId>com.glowxq</groupId>
+            <artifactId>common-db-redis</artifactId>
+            <version>${revision}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.glowxq.excel</groupId>
+            <artifactId>common-excel</artifactId>
+            <version>${revision}</version>
+        </dependency>
+        <!-- oss模块 -->
+        <dependency>
+            <groupId>com.glowxq.oss</groupId>
+            <artifactId>common-oss</artifactId>
+            <version>${revision}</version>
+        </dependency>
+        <!-- flyway db ddl; https://documentation.red-gate.com/fd/mysql-184127601.html-->
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-core</artifactId>
+            <version>${flyway.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-mysql</artifactId>
+            <version>${flyway.version}</version>
+        </dependency>
+        <!-- aspect aop 切面-->
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+        </dependency>
+    </dependencies>
+
+
+</project>

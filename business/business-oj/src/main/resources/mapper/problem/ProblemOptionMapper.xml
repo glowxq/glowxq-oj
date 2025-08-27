@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.glowxq.oj.problem.mapper.ProblemOptionMapper">
+    <!-- 通用映射 -->
+    <resultMap id="BaseResultMap" type="com.glowxq.oj.problem.pojo.po.ProblemOption">
+        <id column="id" property="id"/>
+        <result column="problem_id" property="problemId"/>
+        <result column="problem_key" property="problemKey"/>
+        <result column="option_key" property="optionKey"/>
+        <result column="problem_type" property="problemType"/>
+        <result column="score" property="score"/>
+        <result column="option_content" property="optionContent"/>
+        <result column="answer" property="answer"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="create_id" property="createId"/>
+        <result column="update_id" property="updateId"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, problem_id, problem_key, option_key, problem_type, score, option_content, answer, create_time, update_time, del_flag, create_id, update_id
+    </sql>
+
+</mapper>

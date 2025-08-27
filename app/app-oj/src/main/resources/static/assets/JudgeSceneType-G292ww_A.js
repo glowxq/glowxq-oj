@@ -1,0 +1,1 @@
+const o={Normal:{code:"Normal",name:"普通测评",tooltip:"普通评测场景",text:"常规代码评测场景"},Exercise:{code:"Exercise",name:"练习",tooltip:"练习评测场景",text:"用于练习的评测场景"},Homework:{code:"Homework",name:"作业",tooltip:"训练作业评测场景",text:"用于日常作业训练的评测场景"},Contest:{code:"Contest",name:"比赛",tooltip:"比赛评测场景",text:"用于比赛的评测场景"}};function n(e){return Object.values(o).find(t=>t.code===e)||null}export{o as J,n as m};

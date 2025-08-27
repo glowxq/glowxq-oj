@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.glowxq.oj.user.mapper.UserInfoMapper">
+    <!-- 通用映射 -->
+    <resultMap id="BaseResultMap" type="com.glowxq.oj.user.pojo.po.UserInfo">
+        <id column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="dept_id" property="deptId"/>
+        <result column="name" property="name"/>
+        <result column="nick_name" property="nickName"/>
+        <result column="phone" property="phone"/>
+        <result column="email" property="email"/>
+        <result column="avatar" property="avatar"/>
+        <result column="sex" property="sex"/>
+        <result column="birthday" property="birthday"/>
+        <result column="image" property="image"/>
+        <result column="ac_num" property="acNum"/>
+        <result column="integral" property="integral"/>
+        <result column="continuous_sign_day" property="continuousSignDay"/>
+        <result column="submit_num" property="submitNum"/>
+        <result column="title" property="title"/>
+        <result column="color" property="color"/>
+        <result column="remark" property="remark"/>
+        <result column="expiration_time" property="expirationTime"/>
+        <result column="last_login_time" property="lastLoginTime"/>
+        <result column="last_login_ip" property="lastLoginIp"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="del_flag" property="delFlag"/>
+        <result column="create_id" property="createId"/>
+        <result column="update_id" property="updateId"/>
+        <result column="tenant_id" property="tenantId"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, user_id, dept_id, name, nick_name, phone, email, avatar, sex, birthday, image, ac_num, integral, continuous_sign_day, submit_num, title, color, remark, expiration_time, last_login_time, last_login_ip, create_time, update_time, del_flag, create_id, update_id, tenant_id
+    </sql>
+
+</mapper>

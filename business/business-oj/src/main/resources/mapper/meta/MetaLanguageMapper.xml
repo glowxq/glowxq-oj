@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.glowxq.oj.meta.mapper.MetaLanguageMapper">
+    <!-- 通用映射 -->
+    <resultMap id="BaseResultMap" type="com.glowxq.oj.meta.pojo.po.MetaLanguage">
+        <id column="id" property="id"/>
+        <result column="content_type" property="contentType"/>
+        <result column="description" property="description"/>
+        <result column="name" property="name"/>
+        <result column="compile_command" property="compileCommand"/>
+        <result column="template" property="template"/>
+        <result column="code_template" property="codeTemplate"/>
+        <result column="spj_enable" property="spjEnable"/>
+        <result column="oj" property="oj"/>
+        <result column="seq" property="seq"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="create_id" property="createId"/>
+        <result column="update_id" property="updateId"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, content_type, description, name, compile_command, template, code_template, spj_enable, oj, seq, create_time, update_time, del_flag, create_id, update_id
+    </sql>
+
+</mapper>

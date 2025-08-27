@@ -1,0 +1,35 @@
+package com.glowxq.system.meta.pojo.dto;
+
+import com.glowxq.core.common.entity.PageQuery;
+import com.glowxq.core.common.entity.base.BaseDTO;
+import com.glowxq.core.util.BeanCopyUtils;
+import com.glowxq.system.meta.pojo.po.MetaTagCategory;
+import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Data;
+
+/**
+ * <p>
+ * MetaTagCategory查询DTO
+ * </p>
+ *
+ * @author glowxq
+ * @since 2025-06-10
+ */
+@Data
+@Schema(description = "MetaTagCategory查询DTO")
+public class MetaTagCategoryListDTO extends PageQuery implements BaseDTO {
+
+    @Schema(description = "分类名称")
+    private String name;
+
+    @Schema(description = "启用")
+    private Boolean enable;
+
+    @Schema(description = "租户ID")
+    private String tenantId;
+
+    @Override
+    public MetaTagCategory buildEntity() {
+        return BeanCopyUtils.copy(this, MetaTagCategory.class);
+    }
+}

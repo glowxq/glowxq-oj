@@ -1,0 +1,8 @@
+feishu:
+  robot:
+    webhook:
+      internal-url: xxxxx
+      business-url: xxxxx
+  app:
+    app-id: xxxxx
+    app-secret: xxxxx

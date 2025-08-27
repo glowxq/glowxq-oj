@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>glowxq-oj</artifactId>
+        <groupId>com.glowxq</groupId>
+        <version>${revision}</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>common</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>common-core</module>
+        <module>common-db-mongodb</module>
+        <module>common-db-mysql</module>
+        <module>common-db-redis</module>
+        <module>common-excel</module>
+        <module>common-generator</module>
+        <module>common-log</module>
+        <module>common-oss</module>
+        <module>common-mq</module>
+        <module>common-security</module>
+        <module>common-business</module>
+        <module>common-websocket</module>
+        <module>common-tenant</module>
+    </modules>
+
+</project>

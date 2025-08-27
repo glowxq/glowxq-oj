@@ -1,0 +1,6 @@
+server:
+  port: 7101
+web:
+  cors:
+    allowed-origins:
+      - "*"
