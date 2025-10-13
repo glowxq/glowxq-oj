@@ -160,6 +160,9 @@ cd glowxq-oj
 
 2. **一键启动**
 ```bash
+# 进入脚本目录
+cd init
+
 # Linux/macOS
 chmod +x start.sh
 ./start.sh
