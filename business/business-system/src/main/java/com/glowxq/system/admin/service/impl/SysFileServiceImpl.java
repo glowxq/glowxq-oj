@@ -2,6 +2,7 @@ package com.glowxq.system.admin.service.impl;
 
 import com.glowxq.core.common.entity.PageResult;
 import com.glowxq.core.common.enums.CommonResponseEnum;
+import com.glowxq.core.common.feishu.utils.FeishuMessageUtils;
 import com.glowxq.core.util.BeanCopyUtils;
 import com.glowxq.core.util.PageUtils;
 import com.glowxq.core.util.Utils;
@@ -92,6 +93,11 @@ public class SysFileServiceImpl extends ServiceImpl<CommonFileMapper, SysFile> i
     @Override
     @PostConstruct
     public void initBucket() {
-        ossClient.initBucket();
+        try {
+            ossClient.initBucket();
+        } catch (Exception e) {
+            FeishuMessageUtils.sendInternalMessage("OSS 初始化失败");
+            log.error("OSS 初始化失败", e);
+        }
     }
 }
