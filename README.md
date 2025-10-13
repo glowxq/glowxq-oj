@@ -169,6 +169,12 @@ chmod +x start.sh
 
 # Windows (使用Git Bash或WSL)
 bash start.sh
+
+# 注意 如果数据库初始化失败则执行下述脚本进行初始化
+# 1.赋予执行权限
+chmod +x init-db.sh
+# 2.执行脚本：
+./init-db.sh
 ```
 
 3. **访问系统**
