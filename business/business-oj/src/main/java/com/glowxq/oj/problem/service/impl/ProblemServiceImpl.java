@@ -171,10 +171,6 @@ public class ProblemServiceImpl extends ServiceImpl<ProblemMapper, Problem> impl
         List<ProblemCaseBO> problemCaseBos = BeanCopyUtils.copyList(problemCases, ProblemCaseBO.class);
         List<ProblemCodeTemplateCreateDTO> problemCodeTemplateCreateDataList = BeanCopyUtils.copyList(problemCodeTemplateList, ProblemCodeTemplateCreateDTO.class);
 
-        // TODO 用例获取
-        String path = FilePath.TESTCASE_BASE_FOLDER.buildPath(problemId);
-        List<String> strings = AppUtils.isNotProd() ? List.of("/testcase_tmp/" + problemId) : FileUtil.listFileNames(path);
-
         ProblemCreateUpdateDTO problemCreateUpdateDTO = new ProblemCreateUpdateDTO();
         problemCreateUpdateDTO.setProblemBo(new ProblemBO(problem));
 
