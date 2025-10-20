@@ -1,6 +1,7 @@
 package com.glowxq.oj.problem.handler.create;
 
 import com.glowxq.core.common.exception.common.BusinessException;
+import com.glowxq.oj.problem.enums.ProblemType;
 import com.glowxq.oj.problem.pojo.dto.ProblemCreateUpdateDTO;
 import com.glowxq.oj.problem.pojo.po.Problem;
 import com.glowxq.oj.problem.pojo.po.ProblemOption;
@@ -32,7 +33,7 @@ public class FixedProblemCreateHandler extends BaseProblemCreateHandler {
     @Override
     protected void beforeCheck(ProblemCreateUpdateDTO dto) {
         super.beforeCheck(dto);
-        if (CollectionUtils.isEmpty(dto.getOptions())) {
+        if (!ProblemType.ShortAnswer.equals(dto.problemType()) && CollectionUtils.isEmpty(dto.getOptions())) {
             throw new BusinessException("缺少选项数据");
         }
     }
