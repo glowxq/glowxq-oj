@@ -83,12 +83,15 @@ function Check-Files {
 # 创建必要目录
 function Create-Directories {
     Log-Info "创建必要目录..."
-    
-    # 创建日志目录
-    New-Item -ItemType Directory -Force -Path "logs\mysql" | Out-Null
-    New-Item -ItemType Directory -Force -Path "logs\redis" | Out-Null
-    New-Item -ItemType Directory -Force -Path "logs\oj" | Out-Null
-    
+
+    # 创建数据目录（用于 Docker 卷映射）
+    New-Item -ItemType Directory -Force -Path "data\testcase" | Out-Null
+    New-Item -ItemType Directory -Force -Path "data\file" | Out-Null
+    New-Item -ItemType Directory -Force -Path "data\log" | Out-Null
+    New-Item -ItemType Directory -Force -Path "data\run" | Out-Null
+    New-Item -ItemType Directory -Force -Path "data\spj" | Out-Null
+    New-Item -ItemType Directory -Force -Path "data\interactive" | Out-Null
+
     Log-Success "目录创建完成"
 }
 

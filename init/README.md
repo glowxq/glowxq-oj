@@ -11,6 +11,11 @@
 #### Linux/macOS
 ```bash
 cd init
+# 1. 初始化数据目录（首次部署必须执行）
+chmod +x init-dirs.sh
+./init-dirs.sh
+
+# 2. 启动服务
 chmod +x start.sh
 ./start.sh
 ```
@@ -18,12 +23,22 @@ chmod +x start.sh
 #### Windows
 ```powershell
 cd init
+# 1. 初始化数据目录（首次部署必须执行）
+powershell -ExecutionPolicy Bypass -File init-dirs.ps1
+
+# 2. 启动服务
 powershell -ExecutionPolicy Bypass -File start.ps1
 ```
 
 #### 手动部署
 ```bash
 cd init
+# 1. 初始化数据目录
+./init-dirs.sh  # Linux/macOS
+# 或
+powershell -ExecutionPolicy Bypass -File init-dirs.ps1  # Windows
+
+# 2. 启动 Docker 服务
 docker-compose up -d
 ```
 
@@ -54,6 +69,8 @@ docker-compose restart
 - `docker-compose.yml` - Docker Compose 配置文件
 - `init.sql` - MySQL 数据库初始化脚本
 - `.env` - 环境变量配置文件
+- `init-dirs.sh` - Linux/macOS 数据目录初始化脚本（**首次部署必须运行**）
+- `init-dirs.ps1` - Windows 数据目录初始化脚本（**首次部署必须运行**）
 - `start.sh` - Linux/macOS 一键部署脚本
 - `start.ps1` - Windows PowerShell 一键部署脚本
 - `init.md` - 详细部署文档
@@ -61,6 +78,13 @@ docker-compose restart
 - `force-init-db.sh` - 强制数据库初始化脚本
 - `manual-init-db.sh` - 手动数据库初始化脚本
 - `HOJ题目导入测试.zip` - 题目导入测试文件（必须保留）
+- `data/` - 数据目录（由 init-dirs 脚本创建）
+  - `testcase/` - 测试用例文件存储
+  - `file/` - 用户上传文件存储
+  - `log/` - 应用日志文件
+  - `run/` - 判题运行目录
+  - `spj/` - Special Judge 文件
+  - `interactive/` - 交互式判题文件
 
 ## 自定义配置
 
@@ -91,6 +115,8 @@ chmod +x diagnose.sh && ./diagnose.sh
 3. **MySQL 启动失败**: MySQL 8.0 配置已优化，移除了不兼容的 SQL 模式
 4. **数据库未初始化**: 部署脚本会自动检查并初始化数据库，如仍有问题可运行强制初始化脚本
 5. **服务启动失败**: 查看日志 `docker-compose logs [服务名]`
+6. **目录读取失败**: 确保已运行 `init-dirs.sh` 或 `init-dirs.ps1` 创建数据目录
+7. **权限问题**: Linux/macOS 下运行 `chmod -R 777 ./data` 设置目录权限
 
 ### 手动测试连接
 ```bash

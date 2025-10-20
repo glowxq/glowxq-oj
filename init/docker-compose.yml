@@ -137,18 +137,18 @@ services:
         condition: service_healthy
     # 数据卷映射配置（重要持久化数据）
     volumes:
-      # 测试用例目录（使用Docker卷）
-      - oj-testcase:/goj/testcase
-      - oj-testcase:/judge/testcase
+      # 测试用例目录（映射到宿主机目录，便于管理和调试）
+      - ./data/testcase:/goj/testcase
+      - ./data/testcase:/judge/testcase
       # 文件存储目录
-      - oj-data:/goj/file
+      - ./data/file:/goj/file
       # 日志目录
-      - oj-logs:/goj/log
-      - oj-logs:/judge/log
+      - ./data/log:/goj/log
+      - ./data/log:/judge/log
       # 判题相关目录
-      - oj-data:/judge/run
-      - oj-data:/judge/spj
-      - oj-data:/judge/interactive
+      - ./data/run:/judge/run
+      - ./data/spj:/judge/spj
+      - ./data/interactive:/judge/interactive
 
     # 环境变量配置（关键参数通过环境注入）
     environment:
@@ -215,18 +215,19 @@ volumes:
     driver: local
     name: glowxq-redis-logs
 
-  # OJ 测试用例卷
-  oj-testcase:
-    driver: local
-    name: glowxq-oj-testcase
+  # 注意：OJ 相关目录已改为宿主机目录映射（./data/*）
+  # 这样可以直接在宿主机上管理文件，便于调试和数据迁移
+  # 如需使用 Docker 卷，请取消注释以下配置并修改 glowxq-oj 服务的 volumes 配置
 
-  # OJ 数据卷
-  oj-data:
-    driver: local
-    name: glowxq-oj-data
+  # oj-testcase:
+  #   driver: local
+  #   name: glowxq-oj-testcase
 
-  # OJ 日志卷
-  oj-logs:
-    driver: local
-    name: glowxq-oj-logs
+  # oj-data:
+  #   driver: local
+  #   name: glowxq-oj-data
+
+  # oj-logs:
+  #   driver: local
+  #   name: glowxq-oj-logs
 

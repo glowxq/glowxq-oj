@@ -72,10 +72,16 @@ check_files() {
 create_directories() {
     log_info "创建必要目录..."
 
-    # 创建日志目录
-    mkdir -p logs/mysql
-    mkdir -p logs/redis
-    mkdir -p logs/oj
+    # 创建数据目录（用于 Docker 卷映射）
+    mkdir -p data/testcase
+    mkdir -p data/file
+    mkdir -p data/log
+    mkdir -p data/run
+    mkdir -p data/spj
+    mkdir -p data/interactive
+
+    # 设置目录权限（确保容器可以读写）
+    chmod -R 777 data
 
     log_success "目录创建完成"
 }
