@@ -73,6 +73,7 @@
 - [环境变量说明](#-环境变量说明)
 - [常见问题](#-常见问题)
 - [联系方式](#-联系方式--技术服务)
+- [鸣谢 & 友情链接](#-鸣谢--友情链接)
 - [License](#-license)
 
 <br/>
@@ -828,6 +829,24 @@ git clone https://gitee.com/glowxq/glowxq-oj.git
 <p>
   <img src="docs/img/支付宝打赏.png" alt="支付宝打赏" width="200" />
 </p>
+
+<br/>
+
+<img src="docs/svg/divider.svg" width="100%"/>
+
+<br/>
+
+## 🤝 鸣谢 & 友情链接
+
+感谢以下优秀开源项目对本项目的启发与支持：
+
+| 项目 | 简介 |
+|---|---|
+| [Hydro](https://hydro.ac/) | 高性能在线评测系统 |
+| [HOJ](https://gitee.com/himitzh0730/hoj) | 基于 Spring Cloud 的分布式开源在线评测系统 |
+| [Sz-Admin](https://szadmin.cn/) | 基于 Spring Boot 3 + Vue 3 的开源 RBAC 权限框架 |
+| [Sa-Token](https://www.sa-token.cc/) | 轻量级 Java 全功能权限认证框架 |
+| [MyBatis-Flex](https://mybatis-flex.com/) | 优雅的 MyBatis 增强框架 |
 
 <br/>
 
