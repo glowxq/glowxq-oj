@@ -866,6 +866,7 @@ git clone https://gitee.com/glowxq/glowxq-oj.git
 |---|---|
 | [Hydro](https://hydro.ac/) | 高性能在线评测系统 |
 | [HOJ](https://gitee.com/himitzh0730/hoj) | 基于 Spring Cloud 的分布式开源在线评测系统 |
+| [go-judge](https://github.com/criyle/go-judge) | 安全高效的代码沙盒评测引擎 |
 | [Sz-Admin](https://szadmin.cn/) | 基于 Spring Boot 3 + Vue 3 的开源 RBAC 权限框架 |
 | [Sa-Token](https://www.sa-token.cc/) | 轻量级 Java 全功能权限认证框架 |
 | [MyBatis-Flex](https://mybatis-flex.com/) | 优雅的 MyBatis 增强框架 |

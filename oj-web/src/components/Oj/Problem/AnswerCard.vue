@@ -41,15 +41,15 @@
         <div class="indicator-title">您的选择:</div>
         <div class="tf-buttons">
           <el-button
-            :type="selectedOptions.includes('T') ? 'success' : 'default'"
-            @click="selectTrueFalseOption('T')"
+            :type="selectedOptions.includes('A') ? 'success' : 'default'"
+            @click="selectTrueFalseOption('A')"
             class="tf-button"
           >
             <el-icon><Check /></el-icon> 正确
           </el-button>
           <el-button
-            :type="selectedOptions.includes('F') ? 'danger' : 'default'"
-            @click="selectTrueFalseOption('F')"
+            :type="selectedOptions.includes('B') ? 'danger' : 'default'"
+            @click="selectTrueFalseOption('B')"
             class="tf-button"
           >
             <el-icon><Close /></el-icon> 错误

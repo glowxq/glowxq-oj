@@ -10,9 +10,9 @@
       <div class="true-false-container">
         <el-checkbox-group v-model="selectedValue" class="choice-group" @change="handleChange">
           <div class="option-item">
-            <el-checkbox label="T">
+            <el-checkbox label="A">
               <div class="option-content-wrapper">
-                <span class="option-key">T</span>
+                <span class="option-key">A</span>
                 <span class="option-content">
                   <el-icon class="true-false-icon"><Check /></el-icon>
                   正确
@@ -21,9 +21,9 @@
             </el-checkbox>
           </div>
           <div class="option-item">
-            <el-checkbox label="F">
+            <el-checkbox label="B">
               <div class="option-content-wrapper">
-                <span class="option-key">F</span>
+                <span class="option-key">B</span>
                 <span class="option-content">
                   <el-icon class="true-false-icon"><Close /></el-icon>
                   错误

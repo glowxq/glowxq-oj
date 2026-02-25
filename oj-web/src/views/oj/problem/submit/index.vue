@@ -892,11 +892,18 @@ const restoreSubmittedAnswer = () => {
           .map((opt: any) => opt.optionKey);
       }
     } else if (problemType === ProblemType.TRUE_FALSE.code) {
-      // 判断题
+      // 判断题：从 replyOptions 中提取 answer=true 的选项 key
       if (submittedAnswer.value.selectedOptions) {
-        selectedOptions.value = submittedAnswer.value.selectedOptions;
-      } else if (submittedAnswer.value.replyOptions && submittedAnswer.value.replyOptions.length > 0) {
-        selectedOptions.value = [submittedAnswer.value.replyOptions[0].optionKey];
+        // 兼容旧格式 T/F → A/B
+        selectedOptions.value = submittedAnswer.value.selectedOptions.map((key: string) => {
+          if (key === 'T') return 'A';
+          if (key === 'F') return 'B';
+          return key;
+        });
+      } else if (submittedAnswer.value.replyOptions) {
+        selectedOptions.value = submittedAnswer.value.replyOptions
+          .filter((opt: any) => opt.answer)
+          .map((opt: any) => opt.optionKey);
       }
     } else if (problemType === ProblemType.FILL_BLANK.code) {
       // 填空题
@@ -1271,12 +1278,13 @@ const submitProblem = async () => {
         return
       }
 
-      replyOptions = [
-        {
-          optionKey: selectedOptions.value[0],
-          answer: true
-        }
-      ]
+      // 使用与选择题相同的逻辑：遍历实际题目选项，标记用户选择
+      replyOptions = problemOptions.value.map(option => ({
+        id: option.id,
+        optionKey: option.optionKey,
+        optionContent: option.optionContent,
+        answer: selectedOptions.value.includes(option.optionKey || '')
+      }))
       valid = true
     } else if (problemDetails.value.problemBo?.problemType === ProblemType.FILL_BLANK.code) {
       // 检查是否有选项
