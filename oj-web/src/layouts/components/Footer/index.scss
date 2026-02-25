@@ -1,0 +1,35 @@
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 36px;
+  padding: 0 var(--oj-space-6);
+  background-color: var(--el-bg-color);
+  border-top: 1px solid var(--el-border-color-light);
+
+  .footer-link {
+    display: flex;
+    align-items: center;
+    gap: var(--oj-space-2);
+    font-size: var(--oj-text-sm);
+    color: var(--oj-text-secondary);
+    text-decoration: none;
+    transition: color var(--oj-transition-fast);
+
+    &:hover {
+      color: var(--oj-text-primary);
+    }
+
+    .github-icon {
+      display: flex;
+      align-items: center;
+      opacity: 0.7;
+    }
+  }
+
+  .footer-copyright {
+    font-size: var(--oj-text-xs);
+    color: var(--oj-text-tertiary);
+    letter-spacing: 0.3px;
+  }
+}

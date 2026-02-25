@@ -1,0 +1,116 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg t="1755581449699" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="6481"
+     xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="200">
+    <defs>
+        <!-- 荧光绿渐变 -->
+        <linearGradient id="firefly-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#39FF14;stop-opacity:1"/>
+            <stop offset="50%" style="stop-color:#00FF41;stop-opacity:1"/>
+            <stop offset="100%" style="stop-color:#32CD32;stop-opacity:1"/>
+        </linearGradient>
+
+        <!-- 发光效果渐变 -->
+        <radialGradient id="glow-gradient" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" style="stop-color:#39FF14;stop-opacity:0.8"/>
+            <stop offset="70%" style="stop-color:#00FF41;stop-opacity:0.4"/>
+            <stop offset="100%" style="stop-color:#39FF14;stop-opacity:0"/>
+        </radialGradient>
+
+        <!-- 发光滤镜 -->
+        <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+            <feMerge>
+                <feMergeNode in="coloredBlur"/>
+                <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+        </filter>
+
+        <!-- 强烈发光滤镜 -->
+        <filter id="strong-glow" x="-100%" y="-100%" width="300%" height="300%">
+            <feGaussianBlur stdDeviation="6" result="coloredBlur"/>
+            <feMerge>
+                <feMergeNode in="coloredBlur"/>
+                <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+        </filter>
+    </defs>
+
+    <!-- 背景发光圆圈 -->
+    <circle cx="350" cy="500" r="200" fill="url(#glow-gradient)" opacity="0.3"/>
+
+    <!-- 萤火虫身体 -->
+    <path d="M227.328 342.016l104.96-104.96c30.72-30.72 79.872-30.72 110.592 0 30.208 30.208 30.208 79.872 0 110.592L349.184 440.32l44.032 44.032L486.4 391.168c54.784-54.784 55.296-143.872 0.512-198.656-54.784-55.296-143.872-55.296-198.656 0L148.992 331.776c26.112-2.56 53.248 1.024 78.336 10.24z"
+          fill="url(#firefly-gradient)"
+          filter="url(#glow)"
+          p-id="6482">
+        <animate attributeName="opacity" values="0.8;1;0.8" dur="2s" repeatCount="indefinite"/>
+    </path>
+
+    <!-- 萤火虫翅膀和尾部 -->
+    <path d="M265.728 411.648a140.75904 140.75904 0 0 0-199.168-0.512c-54.784 54.784-54.272 143.872 0.512 198.656l221.184 221.184c54.784 54.784 143.872 55.296 198.656 0.512 54.784-54.784 54.784-143.872-0.512-198.656L265.728 411.648z m177.152 375.808c-30.72 30.208-79.872 30.208-110.592 0l-221.184-221.184c-30.72-30.208-30.72-79.872 0-110.592 30.208-30.208 79.872-30.208 110.592 0l221.184 221.184c30.208 30.208 30.72 79.872 0 110.592zM560.128 349.184l-0.512 1.024c-8.192 28.672-23.552 55.296-45.568 77.824L431.616 510.976l82.944 82.944c22.528 22.528 37.888 49.664 46.08 78.848 54.784-32.768 91.648-92.672 91.648-161.792s-36.864-129.536-92.16-161.792z"
+          fill="url(#firefly-gradient)"
+          filter="url(#glow)"
+          p-id="6483">
+        <animate attributeName="opacity" values="0.7;0.9;0.7" dur="1.5s" repeatCount="indefinite"/>
+    </path>
+
+    <!-- 发光轨迹线条 -->
+    <g filter="url(#strong-glow)">
+        <path d="M960.512 465.408h9.728c11.776 0 21.504-9.728 21.504-21.504 0-11.776-9.728-21.504-21.504-21.504h-9.728c-11.776 0-21.504 9.728-21.504 21.504 0 11.776 9.728 21.504 21.504 21.504z"
+              fill="#39FF14" opacity="0.9">
+            <animate attributeName="opacity" values="0.5;1;0.5" dur="0.8s" repeatCount="indefinite"/>
+        </path>
+
+        <path d="M609.28 330.24h202.752c11.776 0 21.504-9.728 21.504-21.504 0-11.776-9.728-21.504-21.504-21.504H609.28c-11.776 0-21.504 9.728-21.504 21.504 0 11.776 9.728 21.504 21.504 21.504z"
+              fill="#00FF41" opacity="0.8">
+            <animate attributeName="opacity" values="0.4;0.9;0.4" dur="1.2s" repeatCount="indefinite"/>
+        </path>
+
+        <path d="M882.688 422.4h-169.472c-11.776 0-21.504 9.728-21.504 21.504 0 11.776 9.728 21.504 21.504 21.504h169.472c11.776 0 21.504-9.728 21.504-21.504 0-11.776-9.728-21.504-21.504-21.504z"
+              fill="#32CD32" opacity="0.7">
+            <animate attributeName="opacity" values="0.3;0.8;0.3" dur="1.8s" repeatCount="indefinite"/>
+        </path>
+
+        <path d="M723.968 692.736h-100.352c-11.776 0-21.504 9.728-21.504 21.504 0 11.776 9.728 21.504 21.504 21.504h100.352c11.776 0 21.504-9.728 21.504-21.504 0.512-11.776-9.216-21.504-21.504-21.504z"
+              fill="#39FF14" opacity="0.6">
+            <animate attributeName="opacity" values="0.2;0.7;0.2" dur="2.2s" repeatCount="indefinite"/>
+        </path>
+
+        <path d="M939.52 308.736c0-11.776-9.728-21.504-21.504-21.504h-30.208c-11.776 0-21.504 9.728-21.504 21.504 0 11.776 9.728 21.504 21.504 21.504h30.208c11.776 0 21.504-9.728 21.504-21.504z"
+              fill="#00FF41" opacity="0.8">
+            <animate attributeName="opacity" values="0.4;0.9;0.4" dur="1.0s" repeatCount="indefinite"/>
+        </path>
+
+        <path d="M976.896 557.568h-28.672c-11.776 0-21.504 9.728-21.504 21.504 0 11.776 9.728 21.504 21.504 21.504h28.672c11.776 0 21.504-9.728 21.504-21.504 0-11.776-9.216-21.504-21.504-21.504z"
+              fill="#32CD32" opacity="0.7">
+            <animate attributeName="opacity" values="0.3;0.8;0.3" dur="1.6s" repeatCount="indefinite"/>
+        </path>
+
+        <path d="M851.968 692.736h-57.344c-11.776 0-21.504 9.728-21.504 21.504 0 11.776 9.728 21.504 21.504 21.504h57.344c11.776 0 21.504-9.728 21.504-21.504 0.512-11.776-9.216-21.504-21.504-21.504z"
+              fill="#39FF14" opacity="0.6">
+            <animate attributeName="opacity" values="0.2;0.7;0.2" dur="2.0s" repeatCount="indefinite"/>
+        </path>
+
+        <path d="M870.912 557.568h-172.544c-11.776 0-21.504 9.728-21.504 21.504 0 11.776 9.728 21.504 21.504 21.504h172.544c11.776 0 21.504-9.728 21.504-21.504 0.512-11.776-9.216-21.504-21.504-21.504z"
+              fill="#00FF41" opacity="0.8">
+            <animate attributeName="opacity" values="0.4;0.9;0.4" dur="1.4s" repeatCount="indefinite"/>
+        </path>
+    </g>
+
+    <!-- 额外的发光点 -->
+    <circle cx="350" cy="400" r="3" fill="#39FF14" opacity="0.9">
+        <animate attributeName="r" values="2;5;2" dur="1s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0.5;1;0.5" dur="1s" repeatCount="indefinite"/>
+    </circle>
+
+    <circle cx="320" cy="450" r="2" fill="#00FF41" opacity="0.8">
+        <animate attributeName="r" values="1;4;1" dur="1.5s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0.3;0.8;0.3" dur="1.5s" repeatCount="indefinite"/>
+    </circle>
+
+    <circle cx="380" cy="380" r="2.5" fill="#32CD32" opacity="0.7">
+        <animate attributeName="r" values="1.5;4.5;1.5" dur="2s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0.4;0.7;0.4" dur="2s" repeatCount="indefinite"/>
+    </circle>
+</svg>

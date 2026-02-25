@@ -1,0 +1,1026 @@
+[{
+  "id": 1,
+  "objective": "新关卡",
+  "learningContent": "学习内容",
+  "availableCommands": [
+    "moveRight()",
+    "moveLeft()",
+    "moveUp()",
+    "moveDown()"
+  ],
+  "codePlaceholder": "// 在这里编写代码",
+  "successMessage": "🎉 恭喜通关！",
+  "maps": [
+    {
+      "id": 1,
+      "name": "地图1",
+      "heroStart": {
+        "x": 1,
+        "y": 1
+      },
+      "treasures": [
+        {
+          "x": 3,
+          "y": 1
+        },
+        {
+          "x": 3,
+          "y": 2
+        }
+      ],
+      "obstacles": [],
+      "monsters": [],
+      "weapons": []
+    },
+    {
+      "id": 2,
+      "name": "地图2",
+      "heroStart": {
+        "x": 6,
+        "y": 1
+      },
+      "treasures": [],
+      "obstacles": [],
+      "monsters": [
+        {
+          "x": 4,
+          "y": 4,
+          "type": "physical"
+        },
+        {
+          "x": 3,
+          "y": 5,
+          "type": "physical"
+        },
+        {
+          "x": 6,
+          "y": 5,
+          "type": "physical"
+        }
+      ],
+      "weapons": []
+    },
+    {
+      "id": 3,
+      "name": "地图3",
+      "heroStart": {
+        "x": 5,
+        "y": 3
+      },
+      "treasures": [
+        {
+          "x": 0,
+          "y": 6
+        },
+        {
+          "x": 2,
+          "y": 6
+        }
+      ],
+      "obstacles": [],
+      "monsters": [],
+      "weapons": []
+    }
+  ],
+  "answer": "// 参考答案"
+},
+  {
+    "id": 1,
+    "objective": "初次冒险：让英雄到达宝箱",
+    "learningContent": "基础移动指令、坐标概念、游戏界面认识",
+    "availableCommands": ["right()", "left()", "up()", "down()"],
+    "codePlaceholder": "// 欢迎来到CodeCombat少儿编程世界！\n// 让英雄🦸移动到宝箱💰位置\n// 使用 right() 向右移动\n// 使用 down() 向下移动\n\nright()\nright()\ndown()",
+    "successMessage": "🎉 太棒了！你迈出了编程冒险的第一步！",
+    "maps": [
+      {
+        "id": 1,
+        "name": "基础路径",
+        "heroStart": { "x": 1, "y": 1 },
+        "treasures": [{ "x": 3, "y": 2 }],
+        "obstacles": [],
+        "monsters": [],
+        "weapons": []
+      },
+      {
+        "id": 2,
+        "name": "变化路径",
+        "heroStart": { "x": 2, "y": 1 },
+        "treasures": [{ "x": 4, "y": 3 }],
+        "obstacles": [],
+        "monsters": [],
+        "weapons": []
+      }
+    ],
+    "answer": "// 关卡1答案：初次冒险\n// 简单的直线移动，让新手快速获得成就感\nright()\nright()\ndown()"
+  },
+  {
+    "id": 2,
+    "objective": "智能前进：学习fd()指令",
+    "learningContent": "fd()前进指令、方向概念、代码简化",
+    "availableCommands": ["go()", "dir()"],
+    "codePlaceholder": "// 学习智能移动指令！\n// go(步数) 可以向当前方向前进指定步数\n// dir(方向) 可以设置朝向：1=上, 2=右, 3=下, 4=左\n// 英雄默认朝向右方\n\ngo(3)  // 向右前进3步",
+    "successMessage": "🎉 很好！你掌握了智能前进指令！",
+    "maps": [
+      {
+        "id": 1,
+        "name": "水平路径",
+        "heroStart": { "x": 1, "y": 2 },
+        "treasures": [{ "x": 4, "y": 2 }],
+        "obstacles": [],
+        "monsters": [],
+        "weapons": []
+      },
+      {
+        "id": 2,
+        "name": "垂直路径",
+        "heroStart": { "x": 2, "y": 1 },
+        "treasures": [{ "x": 2, "y": 4 }],
+        "obstacles": [],
+        "monsters": [],
+        "weapons": []
+      }
+    ],
+    "answer": "// 关卡2答案：智能前进\n// 使用go()指令简化移动代码\ngo(3)"
+  },
+  {
+    "id": 3,
+    "objective": "转向探索：掌握direction()指令",
+    "learningContent": "方向控制、路径规划、L型移动",
+    "availableCommands": ["fd()", "direction()"],
+    "codePlaceholder": "// 学习改变方向！\n// direction(方向) 设置朝向：1=上, 2=右, 3=下, 4=左\n// 组合使用direction()和fd()完成L型移动\n\ndirection(2)  // 朝向右方\nfd(2)         // 向右前进2步\ndirection(3)  // 朝向下方\nfd(2)         // 向下前进2步",
+    "successMessage": "🎉 优秀！你学会了改变方向！",
+    "maps": [
+      {
+        "id": 1,
+        "name": "L型路径",
+        "heroStart": { "x": 1, "y": 1 },
+        "treasures": [{ "x": 3, "y": 3 }],
+        "obstacles": [],
+        "monsters": [],
+        "weapons": []
+      },
+      {
+        "id": 2,
+        "name": "反L型路径",
+        "heroStart": { "x": 1, "y": 3 },
+        "treasures": [{ "x": 3, "y": 1 }],
+        "obstacles": [],
+        "monsters": [],
+        "weapons": []
+      }
+    ],
+    "answer": "// 关卡3答案：转向探索\n// L型路径：先右后下\ndirection(2)  // 朝向右方\nfd(2)         // 向右前进2步\ndirection(3)  // 朝向下方\nfd(2)         // 向下前进2步"
+  },
+  {
+    "id": 4,
+    "objective": "避开障碍：绕过障碍物到达宝箱",
+    "learningContent": "路径规划、障碍物概念、智能导航",
+    "availableCommands": ["fd()", "direction()"],
+    "codePlaceholder": "// 遇到障碍物了！🧱\n// 障碍物不能通过，需要绕过去\n// 规划一条绕过障碍物的路径\n\ndirection(2)  // 朝向右方\nfd(1)         // 向右前进1步\ndirection(3)  // 朝向下方\nfd(2)         // 向下前进2步\ndirection(2)  // 朝向右方\nfd(2)         // 向右前进2步\ndirection(1)  // 朝向上方\nfd(1)         // 向上前进1步",
+    "successMessage": "🎉 太棒了！你学会了智能避障！",
+    "maps": [
+      {
+        "id": 1,
+        "name": "水平障碍",
+        "heroStart": { "x": 1, "y": 2 },
+        "treasures": [{ "x": 4, "y": 2 }],
+        "obstacles": [
+          { "x": 2, "y": 2 },
+          { "x": 3, "y": 2 }
+        ],
+        "monsters": [],
+        "weapons": []
+      },
+      {
+        "id": 2,
+        "name": "垂直障碍",
+        "heroStart": { "x": 2, "y": 1 },
+        "treasures": [{ "x": 2, "y": 4 }],
+        "obstacles": [
+          { "x": 2, "y": 2 },
+          { "x": 2, "y": 3 }
+        ],
+        "monsters": [],
+        "weapons": []
+      }
+    ],
+    "answer": "// 关卡4答案：避开障碍\n// 绕过障碍物的路径：下-右-右-右-上\ndirection(3)  // 朝向下方\nfd(1)         // 向下前进1步到(1,3)\ndirection(2)  // 朝向右方\nfd(3)         // 向右前进3步到(4,3)\ndirection(1)  // 朝向上方\nfd(1)         // 向上前进1步到(4,2)"
+  },
+  {
+    "id": 5,
+    "objective": "循环优化：使用for循环简化代码",
+    "learningContent": "for循环、代码优化、重复操作",
+    "availableCommands": ["fd()", "direction()", "for循环"],
+    "codePlaceholder": "// 学习循环的力量！\n// 当需要重复执行相同操作时，使用for循环\n// for(let i = 0; i < 次数; i++) { 重复的代码 }\n\n// 用循环简化重复的fd()调用\nfor(let i = 0; i < 4; i++) {\n  fd(1)\n}",
+    "successMessage": "🎉 优秀！你掌握了循环的力量！",
+    "maps": [
+      {
+        "id": 1,
+        "name": "直线路径",
+        "heroStart": { "x": 1, "y": 3 },
+        "treasures": [{ "x": 5, "y": 3 }],
+        "obstacles": [],
+        "monsters": [],
+        "weapons": []
+      },
+      {
+        "id": 2,
+        "name": "长距离路径",
+        "heroStart": { "x": 1, "y": 2 },
+        "treasures": [{ "x": 7, "y": 2 }],
+        "obstacles": [],
+        "monsters": [],
+        "weapons": []
+      }
+    ],
+    "answer": "// 关卡5答案：循环优化\n// 使用for循环重复执行fd(1)四次\nfor(let i = 0; i < 4; i++) {\n  fd(1)\n}"
+  },
+  {
+    "id": 6,
+    "objective": "智能检测：学习isThereObstacles()函数",
+    "learningContent": "障碍物检测、条件判断、智能决策",
+    "availableCommands": ["fd()", "direction()", "if-else", "isThereObstacles()"],
+    "codePlaceholder": "// 学习智能检测！\n// isThereObstacles(方向) 检查指定方向是否有障碍物\n// 1=上, 2=右, 3=下, 4=左\n// 返回 true 表示有障碍物，false 表示没有\n\n// 检查右方是否有障碍物，决定路径\nif (!isThereObstacles(2)) {\n  direction(2)\n  fd(3)\n} else {\n  direction(3)\n  fd(1)\n  direction(2)\n  fd(3)\n  direction(1)\n  fd(1)\n}",
+    "successMessage": "🎉 太棒了！你学会了智能检测！",
+    "maps": [
+      {
+        "id": 1,
+        "name": "有障碍路径",
+        "heroStart": { "x": 1, "y": 2 },
+        "treasures": [{ "x": 4, "y": 2 }],
+        "obstacles": [
+          { "x": 2, "y": 2 },
+          { "x": 3, "y": 2 }
+        ],
+        "monsters": [],
+        "weapons": []
+      },
+      {
+        "id": 2,
+        "name": "无障碍路径",
+        "heroStart": { "x": 1, "y": 2 },
+        "treasures": [{ "x": 4, "y": 2 }],
+        "obstacles": [],
+        "monsters": [],
+        "weapons": []
+      }
+    ],
+    "answer": "// 关卡6答案：智能检测\n// 检测右方障碍物，选择绕行路径\nif (!isThereObstacles(2)) {\n  direction(2)\n  fd(3)\n} else {\n  direction(3)\n  fd(1)\n  direction(2)\n  fd(3)\n  direction(1)\n  fd(1)\n}"
+  },
+  {
+    "id": 7,
+    "objective": "武器入门：装备你的第一把武器",
+    "learningContent": "武器系统、物品收集、装备概念",
+    "availableCommands": ["fd()", "direction()"],
+    "codePlaceholder": "// 发现了武器！⚔️\n// 走到武器位置会自动装备\n// 装备武器后可以在后续关卡中战斗\n// 先收集武器，再收集宝箱\n\ndirection(2)  // 朝向右方\nfd(2)         // 前进到武器位置，自动装备\nfd(2)         // 继续前进到宝箱",
+    "successMessage": "🎉 恭喜！你装备了第一把武器！",
+    "maps": [
+      {
+        "id": 1,
+        "name": "剑与宝箱",
+        "heroStart": { "x": 1, "y": 3 },
+        "treasures": [{ "x": 5, "y": 3 }],
+        "obstacles": [],
+        "monsters": [],
+        "weapons": [
+          { "x": 3, "y": 3, "type": "sword" }
+        ]
+      },
+      {
+        "id": 2,
+        "name": "魔杖与宝箱",
+        "heroStart": { "x": 1, "y": 2 },
+        "treasures": [{ "x": 5, "y": 2 }],
+        "obstacles": [],
+        "monsters": [],
+        "weapons": [
+          { "x": 3, "y": 2, "type": "staff" }
+        ]
+      }
+    ],
+    "answer": "// 关卡7答案：武器入门\n// 先装备武器，再收集宝箱\ndirection(2)  // 朝向右方\nfd(2)         // 前进到武器位置，自动装备\nfd(2)         // 继续前进到宝箱"
+  },
+  {
+    "id": 8,
+    "objective": "初次战斗：击败你的第一个怪物",
+    "learningContent": "战斗系统、attack()指令、武器与怪物匹配",
+    "availableCommands": ["fd()", "direction()", "attack()"],
+    "codePlaceholder": "// 遇到怪物了！👹\n// 使用attack()指令攻击怪物\n// 剑⚔️能击败物理系怪物👹\n// 魔杖🪄能击败魔法系怪物🔮\n// 先装备武器，然后在相邻位置攻击怪物\n\ndirection(2)  // 朝向右方\nfd(2)         // 前进到武器位置，装备剑\nattack()      // 攻击右侧的怪物\nfd(2)         // 前进到宝箱",
+    "successMessage": "🎉 恭喜！你击败了第一个怪物！",
+    "maps": [
+      {
+        "id": 1,
+        "name": "剑斗物理怪",
+        "heroStart": { "x": 1, "y": 3 },
+        "treasures": [{ "x": 5, "y": 3 }],
+        "obstacles": [],
+        "monsters": [
+          { "x": 4, "y": 3, "type": "physical" }
+        ],
+        "weapons": [
+          { "x": 3, "y": 3, "type": "sword" }
+        ]
+      },
+      {
+        "id": 2,
+        "name": "多个物理怪",
+        "heroStart": { "x": 1, "y": 2 },
+        "treasures": [{ "x": 6, "y": 2 }],
+        "obstacles": [],
+        "monsters": [
+          { "x": 3, "y": 2, "type": "physical" },
+          { "x": 5, "y": 2, "type": "physical" }
+        ],
+        "weapons": [
+          { "x": 2, "y": 2, "type": "sword" }
+        ]
+      }
+    ],
+    "answer": "// 关卡8答案：初次战斗\n// 装备剑，攻击物理系怪物\ndirection(2)  // 朝向右方\nfd(2)         // 前进到武器位置(3,3)，装备剑\nattack()      // 在(3,3)位置攻击右侧的怪物(4,3)\nfd(2)         // 前进到宝箱位置(5,3)"
+  },
+  {
+    "id": 9,
+    "objective": "武器选择：学习不同武器对付不同怪物",
+    "learningContent": "武器类型、怪物类型、战术选择",
+    "availableCommands": ["fd()", "direction()", "attack()"],
+    "codePlaceholder": "// 学习武器与怪物的匹配！\n// 剑⚔️击败物理系怪物👹（红色）\n// 魔杖🪄击败魔法系怪物🔮（蓝色）\n// 这里有魔法系怪物，需要魔杖\n\ndirection(2)  // 朝向右方\nfd(2)         // 前进到魔杖位置，装备魔杖\nattack()      // 用魔杖攻击右侧的魔法系怪物\nfd(2)         // 前进到宝箱",
+    "successMessage": "🎉 优秀！你学会了选择正确的武器！",
+    "maps": [
+      {
+        "id": 1,
+        "name": "魔杖斗魔法怪",
+        "heroStart": { "x": 1, "y": 3 },
+        "treasures": [{ "x": 5, "y": 3 }],
+        "obstacles": [],
+        "monsters": [
+          { "x": 4, "y": 3, "type": "magical" }
+        ],
+        "weapons": [
+          { "x": 3, "y": 3, "type": "staff" }
+        ]
+      },
+      {
+        "id": 2,
+        "name": "混合怪物",
+        "heroStart": { "x": 1, "y": 2 },
+        "treasures": [{ "x": 6, "y": 2 }],
+        "obstacles": [],
+        "monsters": [
+          { "x": 3, "y": 2, "type": "magical" },
+          { "x": 5, "y": 2, "type": "physical" }
+        ],
+        "weapons": [
+          { "x": 2, "y": 2, "type": "staff" },
+          { "x": 4, "y": 2, "type": "sword" }
+        ]
+      }
+    ],
+    "answer": "// 关卡9答案：武器选择\n// 装备魔杖攻击魔法系怪物\ndirection(2)  // 朝向右方\nfd(2)         // 前进到魔杖位置(3,3)，装备魔杖\nattack()      // 在(3,3)位置攻击右侧的魔法系怪物(4,3)\nfd(2)         // 前进到宝箱位置(5,3)"
+  },
+  {
+    "id": 10,
+    "objective": "终极挑战：编程大师的试炼",
+    "learningContent": "综合应用所有指令、复杂逻辑判断、多层嵌套结构、智能路径规划",
+    "availableCommands": [
+      "fd()",
+      "direction()",
+      "attack()",
+      "for循环",
+      "if-else",
+      "isThereObstacles()",
+      "hasObstacle()",
+      "hasTreasure()",
+      "getHeroPosition()",
+      "rt()"
+    ],
+    "codePlaceholder": "// 🏆 终极挑战：编程大师的试炼 🏆\n// 这是最复杂的关卡，需要运用所有学过的技能：\n// \n// 📋 任务清单：\n// 1. 🗝️ 收集3把不同的武器（需要用循环优化移动）\n// 2. ⚔️ 击败4个不同位置的怪物（需要条件判断选择武器）\n// 3. 💰 收集4个宝箱（需要智能检测和路径规划）\n// 4. 🧭 在复杂迷宫中导航（需要障碍检测和方向判断）\n//\n// 💡 提示：\n// - 使用for循环优化重复移动\n// - 使用if-else根据情况选择路径\n// - 使用isThereObstacles()检测前方障碍\n// - 使用getHeroPosition()获取当前位置\n// - 合理规划路径，避免走回头路\n//\n// 🎯 策略建议：\n// 1. 先收集武器，再挑战怪物\n// 2. 利用障碍物形成的通道规划路径\n// 3. 用检测函数避免碰撞\n// 4. 最后收集所有宝箱\n//\n// 加油！展示你的编程大师技能！💪",
+    "successMessage": "🎉🏆 传奇诞生！你已成为真正的编程大师！🏆🎉\n你成功运用了所有编程技能：循环、条件判断、函数调用、逻辑推理！\n恭喜完成终极挑战，你已经掌握了编程的精髓！👑",
+    "maps": [
+      {
+        "id": 1,
+        "name": "迷宫挑战A",
+        "heroStart": {
+          "x": 1,
+          "y": 8
+        },
+        "treasures": [
+          {
+            "x": 1,
+            "y": 1
+          },
+          {
+            "x": 13,
+            "y": 1
+          },
+          {
+            "x": 7,
+            "y": 8
+          }
+        ],
+        "obstacles": [
+      {
+        "x": 0,
+        "y": 0
+      },
+      {
+        "x": 1,
+        "y": 0
+      },
+      {
+        "x": 2,
+        "y": 0
+      },
+      {
+        "x": 3,
+        "y": 0
+      },
+      {
+        "x": 4,
+        "y": 0
+      },
+      {
+        "x": 5,
+        "y": 0
+      },
+      {
+        "x": 6,
+        "y": 0
+      },
+      {
+        "x": 7,
+        "y": 0
+      },
+      {
+        "x": 8,
+        "y": 0
+      },
+      {
+        "x": 9,
+        "y": 0
+      },
+      {
+        "x": 10,
+        "y": 0
+      },
+      {
+        "x": 11,
+        "y": 0
+      },
+      {
+        "x": 12,
+        "y": 0
+      },
+      {
+        "x": 13,
+        "y": 0
+      },
+      {
+        "x": 14,
+        "y": 0
+      },
+      {
+        "x": 0,
+        "y": 1
+      },
+      {
+        "x": 14,
+        "y": 1
+      },
+      {
+        "x": 0,
+        "y": 2
+      },
+      {
+        "x": 2,
+        "y": 2
+      },
+      {
+        "x": 4,
+        "y": 2
+      },
+      {
+        "x": 6,
+        "y": 2
+      },
+      {
+        "x": 8,
+        "y": 2
+      },
+      {
+        "x": 9,
+        "y": 2
+      },
+      {
+        "x": 10,
+        "y": 2
+      },
+      {
+        "x": 11,
+        "y": 2
+      },
+      {
+        "x": 12,
+        "y": 2
+      },
+      {
+        "x": 13,
+        "y": 2
+      },
+      {
+        "x": 14,
+        "y": 2
+      },
+      {
+        "x": 0,
+        "y": 3
+      },
+      {
+        "x": 2,
+        "y": 3
+      },
+      {
+        "x": 4,
+        "y": 3
+      },
+      {
+        "x": 6,
+        "y": 3
+      },
+      {
+        "x": 8,
+        "y": 3
+      },
+      {
+        "x": 14,
+        "y": 3
+      },
+      {
+        "x": 0,
+        "y": 4
+      },
+      {
+        "x": 4,
+        "y": 4
+      },
+      {
+        "x": 6,
+        "y": 4
+      },
+      {
+        "x": 8,
+        "y": 4
+      },
+      {
+        "x": 14,
+        "y": 4
+      },
+      {
+        "x": 0,
+        "y": 5
+      },
+      {
+        "x": 2,
+        "y": 5
+      },
+      {
+        "x": 4,
+        "y": 5
+      },
+      {
+        "x": 6,
+        "y": 5
+      },
+      {
+        "x": 8,
+        "y": 5
+      },
+      {
+        "x": 14,
+        "y": 5
+      },
+      {
+        "x": 0,
+        "y": 6
+      },
+      {
+        "x": 2,
+        "y": 6
+      },
+      {
+        "x": 4,
+        "y": 6
+      },
+      {
+        "x": 8,
+        "y": 6
+      },
+      {
+        "x": 14,
+        "y": 6
+      },
+      {
+        "x": 0,
+        "y": 7
+      },
+      {
+        "x": 2,
+        "y": 7
+      },
+      {
+        "x": 4,
+        "y": 7
+      },
+      {
+        "x": 6,
+        "y": 7
+      },
+      {
+        "x": 8,
+        "y": 7
+      },
+      {
+        "x": 14,
+        "y": 7
+      },
+      {
+        "x": 0,
+        "y": 8
+      },
+      {
+        "x": 2,
+        "y": 8
+      },
+      {
+        "x": 4,
+        "y": 8
+      },
+      {
+        "x": 6,
+        "y": 8
+      },
+      {
+        "x": 8,
+        "y": 8
+      },
+      {
+        "x": 14,
+        "y": 8
+      },
+      {
+        "x": 0,
+        "y": 9
+      },
+      {
+        "x": 2,
+        "y": 9
+      },
+      {
+        "x": 4,
+        "y": 9
+      },
+      {
+        "x": 6,
+        "y": 9
+      },
+      {
+        "x": 8,
+        "y": 9
+      },
+      {
+        "x": 14,
+        "y": 9
+      }
+        ],
+        "monsters": [
+          {
+            "x": 3,
+            "y": 4,
+            "type": "physical"
+          }
+        ],
+        "weapons": [
+          {
+            "x": 3,
+            "y": 1,
+            "type": "sword"
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "name": "迷宫挑战B",
+        "heroStart": {
+          "x": 1,
+          "y": 8
+        },
+        "treasures": [
+          {
+            "x": 1,
+            "y": 1
+          },
+          {
+            "x": 13,
+            "y": 1
+          },
+          {
+            "x": 9,
+            "y": 8
+          }
+        ],
+        "obstacles": [
+          {
+            "x": 0,
+            "y": 0
+          },
+          {
+            "x": 1,
+            "y": 0
+          },
+          {
+            "x": 2,
+            "y": 0
+          },
+          {
+            "x": 3,
+            "y": 0
+          },
+          {
+            "x": 4,
+            "y": 0
+          },
+          {
+            "x": 5,
+            "y": 0
+          },
+          {
+            "x": 6,
+            "y": 0
+          },
+          {
+            "x": 7,
+            "y": 0
+          },
+          {
+            "x": 8,
+            "y": 0
+          },
+          {
+            "x": 9,
+            "y": 0
+          },
+          {
+            "x": 10,
+            "y": 0
+          },
+          {
+            "x": 11,
+            "y": 0
+          },
+          {
+            "x": 12,
+            "y": 0
+          },
+          {
+            "x": 13,
+            "y": 0
+          },
+          {
+            "x": 14,
+            "y": 0
+          },
+          {
+            "x": 0,
+            "y": 1
+          },
+          {
+            "x": 14,
+            "y": 1
+          },
+          {
+            "x": 0,
+            "y": 2
+          },
+          {
+            "x": 3,
+            "y": 2
+          },
+          {
+            "x": 5,
+            "y": 2
+          },
+          {
+            "x": 7,
+            "y": 2
+          },
+          {
+            "x": 9,
+            "y": 2
+          },
+          {
+            "x": 11,
+            "y": 2
+          },
+          {
+            "x": 14,
+            "y": 2
+          },
+          {
+            "x": 0,
+            "y": 3
+          },
+          {
+            "x": 3,
+            "y": 3
+          },
+          {
+            "x": 5,
+            "y": 3
+          },
+          {
+            "x": 7,
+            "y": 3
+          },
+          {
+            "x": 9,
+            "y": 3
+          },
+          {
+            "x": 11,
+            "y": 3
+          },
+          {
+            "x": 14,
+            "y": 3
+          },
+          {
+            "x": 0,
+            "y": 4
+          },
+          {
+            "x": 5,
+            "y": 4
+          },
+          {
+            "x": 7,
+            "y": 4
+          },
+          {
+            "x": 9,
+            "y": 4
+          },
+          {
+            "x": 14,
+            "y": 4
+          },
+          {
+            "x": 0,
+            "y": 5
+          },
+          {
+            "x": 3,
+            "y": 5
+          },
+          {
+            "x": 5,
+            "y": 5
+          },
+          {
+            "x": 7,
+            "y": 5
+          },
+          {
+            "x": 9,
+            "y": 5
+          },
+          {
+            "x": 11,
+            "y": 5
+          },
+          {
+            "x": 14,
+            "y": 5
+          },
+          {
+            "x": 0,
+            "y": 6
+          },
+          {
+            "x": 3,
+            "y": 6
+          },
+          {
+            "x": 5,
+            "y": 6
+          },
+          {
+            "x": 9,
+            "y": 6
+          },
+          {
+            "x": 11,
+            "y": 6
+          },
+          {
+            "x": 14,
+            "y": 6
+          },
+          {
+            "x": 0,
+            "y": 7
+          },
+          {
+            "x": 3,
+            "y": 7
+          },
+          {
+            "x": 5,
+            "y": 7
+          },
+          {
+            "x": 7,
+            "y": 7
+          },
+          {
+            "x": 9,
+            "y": 7
+          },
+          {
+            "x": 11,
+            "y": 7
+          },
+          {
+            "x": 14,
+            "y": 7
+          },
+          {
+            "x": 0,
+            "y": 8
+          },
+          {
+            "x": 3,
+            "y": 8
+          },
+          {
+            "x": 5,
+            "y": 8
+          },
+          {
+            "x": 7,
+            "y": 8
+          },
+          {
+            "x": 11,
+            "y": 8
+          },
+          {
+            "x": 14,
+            "y": 8
+          },
+          {
+            "x": 0,
+            "y": 9
+          },
+          {
+            "x": 3,
+            "y": 9
+          },
+          {
+            "x": 5,
+            "y": 9
+          },
+          {
+            "x": 7,
+            "y": 9
+          },
+          {
+            "x": 9,
+            "y": 9
+          },
+          {
+            "x": 11,
+            "y": 9
+          },
+          {
+            "x": 14,
+            "y": 9
+          }
+        ],
+        "monsters": [
+          {
+            "x": 4,
+            "y": 4,
+            "type": "magical"
+          }
+        ],
+        "weapons": [
+          {
+            "x": 4,
+            "y": 1,
+            "type": "staff"
+          }
+        ]
+      }
+    ],
+    "answer": "// 🏆 关卡10答案：编程大师的试炼 🏆\n// 这是最复杂的解答，展示了所有编程技能的综合运用\n\n// ===== 第一阶段：收集第一个宝箱(1,1) =====\n// 使用循环优化移动，展示for循环的威力\ndirection(1)  // 朝向上方\nfor(let i = 0; i < 7; i++) {\n  fd(1)  // 循环向上移动7步，从(1,8)到(1,1)\n}\n// 自动收集宝箱💰\n\n// ===== 第二阶段：收集第一把武器(3,1) =====\n// 使用智能移动指令，避开障碍物\ndirection(2)  // 朝向右方\nfd(2)         // 向右移动2步到(3,1)，装备剑⚔️\n\n// ===== 第三阶段：导航到怪物并击败(3,4) =====\n// 展示复杂的路径规划和攻击策略\ndirection(3)  // 朝向下方\nfd(2)         // 向下移动2步到(3,3)\n// 现在英雄在(3,3)位置，怪物在(3,4)位置\n// 英雄朝向下方，可以攻击下方的怪物\nattack()      // 攻击下方的物理系怪物👹\n\n// ===== 第四阶段：收集中心宝箱(7,8) =====\n// 展示智能路径规划，从当前位置导航到中心宝箱\ndirection(1)  // 朝向上方\nfd(2)         // 向上移动2步回到(3,1)\ndirection(2)  // 朝向右方\nfd(4)         // 向右移动4步到(7,1)\ndirection(3)  // 朝向下方\nfd(7)         // 向下移动7步到(7,8)，收集中心宝箱💰\n\n// ===== 第五阶段：收集最后一个宝箱(13,1) =====\n// 最后的挑战，展示精确的路径控制和循环应用\ndirection(1)  // 朝向上方\nfd(7)         // 向上移动7步到(7,1)\ndirection(2)  // 朝向右方\n// 使用循环优化最后的移动\nfor(let i = 0; i < 6; i++) {\n  fd(1)  // 循环向右移动6步到(13,1)\n}\n// 收集最后一个宝箱💰，完成终极挑战！\n\n// 🎉 恭喜！你已经展示了所有编程技能：\n// ✅ for循环 - 优化重复操作，减少代码冗余\n// ✅ direction() - 精确的方向控制(1=上,2=右,3=下,4=左)\n// ✅ fd() - 智能移动指令，简化移动代码\n// ✅ attack() - 战斗指令，正确的攻击时机和位置\n// ✅ 路径规划 - 算法思维，避开障碍物的最优路径\n// ✅ 逻辑思维 - 分阶段完成复杂任务\n// ✅ 空间想象 - 理解二维坐标系统和方向概念\n// ✅ 代码优化 - 使用循环减少重复代码\n//\n// 你已经成为真正的编程大师！🏆👑\n// 这个关卡展示了编程的核心思想：\n// 1. 分解复杂问题为简单步骤\n// 2. 使用循环优化重复操作  \n// 3. 精确控制程序执行流程\n// 4. 理解坐标系统和空间关系\n// 5. 合理规划算法路径"
+  }
+]

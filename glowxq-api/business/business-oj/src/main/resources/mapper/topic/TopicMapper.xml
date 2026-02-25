@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.glowxq.oj.topic.mapper.TopicMapper">
+    <!-- 通用映射 -->
+    <resultMap id="BaseResultMap" type="com.glowxq.oj.topic.pojo.po.Topic">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="code" property="code"/>
+        <result column="principal_user_id" property="principalUserId"/>
+        <result column="principal_name" property="principalName"/>
+        <result column="password" property="password"/>
+        <result column="description" property="description"/>
+        <result column="time_range_type" property="timeRangeType"/>
+        <result column="topic_type" property="topicType"/>
+        <result column="topic_judge_type" property="topicJudgeType"/>
+        <result column="sealed_time" property="sealedTime"/>
+        <result column="time_limit" property="timeLimit"/>
+        <result column="punishment_time" property="punishmentTime"/>
+        <result column="oi_score_type" property="oiScoreType"/>
+        <result column="color" property="color"/>
+        <result column="common" property="common"/>
+        <result column="enable" property="enable"/>
+        <result column="start_time" property="startTime"/>
+        <result column="end_time" property="endTime"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="del_flag" property="delFlag"/>
+        <result column="create_id" property="createId"/>
+        <result column="update_id" property="updateId"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, name, code, principal_user_id, principal_name, password, description, time_range_type, topic_type, topic_judge_type, sealed_time, time_limit, punishment_time, oi_score_type, color, common, enable, start_time, end_time, create_time, update_time, del_flag, create_id, update_id
+    </sql>
+
+</mapper>

@@ -1,0 +1,8 @@
+feishu:
+  robot:
+    webhook:
+      internal-url: ${FEISHU_INTERNAL_WEBHOOK:}
+      business-url: ${FEISHU_BUSINESS_WEBHOOK:}
+  app:
+    app-id: ${FEISHU_APP_ID:}
+    app-secret: ${FEISHU_APP_SECRET:}

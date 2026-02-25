@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.glowxq.tenant.business.mapper.TenantMapper">
+    <!-- 通用映射 -->
+    <resultMap id="BaseResultMap" type="com.glowxq.tenant.business.pojo.po.Tenant">
+        <id column="id" property="id"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="tenant_code" property="tenantCode"/>
+        <result column="tenant_name" property="tenantName"/>
+        <result column="contact_name" property="contactName"/>
+        <result column="contact_phone" property="contactPhone"/>
+        <result column="contact_email" property="contactEmail"/>
+        <result column="show" property="show"/>
+        <result column="password" property="password"/>
+        <result column="enable" property="enable"/>
+        <result column="expired_time" property="expiredTime"/>
+        <result column="max_user_num" property="maxUserNum"/>
+        <result column="current_user_num" property="currentUserNum"/>
+        <result column="logo_url" property="logoUrl"/>
+        <result column="text" property="text"/>
+        <result column="system_name" property="systemName"/>
+        <result column="home_image_url" property="homeImageUrl"/>
+        <result column="theme_color" property="themeColor"/>
+        <result column="config" property="config"/>
+        <result column="custom_domain" property="customDomain"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="del_flag" property="delFlag"/>
+        <result column="create_id" property="createId"/>
+        <result column="update_id" property="updateId"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, tenant_id, tenant_code, tenant_name, contact_name, contact_phone, contact_email, show, password, enable, expired_time, max_user_num, current_user_num, logo_url, text, system_name, home_image_url, theme_color, config, custom_domain, create_time, update_time, del_flag, create_id, update_id
+    </sql>
+
+</mapper>

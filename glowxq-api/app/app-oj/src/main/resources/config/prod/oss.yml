@@ -1,0 +1,11 @@
+oss:
+  # 支持S3协议的厂商
+  provider: ${OSS_PROVIDER:MINIO}
+  endpoint: ${OSS_ENDPOINT:http://localhost:9000}
+  accessKey: ${OSS_ACCESS_KEY:your_access_key}
+  secretKey: ${OSS_SECRET_KEY:your_secret_key}
+  bucketName: ${app.name}
+  domain: ${OSS_DOMAIN:}
+  # 命名方式: UUID、ORIGINAL原文件名偏好，冲突会补充时间
+  naming: original
+  scheme: ${OSS_SCHEME:http}

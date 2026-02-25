@@ -1,0 +1,140 @@
+services:
+  # ==================== MySQL ====================
+  mysql:
+    image: mysql:8.0
+    container_name: oj-mysql
+    restart: unless-stopped
+    ports:
+      - "${MYSQL_PORT:-3306}:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-glowxq123456}
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-glowxq_oj}
+      TZ: Asia/Shanghai
+    volumes:
+      - ${DATA_DIR:-./data}/mysql:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    command: >
+      --character-set-server=utf8mb4
+      --collation-server=utf8mb4_unicode_ci
+      --default-authentication-plugin=mysql_native_password
+      --max_connections=200
+      --innodb_buffer_pool_size=256M
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${MYSQL_ROOT_PASSWORD:-glowxq123456}"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+    networks:
+      - oj-network
+
+  # ==================== Redis ====================
+  redis:
+    image: redis:7-alpine
+    container_name: oj-redis
+    restart: unless-stopped
+    ports:
+      - "${REDIS_PORT:-6379}:6379"
+    command: redis-server --requirepass ${REDIS_PASSWORD:-glowxq123456} --appendonly yes
+    volumes:
+      - ${DATA_DIR:-./data}/redis:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "-a", "${REDIS_PASSWORD:-glowxq123456}", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    networks:
+      - oj-network
+
+  # ==================== MinIO ====================
+  minio:
+    image: minio/minio:latest
+    container_name: oj-minio
+    restart: unless-stopped
+    ports:
+      - "${MINIO_API_PORT:-9000}:9000"
+      - "${MINIO_CONSOLE_PORT:-9001}:9001"
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ACCESS_KEY:-minioadmin}
+      MINIO_ROOT_PASSWORD: ${MINIO_SECRET_KEY:-minioadmin}
+    volumes:
+      - ${DATA_DIR:-./data}/minio:/data
+    command: server /data --console-address ":9001"
+    healthcheck:
+      test: ["CMD", "mc", "ready", "local"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 15s
+    networks:
+      - oj-network
+
+  # ==================== MinIO Init ====================
+  minio-init:
+    image: minio/mc
+    container_name: oj-minio-init
+    depends_on:
+      minio:
+        condition: service_healthy
+    entrypoint: >
+      /bin/sh -c "
+      mc alias set oj-minio http://minio:9000 $${MINIO_ACCESS_KEY:-minioadmin} $${MINIO_SECRET_KEY:-minioadmin};
+      mc mb --ignore-existing oj-minio/$${MINIO_BUCKET:-nexus-oj};
+      mc anonymous set download oj-minio/$${MINIO_BUCKET:-nexus-oj};
+      echo 'MinIO bucket initialized successfully!';
+      exit 0;
+      "
+    environment:
+      MINIO_ACCESS_KEY: ${MINIO_ACCESS_KEY:-minioadmin}
+      MINIO_SECRET_KEY: ${MINIO_SECRET_KEY:-minioadmin}
+      MINIO_BUCKET: ${MINIO_BUCKET:-nexus-oj}
+    networks:
+      - oj-network
+
+  # ==================== OJ API ====================
+  oj-api:
+    build:
+      context: ../
+      dockerfile: app/app-oj/Dockerfile
+    container_name: oj-api
+    restart: unless-stopped
+    # go-judge 沙盒需要特权模式来创建 Linux 容器 (cgroups/namespaces)
+    privileged: true
+    ports:
+      - "${APP_PORT:-7101}:7101"
+      - "${SANDBOX_PORT:-5050}:5050"
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+      MYSQL_HOST: mysql
+      MYSQL_PORT: 3306
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-glowxq_oj}
+      MYSQL_USER: root
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-glowxq123456}
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      REDIS_PASSWORD: ${REDIS_PASSWORD:-glowxq123456}
+      REDIS_DATABASE: ${REDIS_DATABASE:-1}
+      OSS_ENDPOINT: http://minio:9000
+      OSS_DOMAIN: http://localhost:${MINIO_API_PORT:-9000}
+      OSS_ACCESS_KEY: ${MINIO_ACCESS_KEY:-minioadmin}
+      OSS_SECRET_KEY: ${MINIO_SECRET_KEY:-minioadmin}
+      JWT_SECRET_KEY: ${JWT_SECRET_KEY:-your_secret_key_please_change_me}
+      JAVA_OPTS: ${JAVA_OPTS:--Xms256m -Xmx512m}
+      FEISHU_INTERNAL_WEBHOOK: ${FEISHU_INTERNAL_WEBHOOK:-}
+      FEISHU_BUSINESS_WEBHOOK: ${FEISHU_BUSINESS_WEBHOOK:-}
+      FEISHU_APP_ID: ${FEISHU_APP_ID:-}
+      FEISHU_APP_SECRET: ${FEISHU_APP_SECRET:-}
+    depends_on:
+      mysql:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      minio:
+        condition: service_healthy
+    networks:
+      - oj-network
+
+networks:
+  oj-network:
+    driver: bridge

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.glowxq.system.admin.mapper.SysOperationLogMapper">
+    <!-- 通用映射 -->
+    <resultMap id="BaseResultMap" type="com.glowxq.system.admin.pojo.po.SysOperationLog">
+        <id column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="trace_id" property="traceId"/>
+        <result column="span_id" property="spanId"/>
+        <result column="username" property="username"/>
+        <result column="ip" property="ip"/>
+        <result column="method" property="method"/>
+        <result column="uri" property="uri"/>
+        <result column="header" property="header"/>
+        <result column="module" property="module"/>
+        <result column="description" property="description"/>
+        <result column="param" property="param"/>
+        <result column="request" property="request"/>
+        <result column="response" property="response"/>
+        <result column="error" property="error"/>
+        <result column="business_type" property="businessType"/>
+        <result column="error_message" property="errorMessage"/>
+        <result column="cost_time" property="costTime"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="del_flag" property="delFlag"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="create_id" property="createId"/>
+        <result column="update_id" property="updateId"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, user_id, trace_id, span_id, username, ip, method, uri, header, module, description, param, request, response, error, business_type, error_message, cost_time, create_time, update_time, del_flag, tenant_id, create_id, update_id
+    </sql>
+
+</mapper>

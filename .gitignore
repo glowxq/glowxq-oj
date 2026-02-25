@@ -1,0 +1,58 @@
+# ─── 系统文件 ──────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ─── IDE / 编辑器 ─────────────────────────
+.idea/
+.vscode/
+*.iml
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# ─── 环境变量（敏感配置）──────────────────
+.env
+!.env.example
+
+# ─── Docker 数据 / 持久化 ────────────────
+data/
+backups/
+
+# ─── 日志文件 ──────────────────────────────
+*.log
+logs/
+error.log
+
+# ─── Java / Maven ─────────────────────────
+**/target/
+*.class
+*.jar
+!**/Sandbox-*
+
+# ─── Node.js / 前端 ──────────────────────
+node_modules/
+dist/
+dist-ssr/
+*.local
+coverage/
+
+# ─── 前端日志 ──────────────────────────────
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# ─── Cypress ──────────────────────────────
+cypress/videos/
+cypress/screenshots/
+
+# ─── 临时文件 ──────────────────────────────
+*.tmp
+*.temp
+*.swp
+*.bak
+*~

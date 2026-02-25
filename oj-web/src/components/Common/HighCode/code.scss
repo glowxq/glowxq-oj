@@ -1,0 +1,116 @@
+/* 语法高亮 */
+.hljs-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: max-content;
+  overflow-x: hidden;
+  font-size: 14px;
+  line-height: 24px;
+  text-align: left;
+  background: #21252b;
+
+  .hljs-header {
+    width: 100%;
+    background-color: #21252b;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    left: 0;
+    z-index: 100;
+  }
+
+  .hljs-wrapper {
+    display: flex;
+    align-items: flex-start;
+  }
+
+  /** 行数样式 */
+  .hljs-code-number {
+    padding: 17px 10px 0;
+    color: #d1d8e6;
+    font-size: 12px;
+    list-style: none;
+    background: #21252b;
+    position: sticky;
+    left: 0;
+  }
+
+  pre {
+    flex: 1;
+  }
+}
+
+/** 3个点 */
+.hljs-container .hljs-header::before {
+  position: absolute;
+  top: 10px;
+  left: 15px;
+  width: 12px;
+  height: 12px;
+  overflow: visible;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 12px;
+  white-space: nowrap;
+  text-indent: 75px;
+  background-color: #fc625d;
+  border-radius: 16px;
+  box-shadow:
+    20px 0 #fdbc40,
+    40px 0 #35cd4b;
+  content: attr(codetype);
+}
+
+/** 滚动条 */
+:deep(.hljs) {
+  overflow-x: auto;
+}
+
+:deep(.hljs::-webkit-scrollbar) {
+  width: 12px !important;
+  height: 12px !important;
+}
+
+:deep(.hljs::-webkit-scrollbar-thumb) {
+  height: 30px !important;
+  background: #d1d8e6;
+  background-clip: content-box;
+  border: 2px solid transparent;
+  border-radius: 19px;
+  opacity: 0.8;
+}
+
+:deep(.hljs::-webkit-scrollbar-thumb:hover) {
+  background: #a5b3cf;
+  background-clip: content-box;
+  border: 2px solid transparent;
+}
+
+:deep(.hljs::-webkit-scrollbar-track-piece) {
+  width: 30px;
+  height: 30px;
+  background: #333;
+}
+
+::-webkit-scrollbar-button {
+  display: none;
+}
+
+/** 复制样式 */
+.hljs-copy {
+  width: auto;
+  height: 30px;
+  color: #d7d7e1;
+  cursor: pointer;
+  user-select: none;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+  margin: 0 2px;
+
+  .sql-box {
+    text-align: unset;
+  }
+}

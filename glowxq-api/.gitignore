@@ -1,0 +1,9 @@
+/.idea/
+# 忽略所有target文件夹
+/**/target/
+# 排除logs日志文件夹
+/logs/
+# 敏感配置文件
+script/.env
+# Docker 数据目录
+script/data/

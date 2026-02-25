@@ -1,0 +1,69 @@
+.tabs-box {
+  background-color: var(--el-bg-color);
+  .tabs-menu {
+    position: relative;
+    width: 100%;
+    .el-dropdown {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      .more-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 43px;
+        cursor: pointer;
+        border-left: 1px solid var(--el-border-color-light);
+        transition: all 0.3s;
+        &:hover {
+          background-color: var(--el-color-info-light-9);
+        }
+        .iconfont {
+          font-size: 12.5px;
+        }
+      }
+    }
+    :deep(.el-tabs) {
+      .el-tabs__header {
+        box-sizing: border-box;
+        height: 40px;
+        padding: 0 10px;
+        margin: 0;
+        .el-tabs__nav-wrap {
+          position: absolute;
+          width: calc(100% - 70px);
+          .el-tabs__nav {
+            display: flex;
+            border: none;
+            .el-tabs__item {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              color: #afafaf;
+              border: none;
+              .tabs-icon {
+                margin: 1.5px 4px 0 0;
+                font-size: 15px;
+              }
+              .is-icon-close {
+                margin-top: 1px;
+              }
+              &.is-active {
+                color: var(--el-color-primary);
+                &::before {
+                  position: absolute;
+                  bottom: 0;
+                  width: 100%;
+                  height: 0;
+                  content: '';
+                  border-bottom: 2px solid var(--el-color-primary) !important;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

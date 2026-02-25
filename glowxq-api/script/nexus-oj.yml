@@ -1,0 +1,52 @@
+# 指定 Docker Compose 文件格式版本
+# 3.8 版本支持扩展字段、滚动更新配置等特性
+version: "3.8"
+
+# 定义服务组件
+services:
+
+  oj-api:
+    # 使用阿里云镜像仓库的定制镜像
+    image: registry.cn-guangzhou.aliyuncs.com/glowxq/nexus:oj-api
+    # 容器命名便于管理
+    container_name: oj-api
+    # 重启策略：总是自动重启（保障服务高可用）
+    restart: always
+    # 数据卷映射配置（重要持久化数据）
+    volumes:
+      # 测试用例目录（双映射保证 goj 和 judge 服务都能访问）
+      - ${OJ_DATA_DIRECTORY:-/me/nexus/oj/data}/common/testcase:/goj/testcase
+      - ${OJ_DATA_DIRECTORY:-/me/nexus/oj/data}/common/testcase:/judge/testcase
+
+      # GoJ 接口服务相关目录
+      - ${OJ_DATA_DIRECTORY:-/me/nexus/oj/data}/goj/file:/goj/file  # 上传文件存储
+      - ${OJ_DATA_DIRECTORY:-/me/nexus/oj/data}/goj/log:/goj/log    # 业务日志
+
+      # Judge 判题服务目录
+      - ${OJ_DATA_DIRECTORY:-/me/nexus/oj/data}/judge/log:/judge/log         # 判题日志
+      - ${OJ_DATA_DIRECTORY:-/me/nexus/oj/data}/judge/run:/judge/run         # 运行时临时文件
+      - ${OJ_DATA_DIRECTORY:-/me/nexus/oj/data}/judge/spj:/judge/spj         # 特殊判题程序
+      - ${OJ_DATA_DIRECTORY:-/me/nexus/oj/data}/judge/interactive:/judge/interactive  # 交互程序
+
+    # 环境变量配置（关键参数通过环境注入）
+    environment:
+      - TZ=Asia/Shanghai  # 设置容器时区为上海时间
+      - JAVA_OPTS=-Xms1024m -Xmx2048m  # JVM 内存参数（初始 1GB，最大 2GB）
+
+    # 端口映射（将容器内部端口暴露给宿主机）
+    ports:
+      - "7101:7101"  # 格式：宿主机端口:容器端口
+
+    privileged: true  # 启用特权模式（需访问系统级功能如 cgroup）
+    shm_size: 1024mb   # 共享内存大小（影响判题效率）
+
+
+  # 容器健康监控服务（自动重启不健康容器）
+  nexus-oj-health:
+    image: willfarrell/autoheal  # 官方自动修复镜像
+    container_name: nexus-oj-health
+    restart: always
+    environment:
+      - AUTOHEAL_CONTAINER_LABEL=all  # 监控所有带健康检查的容器
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock  # 挂载 Docker 套接字以操作容器

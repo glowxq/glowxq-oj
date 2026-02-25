@@ -1,0 +1,53 @@
+package com.glowxq.system.admin.pojo.dto.sysdept;
+
+import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Data;
+
+import java.util.List;
+
+/**
+ * <p>
+ * SysDept添加DTO
+ * </p>
+ *
+ * @author glowxq
+ * @since 2024-03-20
+ */
+@Data
+@Schema(description = "SysDept添加DTO")
+public class SysDeptCreateDTO {
+
+    @Schema(description = "部门名称")
+    private String name;
+
+    @Schema(description = "父级id")
+    private Long pid;
+
+    @Schema(description = "排序")
+    private Integer sort;
+
+    @Schema(description = "备注")
+    private String remark;
+
+    @Schema(description = "所属地址区域")
+    private Long regionId;
+
+    @Schema(description = "编号前缀")
+    private String numberPrefix;
+
+    @Schema(description = "部门编号")
+    private String deptNumber;
+
+    @Schema(description = "部门logo")
+    private String logo;
+
+    @Schema(description = "部门图片")
+    private String image;
+
+    @Schema(description = "部门介绍")
+    private String content;
+
+    @Schema(description = "负责人")
+    private List<Long> leaders;
+
+}

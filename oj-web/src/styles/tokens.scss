@@ -1,0 +1,75 @@
+/* ================================================================
+ * OJ Design Tokens — Apple 简约风设计令牌系统
+ * ================================================================
+ * 统一的间距、圆角、阴影、毛玻璃、文本色、字体、过渡动画
+ * 暗色模式通过 html.dark 覆盖
+ * ================================================================ */
+
+:root {
+  /* ── 间距系统 (4px 倍数) ── */
+  --oj-space-1: 4px;
+  --oj-space-2: 8px;
+  --oj-space-3: 12px;
+  --oj-space-4: 16px;
+  --oj-space-5: 20px;
+  --oj-space-6: 24px;
+  --oj-space-7: 28px;
+  --oj-space-8: 32px;
+  --oj-space-9: 48px;
+  --oj-space-10: 64px;
+
+  /* ── 圆角三级 ── */
+  --oj-radius-sm: 8px;
+  --oj-radius-md: 12px;
+  --oj-radius-lg: 16px;
+
+  /* ── 阴影四级 ── */
+  --oj-shadow-sm: 0 1px 3px rgb(0 0 0 / 4%), 0 1px 2px rgb(0 0 0 / 6%);
+  --oj-shadow-md: 0 4px 12px rgb(0 0 0 / 6%), 0 2px 4px rgb(0 0 0 / 4%);
+  --oj-shadow-lg: 0 10px 30px rgb(0 0 0 / 8%), 0 4px 8px rgb(0 0 0 / 4%);
+  --oj-shadow-hover: 0 8px 24px rgb(0 0 0 / 10%), 0 4px 8px rgb(0 0 0 / 6%);
+
+  /* ── 毛玻璃 ── */
+  --oj-glass-bg: rgba(255, 255, 255, 0.72);
+  --oj-glass-border: rgba(255, 255, 255, 0.2);
+  --oj-glass-blur: blur(20px);
+
+  /* ── 语义文本色 ── */
+  --oj-text-primary: #1d1d1f;
+  --oj-text-secondary: #6e6e73;
+  --oj-text-tertiary: #aeaeb2;
+
+  /* ── 字体系统 ── */
+  --oj-font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text',
+    'Helvetica Neue', Arial, sans-serif;
+  --oj-font-semibold: 600;
+
+  --oj-text-xs: 12px;
+  --oj-text-sm: 13px;
+  --oj-text-base: 14px;
+  --oj-text-md: 16px;
+  --oj-text-lg: 18px;
+  --oj-text-xl: 20px;
+  --oj-text-2xl: 24px;
+  --oj-text-3xl: 30px;
+
+  /* ── 过渡动画 ── */
+  --oj-transition-fast: 0.15s ease;
+  --oj-transition-normal: 0.25s ease;
+  --oj-transition-slow: 0.4s ease;
+}
+
+/* ── 暗色模式覆盖 ── */
+html.dark {
+  --oj-shadow-sm: 0 1px 3px rgb(0 0 0 / 20%), 0 1px 2px rgb(0 0 0 / 15%);
+  --oj-shadow-md: 0 4px 12px rgb(0 0 0 / 25%), 0 2px 4px rgb(0 0 0 / 15%);
+  --oj-shadow-lg: 0 10px 30px rgb(0 0 0 / 35%), 0 4px 8px rgb(0 0 0 / 20%);
+  --oj-shadow-hover: 0 8px 24px rgb(0 0 0 / 30%), 0 4px 8px rgb(0 0 0 / 20%);
+
+  --oj-glass-bg: rgba(30, 30, 30, 0.72);
+  --oj-glass-border: rgba(255, 255, 255, 0.08);
+
+  --oj-text-primary: #f5f5f7;
+  --oj-text-secondary: #a1a1a6;
+  --oj-text-tertiary: #6e6e73;
+}

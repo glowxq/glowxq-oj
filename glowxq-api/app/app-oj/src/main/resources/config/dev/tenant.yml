@@ -1,0 +1,29 @@
+# 多租户配置
+glowxq:
+  tenant:
+    # 是否启用多租户功能
+    enable: false
+    # 需要忽略租户过滤的表名列表（这些表不会添加租户条件）
+    ignore-table:
+      # 系统基础表（通常是所有租户共享的）
+      - sys_config      # 系统配置表
+      - sys_dict        # 系统字典表
+      - sys_menu        # 系统菜单表
+      - sys_param       # 系统参数表
+      - sys_notice      # 系统通知表
+      - sys_role        # 系统角色表
+      - sys_data_role_menu
+      - sys_data_role_relation
+      - sys_data_role
+      - sys_dict
+      - sys_dict_type
+      - sys_config
+      - sys_client
+
+      # 租户表
+      - tenant
+
+      # 日志表
+      - sys_login_log   # 登录日志表
+      - sys_oper_log    # 操作日志表
+

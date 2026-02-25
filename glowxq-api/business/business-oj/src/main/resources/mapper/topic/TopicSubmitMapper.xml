@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.glowxq.oj.topic.mapper.TopicSubmitMapper">
+    <!-- 通用映射 -->
+    <resultMap id="BaseResultMap" type="com.glowxq.oj.topic.pojo.po.TopicSubmit">
+        <id column="id" property="id"/>
+        <result column="topic_id" property="topicId"/>
+        <result column="problem_id" property="problemId"/>
+        <result column="problem_key" property="problemKey"/>
+        <result column="problem_title" property="problemTitle"/>
+        <result column="problem_type" property="problemType"/>
+        <result column="topic_judge_type" property="topicJudgeType"/>
+        <result column="user_id" property="userId"/>
+        <result column="name" property="name"/>
+        <result column="nick_name" property="nickName"/>
+        <result column="judge_status" property="judgeStatus"/>
+        <result column="score" property="score"/>
+        <result column="use_time" property="useTime"/>
+        <result column="punishment_time" property="punishmentTime"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="create_id" property="createId"/>
+        <result column="update_id" property="updateId"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, topic_id, problem_id, problem_key, problem_title, problem_type, topic_judge_type, user_id, name, nick_name, judge_status, score, use_time, punishment_time, create_time, update_time, del_flag, create_id, update_id
+    </sql>
+
+
+    <select id="listByTopicIdMaxUserScore" resultType="com.glowxq.oj.topic.pojo.po.TopicSubmit">
+        <!-- 查询最高分记录 -->
+        <![CDATA[
+        SELECT *
+        FROM (
+                 SELECT
+                     *,
+                     ROW_NUMBER() OVER (
+                         PARTITION BY user_id, problem_id
+                         ORDER BY score DESC, id DESC
+                         ) AS rn
+                 FROM topic_submit
+                 WHERE
+                     topic_id = #{topicId}
+                   AND del_flag = 'F'
+             ) tmp
+        WHERE rn = 1
+        ]]>
+    </select>
+
+</mapper>

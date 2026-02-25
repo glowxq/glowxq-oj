@@ -1,0 +1,176 @@
+[
+  {
+    "id": 101,
+    "objective": "基础移动指令测试",
+    "learningContent": "测试 right(), left(), up(), down() 指令",
+    "difficulty": 1,
+    "availableCommands": ["right()", "left()", "up()", "down()"],
+    "codePlaceholder": "// 测试基础移动指令\n// ",
+    "successMessage": "🎉 基础移动指令测试通过！",
+    "maps": [
+      {
+        "id": 1,
+        "name": "基础移动测试",
+        "heroStart": { "x": 1, "y": 1 },
+        "treasures": [{ "x": 3, "y": 3 }],
+        "obstacles": [],
+        "monsters": [],
+        "weapons": []
+      }
+    ],
+    "answer": "right()\nright()\ndown()\ndown()"
+  },
+  {
+    "id": 102,
+    "objective": "高级移动指令测试",
+    "learningContent": "测试 dir(), go(), turn() 指令",
+    "difficulty": 2,
+    "availableCommands": ["dir()", "go()", "turn()"],
+    "codePlaceholder": "// 测试高级移动指令\n// 使用 dir() 设置方向，go() 前进，turn() 转向\n\ndir(2)  // 朝右\ngo(2)   // 前进2步\nturn()  // 右转（现在朝下）\ngo(2)   // 前进2步",
+    "successMessage": "🎉 高级移动指令测试通过！",
+    "maps": [
+      {
+        "id": 1,
+        "name": "高级移动测试",
+        "heroStart": { "x": 1, "y": 1 },
+        "treasures": [{ "x": 3, "y": 3 }],
+        "obstacles": [],
+        "monsters": [],
+        "weapons": []
+      }
+    ],
+    "answer": "dir(2)\ngo(2)\nturn()\ngo(2)"
+  },
+  {
+    "id": 103,
+    "objective": "位置获取指令测试",
+    "learningContent": "测试 posX(), posY(), treasureX(), treasureY(), weaponX(), weaponY(), weapon() 指令",
+    "difficulty": 4,
+    "availableCommands": ["posX()", "posY()", "treasureX()", "treasureY()", "weaponX()", "weaponY()", "weapon()", "right()", "down()", "printf()", "console.log()"],
+    "codePlaceholder": "// 测试两种输出方式的区别\n// printf() 输出到控制台组件\n// console.log() 输出到运行信息模块\n\nprintf(\"=== 控制台输出 ===\")\nconst heroX = posX()\nconst heroY = posY()\nprintf(\"英雄位置:\", heroX, heroY)\n\nconsole.log(\"=== 运行信息输出 ===\")\nconsole.log(\"这是 console.log 的输出\")\nconsole.log(\"英雄坐标:\", heroX, heroY)\n\nconst treasureXPos = treasureX()\nconst treasureYPos = treasureY()\nprintf(\"宝箱位置:\", treasureXPos, treasureYPos)\nconsole.log(\"宝箱坐标:\", treasureXPos, treasureYPos)\n\n// 移动到剑的位置\nprintf(\"开始移动到剑\")\nright()\ndown()\nconsole.log(\"已移动到剑的位置\")\n\n// 移动到宝箱\nright()\ndown()\nprintf(\"到达宝箱！\")\nconsole.log(\"游戏完成\")",
+    "successMessage": "🎉 位置获取指令测试通过！检查控制台输出。",
+    "maps": [
+      {
+        "id": 1,
+        "name": "位置获取测试",
+        "heroStart": { "x": 1, "y": 1 },
+        "treasures": [{ "x": 3, "y": 3 }],
+        "obstacles": [],
+        "monsters": [],
+        "weapons": [
+          { "x": 2, "y": 2, "type": "sword" }
+        ]
+      }
+    ],
+    "answer": "// 测试两种输出方式的区别\n// printf() 输出到控制台组件\n// console.log() 输出到运行信息模块\n\nprintf(\"=== 控制台输出 ===\")\nconst heroX = posX()\nconst heroY = posY()\nprintf(\"英雄位置:\", heroX, heroY)\n\nconsole.log(\"=== 运行信息输出 ===\")\nconsole.log(\"这是 console.log 的输出\")\nconsole.log(\"英雄坐标:\", heroX, heroY)\n\nconst treasureXPos = treasureX()\nconst treasureYPos = treasureY()\nprintf(\"宝箱位置:\", treasureXPos, treasureYPos)\nconsole.log(\"宝箱坐标:\", treasureXPos, treasureYPos)\n\n// 移动到剑的位置\nprintf(\"开始移动到剑\")\nright()\ndown()\nconsole.log(\"已移动到剑的位置\")\n\n// 移动到宝箱\nright()\ndown()\nprintf(\"到达宝箱！\")\nconsole.log(\"游戏完成\")"
+  },
+  {
+    "id": 104,
+    "objective": "位置检测指令测试",
+    "learningContent": "测试 hasObstacle(), hasTreasure() 指令",
+    "difficulty": 5,
+    "availableCommands": ["hasObstacle()", "hasTreasure()", "right()", "down()", "printf()"],
+    "codePlaceholder": "// 测试位置检测指令\n// 检测指定位置是否有障碍物或宝箱\n\nprintf(\"(2,2)有障碍物:\", hasObstacle(2, 2))\nprintf(\"(3,3)有障碍物:\", hasObstacle(3, 3))\nprintf(\"(4,4)有宝箱:\", hasTreasure(4, 4))\nprintf(\"(2,2)有宝箱:\", hasTreasure(2, 2))\n\n// 绕过障碍物到达宝箱\nright()\nright()\nright()\ndown()\ndown()\ndown()",
+    "successMessage": "🎉 位置检测指令测试通过！检查控制台输出。",
+    "maps": [
+      {
+        "id": 1,
+        "name": "位置检测测试",
+        "heroStart": { "x": 1, "y": 1 },
+        "treasures": [{ "x": 4, "y": 4 }],
+        "obstacles": [
+          { "x": 2, "y": 2 },
+          { "x": 3, "y": 3 }
+        ],
+        "monsters": [],
+        "weapons": []
+      }
+    ],
+    "answer": "// 测试位置检测指令\n// 检测指定位置是否有障碍物或宝箱\n\nprintf(\"(2,2)有障碍物:\", hasObstacle(2, 2))\nprintf(\"(3,3)有障碍物:\", hasObstacle(3, 3))\nprintf(\"(4,4)有宝箱:\", hasTreasure(4, 4))\nprintf(\"(2,2)有宝箱:\", hasTreasure(2, 2))\n\n// 绕过障碍物到达宝箱\nright()\nright()\nright()\ndown()\ndown()\ndown()"
+  },
+  {
+    "id": 105,
+    "objective": "方向检测指令测试",
+    "learningContent": "测试 see(), seeTreasure(), seeWeapon(), seeMonster() 指令",
+    "difficulty": 6,
+    "availableCommands": ["see()", "seeTreasure()", "seeWeapon()", "seeMonster()", "right()", "down()", "hit()", "printf()"],
+    "codePlaceholder": "// 测试方向检测指令\n// 检测各个方向是否有特定元素\n\nconsole.log(\"前方有障碍物:\", see())\nconsole.log(\"右方有障碍物:\", see(2))\nconsole.log(\"下方有武器:\", seeWeapon(3))\nconsole.log(\"右方有怪物:\", seeMonster(2))\n\n// 向下拿武器\ndown()\nconsole.log(\"装备武器后，前方有怪物:\", seeMonster())\n\n// 攻击怪物\nhit()\n\n// 继续前进到宝箱\nright()\nconsole.log(\"前方有宝箱:\", seeTreasure())\nright()",
+    "successMessage": "🎉 方向检测指令测试通过！检查控制台输出。",
+    "maps": [
+      {
+        "id": 1,
+        "name": "方向检测测试",
+        "heroStart": { "x": 1, "y": 1 },
+        "treasures": [{ "x": 4, "y": 2 }],
+        "obstacles": [
+          { "x": 1, "y": 2 },
+          { "x": 3, "y": 1 }
+        ],
+        "monsters": [
+          { "x": 3, "y": 2, "type": "physical" }
+        ],
+        "weapons": [
+          { "x": 1, "y": 2, "type": "sword" }
+        ]
+      }
+    ],
+    "answer": "// 测试方向检测指令\n// 检测各个方向是否有特定元素\n\nconsole.log(\"前方有障碍物:\", see())\nconsole.log(\"右方有障碍物:\", see(2))\nconsole.log(\"下方有武器:\", seeWeapon(3))\nconsole.log(\"右方有怪物:\", seeMonster(2))\n\n// 向下拿武器\ndown()\nconsole.log(\"装备武器后，前方有怪物:\", seeMonster())\n\n// 攻击怪物\nhit()\n\n// 继续前进到宝箱\nright()\nconsole.log(\"前方有宝箱:\", seeTreasure())\nright()"
+  },
+  {
+    "id": 106,
+    "objective": "战斗指令测试",
+    "learningContent": "测试 hit() 指令和武器系统",
+    "difficulty": 8,
+    "availableCommands": ["hit()", "weapon()", "weaponX()", "weaponY()", "right()", "down()", "printf()"],
+    "codePlaceholder": "// 测试战斗指令\n// 装备武器并攻击怪物\n\nprintf(\"初始武器:\", weapon())\n\n// 获取剑的位置并移动过去\nconst swordX = weaponX(1)\nconst swordY = weaponY(1)\nprintf(\"剑在:\", swordX, swordY)\nright()\n\nprintf(\"装备剑后:\", weapon())\n\n// 攻击物理怪物\nhit()\nprintf(\"攻击物理怪物后\")\n\n// 移动到魔杖位置\ndown()\nprintf(\"装备魔杖后:\", weapon())\n\n// 攻击魔法怪物\nhit()\nprintf(\"攻击魔法怪物后\")\n\n// 到达宝箱\nright()",
+    "successMessage": "🎉 战斗指令测试通过！检查控制台输出。",
+    "maps": [
+      {
+        "id": 1,
+        "name": "战斗测试",
+        "heroStart": { "x": 1, "y": 1 },
+        "treasures": [{ "x": 3, "y": 2 }],
+        "obstacles": [],
+        "monsters": [
+          { "x": 2, "y": 1, "type": "physical" },
+          { "x": 2, "y": 2, "type": "magical" }
+        ],
+        "weapons": [
+          { "x": 2, "y": 1, "type": "sword" },
+          { "x": 2, "y": 2, "type": "staff" }
+        ]
+      }
+    ],
+    "answer": "// 测试战斗指令\n// 装备武器并攻击怪物\n\nprintf(\"初始武器:\", weapon())\n\n// 获取剑的位置并移动过去\nconst swordX = weaponX(1)\nconst swordY = weaponY(1)\nprintf(\"剑在:\", swordX, swordY)\nright()\n\nprintf(\"装备剑后:\", weapon())\n\n// 攻击物理怪物\nhit()\nprintf(\"攻击物理怪物后\")\n\n// 移动到魔杖位置\ndown()\nprintf(\"装备魔杖后:\", weapon())\n\n// 攻击魔法怪物\nhit()\nprintf(\"攻击魔法怪物后\")\n\n// 到达宝箱\nright()"
+  },
+  {
+    "id": 107,
+    "objective": "综合指令测试",
+    "learningContent": "综合测试所有指令的配合使用",
+    "difficulty": 10,
+    "availableCommands": ["所有指令"],
+    "codePlaceholder": "// 综合指令测试\n// 使用多种指令完成复杂任务\n\n// 1. 获取位置信息\nconst hero = pos()\nconst treasure = treasurePos()\nconsole.log(\"英雄:\", hero.x, hero.y, \"宝箱:\", treasure.x, treasure.y)\n\n// 2. 智能寻找武器\nif(weapon() === 0) {\n  const sword = weaponPos(1)\n  console.log(\"需要武器，剑在:\", sword.x, sword.y)\n  \n  // 智能移动到武器位置\n  while(!seeWeapon()) {\n    if(!see()) {\n      go()\n    } else {\n      turn()\n    }\n  }\n}\n\n// 3. 战斗\nwhile(seeMonster()) {\n  hit()\n}\n\n// 4. 寻找宝箱\nwhile(!seeTreasure()) {\n  if(!see()) {\n    go()\n  } else {\n    turn()\n  }\n}\n\n// 5. 到达宝箱\ngo()",
+    "successMessage": "🎉 综合指令测试通过！你已经掌握了所有指令！",
+    "maps": [
+      {
+        "id": 1,
+        "name": "综合测试",
+        "heroStart": { "x": 1, "y": 1 },
+        "treasures": [{ "x": 5, "y": 5 }],
+        "obstacles": [
+          { "x": 2, "y": 1 },
+          { "x": 1, "y": 2 },
+          { "x": 3, "y": 3 },
+          { "x": 4, "y": 2 }
+        ],
+        "monsters": [
+          { "x": 4, "y": 4, "type": "physical" }
+        ],
+        "weapons": [
+          { "x": 3, "y": 1, "type": "sword" }
+        ]
+      }
+    ],
+    "answer": "// 参考答案（智能解决方案）\nconst heroX = posX()\nconst heroY = posY()\nconst treasureXPos = treasureX()\nconst treasureYPos = treasureY()\nprintf(\"英雄:\", heroX, heroY, \"宝箱:\", treasureXPos, treasureYPos)\n\nif(weapon() === 0) {\n  const swordX = weaponX(1)\n  const swordY = weaponY(1)\n  printf(\"需要武器，剑在:\", swordX, swordY)\n  \n  dir(2)\n  go(2)\n}\n\ndir(3)\ngo(2)\ndir(2)\ngo()\n\nif(seeMonster()) {\n  hit()\n}\n\ngo()"
+  }
+]

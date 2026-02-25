@@ -1,0 +1,76 @@
+.hljs-container {
+  position: relative;
+  margin: 20px 0;
+  background-color: #f3f3f3;
+  border-radius: 8px;
+  font-size: 14px;
+  line-height: 1.6;
+  overflow-x: auto;
+
+  pre {
+    margin: 0;
+  }
+}
+
+.hljs-container.sql-box {
+  text-align: unset;
+}
+
+.hljs-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #343541;
+  padding: 4px;
+  position: relative; /* 添加 relative 定位 */
+}
+
+.hljs-separator {
+  height: 1px;
+  width: 100%;
+  background-color: #ccc;
+  margin: 10px 0;
+}
+
+.hljs-language {
+  color: #d7d7e1;
+  font-weight: bold;
+  margin-left: 10px;
+}
+
+.hljs-code-number {
+  position: absolute;
+  top: 0; /* 调整为 0，即头部的底部 */
+  left: 0;
+  padding: 0 10px;
+  color: #757575;
+  user-select: none;
+
+  li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+.hljs-code {
+  font-family: 'Courier New', monospace;
+}
+
+.hljs-copy {
+  margin-right: 10px;
+  color: #d7d7e1;
+  cursor: pointer;
+  user-select: none;
+  background-color: #333;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: #555;
+  }
+
+  .sql-box {
+    text-align: unset;
+  }
+}

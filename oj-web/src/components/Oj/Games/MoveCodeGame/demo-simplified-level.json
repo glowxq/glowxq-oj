@@ -1,0 +1,57 @@
+{
+  "id": 100,
+  "objective": "简化指令演示：体验新的短指令",
+  "learningContent": "简化指令、智能检测、位置获取",
+  "availableCommands": [
+    "right()", "left()", "up()", "down()",
+    "go()", "dir()", "turn()", "hit()",
+    "pos()", "treasurePos()", "weaponPos()", "weapon()",
+    "see()", "seeTreasure()", "seeWeapon()", "seeMonster()"
+  ],
+  "codePlaceholder": "// 🎮 简化指令演示关卡\n// 体验新的短指令，让编程更简单！\n\n// 基础移动（更短的指令）\nright()  // 代替 moveRight()\ndown()   // 代替 moveDown()\n\n// 智能移动\ngo(2)    // 向前走2步，代替 fd(2)\ndir(1)   // 朝上，代替 direction(1)\n\n// 智能检测\nif(see()) {\n  console.log(\"前方有障碍物\")\n}\n\n// 位置获取\nconst hero = pos()  // 获取英雄位置\nconsole.log(\"英雄在:\", hero.x, hero.y)",
+  "successMessage": "🎉 太棒了！你掌握了简化指令系统！编程变得更简单了！",
+  "maps": [
+    {
+      "id": 1,
+      "name": "基础演示",
+      "heroStart": { "x": 1, "y": 1 },
+      "treasures": [{ "x": 4, "y": 3 }],
+      "obstacles": [
+        { "x": 2, "y": 2 },
+        { "x": 3, "y": 1 }
+      ],
+      "monsters": [],
+      "weapons": []
+    },
+    {
+      "id": 2,
+      "name": "智能检测演示",
+      "heroStart": { "x": 1, "y": 2 },
+      "treasures": [{ "x": 5, "y": 2 }],
+      "obstacles": [
+        { "x": 3, "y": 2 }
+      ],
+      "monsters": [
+        { "x": 4, "y": 2, "type": "physical" }
+      ],
+      "weapons": [
+        { "x": 2, "y": 2, "type": "sword" }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "位置获取演示",
+      "heroStart": { "x": 1, "y": 1 },
+      "treasures": [{ "x": 6, "y": 4 }],
+      "obstacles": [
+        { "x": 3, "y": 2 },
+        { "x": 4, "y": 3 }
+      ],
+      "monsters": [],
+      "weapons": [
+        { "x": 2, "y": 3, "type": "staff" }
+      ]
+    }
+  ],
+  "answer": "// 简化指令演示答案\n// 展示多种新指令的使用\n\n// 方案1：基础移动（适用于地图1）\nright()\nright()\ndown()\ndown()\n\n// 方案2：智能移动（更通用）\n// const treasure = treasurePos()\n// const hero = pos()\n// \n// // 计算移动距离\n// const dx = treasure.x - hero.x\n// const dy = treasure.y - hero.y\n// \n// // 智能移动\n// if(dx > 0) {\n//   dir(2)  // 朝右\n//   go(dx)  // 前进dx步\n// }\n// if(dy > 0) {\n//   dir(3)  // 朝下\n//   go(dy)  // 前进dy步\n// }\n\n// 方案3：智能检测（最智能）\n// while(!seeTreasure()) {\n//   if(!see()) {\n//     go(1)  // 前方无障碍，前进\n//   } else {\n//     turn()  // 遇到障碍，转向\n//   }\n// }"
+}

@@ -1,0 +1,52 @@
+# glowxq-common-wechat模块需要的配置
+#wechat:
+#  mini:
+#    app-id: your-app-id
+#    app-secret: your-app-secret
+
+# 微信支付配置
+wechat:
+  app-id: ${WECHAT_APP_ID:your_wechat_app_id}
+  payment:
+    # 微信分配的公众账号ID
+    app-id: ${wechat.app-id}
+    # 微信支付分配的商户号
+    mch-id: ${WECHAT_MCH_ID:your_mch_id}
+    # 商户密钥，用于签名
+    mch-key: ${WECHAT_MCH_KEY:your_mch_key}
+    # 服务商模式下的子商户公众账号ID
+    sub-app-id:
+    # 服务商模式下的子商户号
+    sub-mch-id:
+    # 结果通知
+    notify-url: ${WECHAT_NOTIFY_URL:https://your-domain.com/api}
+    # 支付结果通知URL
+    pay-notify-path: ${wechat.payment.notify-url}/notify/wechat/payment
+    # 退款结果通知URL
+    refund-notify-path: ${wechat.payment.notify-url}/notify/wechat/refund
+    # 商户APIv3密钥，用于APIv3签名
+    api-v3-key: ${WECHAT_API_V3_KEY:your_api_v3_key}
+    # 商户私钥路径，用于API签名
+    private-key-path: classpath:cert/apiclient_key.pem
+    # 商户证书路径，用于API验证
+    private-cert-path: classpath:cert/apiclient_cert.pem
+    # CA证书路径，用于SSL验证
+    key-path: classpath:cert/apiclient_cert.p12
+  # 小程序配置
+  applet:
+    # 微信分配的小程序AppID
+    app-id: ${wechat.app-id}
+    # 小程序密钥
+    secret: ${WECHAT_APPLET_SECRET:your_applet_secret}
+    # 消息加解密密钥
+    token:
+    # 消息加解密算法密钥
+    aes-key:
+    # 消息格式
+    msg-data-format: JSON
+  # 无限码配置
+  wxa-code-unlimit:
+    # 环境标识，开发环境或生产环境
+    environment: develop
+    page: pages/Registration/index
+    scene: code=xxx的形式

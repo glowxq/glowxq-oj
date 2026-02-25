@@ -1,0 +1,25 @@
+# IDE
+.idea/
+.vscode/
+*.iml
+
+# Git
+.git/
+.gitignore
+
+# 日志和运行时数据
+logs/
+*.log
+
+# 部署脚本（构建不需要）
+script/
+
+# 文档
+*.md
+todo.md
+
+# 本地编译产物（Docker 内会重新编译）
+**/target/
+
+# macOS
+.DS_Store

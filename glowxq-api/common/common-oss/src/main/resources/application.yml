@@ -1,0 +1,11 @@
+oss:
+  # 兼容S3协议的厂商 （理论上说所有兼容S3协议的OSS厂商都可以使用）
+  provider: ${OSS_PROVIDER:minio}
+  endpoint: ${OSS_ENDPOINT:http://localhost:9000}
+  accessKey: ${OSS_ACCESS_KEY:your_access_key}
+  secretKey: ${OSS_SECRET_KEY:your_secret_key}
+  # bucket
+  bucketName: ${app.name}
+  # 自定义域名
+  domain: ${OSS_DOMAIN:http://localhost:9000}
+  is-https: false
