@@ -1,63 +1,63 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="800" height="200" viewBox="0 0 800 200">
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="210" viewBox="0 0 800 210">
   <defs>
     <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#0f0c29"/>
-      <stop offset="50%" style="stop-color:#302b63"/>
-      <stop offset="100%" style="stop-color:#24243e"/>
+      <stop offset="0%" style="stop-color:#1a1a2e"/>
+      <stop offset="40%" style="stop-color:#16213e"/>
+      <stop offset="100%" style="stop-color:#0f3460"/>
     </linearGradient>
     <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" style="stop-color:#00d2ff"/>
-      <stop offset="100%" style="stop-color:#7b2ff7"/>
+      <stop offset="0%" style="stop-color:#e94560"/>
+      <stop offset="50%" style="stop-color:#ff6b6b"/>
+      <stop offset="100%" style="stop-color:#ffa502"/>
     </linearGradient>
     <linearGradient id="glow" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" style="stop-color:#00d2ff;stop-opacity:0.6"/>
-      <stop offset="50%" style="stop-color:#7b2ff7;stop-opacity:0.4"/>
-      <stop offset="100%" style="stop-color:#00d2ff;stop-opacity:0.6"/>
+      <stop offset="0%" style="stop-color:#e94560;stop-opacity:0.3"/>
+      <stop offset="100%" style="stop-color:#ffa502;stop-opacity:0.3"/>
     </linearGradient>
-    <filter id="blur">
-      <feGaussianBlur in="SourceGraphic" stdDeviation="2"/>
-    </filter>
+    <linearGradient id="textGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#ffffff"/>
+      <stop offset="100%" style="stop-color:#e0e0e0"/>
+    </linearGradient>
   </defs>
 
   <!-- Background -->
-  <rect width="800" height="200" rx="12" fill="url(#bg)"/>
+  <rect width="800" height="210" rx="14" fill="url(#bg)"/>
 
-  <!-- Decorative circles -->
-  <circle cx="680" cy="40" r="60" fill="url(#glow)" opacity="0.15"/>
-  <circle cx="120" cy="160" r="80" fill="url(#glow)" opacity="0.1"/>
-  <circle cx="400" cy="100" r="120" fill="url(#glow)" opacity="0.05"/>
+  <!-- Decorative elements -->
+  <circle cx="700" cy="35" r="70" fill="#e94560" opacity="0.06"/>
+  <circle cx="100" cy="175" r="90" fill="#ffa502" opacity="0.05"/>
+  <circle cx="400" cy="105" r="140" fill="#ff6b6b" opacity="0.03"/>
 
-  <!-- Grid pattern -->
-  <g opacity="0.06" stroke="#fff" stroke-width="0.5">
-    <line x1="0" y1="40" x2="800" y2="40"/>
-    <line x1="0" y1="80" x2="800" y2="80"/>
-    <line x1="0" y1="120" x2="800" y2="120"/>
-    <line x1="0" y1="160" x2="800" y2="160"/>
-    <line x1="100" y1="0" x2="100" y2="200"/>
-    <line x1="200" y1="0" x2="200" y2="200"/>
-    <line x1="300" y1="0" x2="300" y2="200"/>
-    <line x1="400" y1="0" x2="400" y2="200"/>
-    <line x1="500" y1="0" x2="500" y2="200"/>
-    <line x1="600" y1="0" x2="600" y2="200"/>
-    <line x1="700" y1="0" x2="700" y2="200"/>
+  <!-- Subtle grid -->
+  <g opacity="0.04" stroke="#fff" stroke-width="0.5">
+    <line x1="0" y1="42" x2="800" y2="42"/>
+    <line x1="0" y1="84" x2="800" y2="84"/>
+    <line x1="0" y1="126" x2="800" y2="126"/>
+    <line x1="0" y1="168" x2="800" y2="168"/>
+    <line x1="160" y1="0" x2="160" y2="210"/>
+    <line x1="320" y1="0" x2="320" y2="210"/>
+    <line x1="480" y1="0" x2="480" y2="210"/>
+    <line x1="640" y1="0" x2="640" y2="210"/>
   </g>
 
-  <!-- Code bracket decoration -->
-  <text x="60" y="115" font-family="monospace" font-size="80" fill="url(#accent)" opacity="0.3" font-weight="bold">{</text>
-  <text x="710" y="115" font-family="monospace" font-size="80" fill="url(#accent)" opacity="0.3" font-weight="bold">}</text>
+  <!-- Code brackets -->
+  <text x="55" y="122" font-family="'Courier New', monospace" font-size="85" fill="url(#accent)" opacity="0.15" font-weight="bold">&lt;</text>
+  <text x="700" y="122" font-family="'Courier New', monospace" font-size="85" fill="url(#accent)" opacity="0.15" font-weight="bold">/&gt;</text>
 
   <!-- Main title -->
-  <text x="400" y="85" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif" font-size="42" font-weight="bold" fill="#ffffff" letter-spacing="3">GlowXQ OJ</text>
+  <text x="400" y="88" text-anchor="middle" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="48" font-weight="800" fill="url(#textGrad)" letter-spacing="4">GlowXQ OJ</text>
 
-  <!-- Accent line -->
-  <rect x="280" y="98" width="240" height="3" rx="1.5" fill="url(#accent)"/>
+  <!-- Accent underline -->
+  <rect x="260" y="100" width="280" height="3.5" rx="2" fill="url(#accent)"/>
 
   <!-- Subtitle -->
-  <text x="400" y="130" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif" font-size="16" fill="#a8b2d1" letter-spacing="2">Online Judge Platform</text>
+  <text x="400" y="134" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif" font-size="17" fill="#a0aec0" letter-spacing="3" font-weight="500">ONLINE JUDGE PLATFORM</text>
 
-  <!-- Tag line -->
-  <text x="400" y="158" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif" font-size="13" fill="#8892b0" letter-spacing="1">C++ &middot; Java &middot; Python &middot; Rust &middot; JavaScript</text>
+  <!-- Language tags -->
+  <g font-family="'Segoe UI', Arial, sans-serif" font-size="12" fill="#718096" letter-spacing="1">
+    <text x="400" y="168" text-anchor="middle">C++  ·  Java  ·  Python  ·  Rust  ·  JavaScript</text>
+  </g>
 
-  <!-- Bottom border -->
-  <rect x="0" y="196" width="800" height="4" rx="0" fill="url(#accent)"/>
+  <!-- Bottom gradient line -->
+  <rect x="0" y="205" width="800" height="5" rx="0" fill="url(#accent)" opacity="0.8"/>
 </svg>

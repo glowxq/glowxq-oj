@@ -694,13 +694,17 @@ MINIO_CONSOLE_PORT=9003
 <details>
 <summary><b>Docker 构建很慢？</b></summary>
 
-配置镜像加速器，编辑 `/etc/docker/daemon.json`：
+**Dockerfile 已内置国内加速**：Maven 阿里云镜像 + npm 淘宝镜像，国内服务器构建无需额外配置。
+
+如果 Docker 拉取基础镜像慢，配置 Docker 镜像加速器，编辑 `/etc/docker/daemon.json`：
 
 ```json
 {
   "registry-mirrors": ["https://mirror.ccs.tencentyun.com"]
 }
 ```
+
+重启 Docker：`sudo systemctl restart docker`
 
 </details>
 

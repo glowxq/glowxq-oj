@@ -12,6 +12,26 @@ FROM maven:3.9-eclipse-temurin-21 AS maven-builder
 
 WORKDIR /build
 
+# 配置 Maven 阿里云镜像（国内服务器构建加速，解决 dependency:go-offline 卡住问题）
+RUN mkdir -p /root/.m2 && cat > /root/.m2/settings.xml << 'EOF'
+<settings>
+  <mirrors>
+    <mirror>
+      <id>aliyun</id>
+      <mirrorOf>central</mirrorOf>
+      <name>Aliyun Maven Central Mirror</name>
+      <url>https://maven.aliyun.com/repository/central</url>
+    </mirror>
+    <mirror>
+      <id>aliyun-public</id>
+      <mirrorOf>*</mirrorOf>
+      <name>Aliyun Public Maven Mirror</name>
+      <url>https://maven.aliyun.com/repository/public</url>
+    </mirror>
+  </mirrors>
+</settings>
+EOF
+
 # 先复制所有 pom.xml，利用 Docker 层缓存加速依赖下载
 COPY glowxq-api/pom.xml .
 COPY glowxq-api/build/pom.xml build/pom.xml
@@ -56,8 +76,10 @@ FROM node:20-alpine AS web-builder
 
 WORKDIR /app
 
-# 安装 pnpm
-RUN npm install -g pnpm
+# 安装 pnpm + 配置国内镜像
+RUN npm install -g pnpm && \
+    npm config set registry https://registry.npmmirror.com && \
+    pnpm config set registry https://registry.npmmirror.com
 
 # 先复制依赖文件，利用缓存
 COPY oj-web/package.json oj-web/pnpm-lock.yaml ./
