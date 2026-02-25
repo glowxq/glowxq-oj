@@ -1,5 +1,5 @@
 #!/bin/bash
-set -e
+set -eo pipefail
 
 # ============================================================
 # GlowXQ OJ - All-in-One 单容器部署脚本
@@ -178,12 +178,19 @@ build_image() {
 
     local start_time=$(date +%s)
 
+    # 注意：管道会吞掉 docker build 的退出码，需用 pipefail（已在脚本头部设置）
     docker build \
         -f Dockerfile.allinone \
         -t "${IMAGE_NAME}:${IMAGE_TAG}" \
         . 2>&1 | while IFS= read -r line; do
         echo -e "  ${DIM}${line}${NC}"
     done
+
+    # 双重保险：验证镜像确实构建成功
+    if ! docker image inspect "${IMAGE_NAME}:${IMAGE_TAG}" &>/dev/null; then
+        log_error "镜像构建失败，请检查上方错误信息"
+        exit 1
+    fi
 
     local end_time=$(date +%s)
     local duration=$((end_time - start_time))
@@ -197,6 +204,12 @@ start_container() {
     log_step ">>> 启动 All-in-One 容器"
 
     load_env
+
+    # 检查镜像是否存在（防止未构建就尝试启动，导致 Docker 去远程拉取不存在的镜像）
+    if ! docker image inspect "${IMAGE_NAME}:${IMAGE_TAG}" &>/dev/null; then
+        log_error "镜像 ${IMAGE_NAME}:${IMAGE_TAG} 不存在，请先构建：$0 或 $0 update"
+        exit 1
+    fi
 
     # 停止已有容器
     if docker ps -a --format '{{.Names}}' | grep -q "^${CONTAINER_NAME}$"; then
