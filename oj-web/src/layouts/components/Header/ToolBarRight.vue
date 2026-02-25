@@ -10,6 +10,9 @@
       <!-- <Message id="message" /> -->
       <GithubLink id="githubLink" />
       <Fullscreen id="fullscreen" />
+      <span v-if="buildVersion && buildVersion !== 'dev'" class="build-version" :title="'构建版本: ' + buildVersion">
+        v{{ buildVersion }}
+      </span>
     </div>
     <div class="user-info">
       <div class="user-details">
@@ -38,6 +41,7 @@ import GithubLink from './components/GithubLink.vue';
 
 const { isAdminOrCommon } = useRole();
 const userStore = useUserStore();
+const buildVersion = import.meta.env.VITE_APP_BUILD_VERSION || '';
 const username = computed(() => userStore.userInfo.username);
 const name = computed(() => userStore.userInfo.name);
 const nickname = computed(() => userStore.userInfo.nickname);
@@ -74,6 +78,17 @@ const iconGap = 'var(--oj-space-4)';
 
     & > *:first-child {
       margin-left: 0;
+    }
+
+    .build-version {
+      font-size: 10px;
+      font-weight: 500;
+      color: var(--el-header-text-color);
+      opacity: 0.5;
+      font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, monospace;
+      white-space: nowrap;
+      cursor: default;
+      user-select: all;
     }
 
     .tenant-switch-wrapper {

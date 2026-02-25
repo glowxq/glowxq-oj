@@ -23,9 +23,13 @@ ARG APP_NAME
 # Docker 部署时覆盖 API 地址为相对路径（由 nginx 代理到本地 oj-api）
 # 不修改 env/.env.oj 源文件，通过环境变量覆盖 Vite 的 env 配置
 ARG VITE_API_URL=/api
-ARG VITE_SOCKET_URL=/api/socket
 ENV VITE_API_URL=${VITE_API_URL}
-ENV VITE_SOCKET_URL=${VITE_SOCKET_URL}
+# WebSocket URL 留空，前端自动根据 window.location 推导
+# ENV VITE_SOCKET_URL=
+
+# 构建版本号
+ARG APP_BUILD_VERSION=dev
+ENV VITE_APP_BUILD_VERSION=${APP_BUILD_VERSION}
 
 # 构建项目
 RUN pnpm build-only --mode ${APP_NAME}

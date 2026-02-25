@@ -176,9 +176,18 @@ build_image() {
 
     local start_time=$(date +%s)
 
+    # 生成构建版本号（日期 + git 短 hash），用于前端展示
+    local build_version
+    local git_hash
+    git_hash=$(git rev-parse --short HEAD 2>/dev/null || echo "unknown")
+    build_version="$(date +%Y%m%d.%H%M%S).${git_hash}"
+    log_info "构建版本: ${build_version}"
+
     # 注意：管道会吞掉 docker build 的退出码，需用 pipefail（已在脚本头部设置）
+    # APP_BUILD_VERSION 每次不同，确保前端构建层缓存失效
     docker build \
         -f Dockerfile.allinone \
+        --build-arg APP_BUILD_VERSION="${build_version}" \
         -t "${IMAGE_NAME}:${IMAGE_TAG}" \
         . 2>&1 | while IFS= read -r line; do
         echo -e "  ${DIM}${line}${NC}"

@@ -91,7 +91,12 @@ COPY oj-web/ .
 
 # Docker 部署时 API 走 Nginx 反代，使用相对路径
 ENV VITE_API_URL=/api
-ENV VITE_SOCKET_URL=/api/socket
+# WebSocket URL 留空，前端自动根据 window.location 推导
+# ENV VITE_SOCKET_URL=
+
+# 构建版本号（由部署脚本传入，用于页面展示判断是否更新成功）
+ARG APP_BUILD_VERSION=dev
+ENV VITE_APP_BUILD_VERSION=${APP_BUILD_VERSION}
 
 RUN pnpm build-only --mode oj
 
