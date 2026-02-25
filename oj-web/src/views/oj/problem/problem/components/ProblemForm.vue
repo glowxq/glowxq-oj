@@ -614,6 +614,12 @@ const fillFormData = (data: Record<string, any>) => {
     problemData.options = [...data.options]
   }
 
+  // 判断题：从 options 推导 problemBo.answer 用于 UI 显示
+  if (String(problemData.problemBo.problemType) === String(ProblemType.TRUE_FALSE.code) && problemData.options.length > 0) {
+    const trueOption = problemData.options.find(opt => opt.optionKey === 'A')
+    problemData.problemBo.answer = trueOption?.answer === true
+  }
+
   // 处理填空题数据 - 填空题数据应该存储在options字段
   if (Array.isArray(data.blanks) && data.blanks.length > 0) {
     // 如果是填空题类型，将blanks数据转移到options
@@ -694,6 +700,30 @@ const handleSubmit = () => {
       if (paramsProps.value.row && paramsProps.value.row.id) {
         // 直接设置problemBo中的id
         problemData.problemBo.id = paramsProps.value.row.id
+      }
+
+      // 判断题：将 problemBo.answer 同步到 options 数组
+      if (String(problemData.problemBo.problemType) === String(ProblemType.TRUE_FALSE.code)) {
+        const isTrue = problemData.problemBo.answer === true
+        const score = problemData.problemBo.score || 10
+        if (problemData.options.length >= 2) {
+          // 编辑模式：更新已有选项的 answer 标记（保留 id 等字段）
+          problemData.options.forEach(opt => {
+            if (opt.optionKey === 'A') {
+              opt.answer = isTrue
+              opt.score = isTrue ? score : 0
+            } else if (opt.optionKey === 'B') {
+              opt.answer = !isTrue
+              opt.score = !isTrue ? score : 0
+            }
+          })
+        } else {
+          // 新建模式：生成默认选项
+          problemData.options = [
+            { optionKey: 'A', optionContent: '对', score: isTrue ? score : 0, answer: isTrue },
+            { optionKey: 'B', optionContent: '错', score: !isTrue ? score : 0, answer: !isTrue },
+          ]
+        }
       }
 
       // 确保填空题数据通过options字段提交

@@ -47,7 +47,8 @@ public class S3Configuration {
     public S3Presigner s3Presigner() {
         software.amazon.awssdk.services.s3.S3Configuration config = software.amazon.awssdk.services.s3.S3Configuration.builder()
                 .pathStyleAccessEnabled(isPathStyle()).chunkedEncodingEnabled(false).build();
-        return S3Presigner.builder().region(getRegion()).credentialsProvider(credentialsProvider()).endpointOverride(getUri()).serviceConfiguration(config)
+        // 预签名 URL 使用公网域名（domain），使浏览器可直接访问；无 domain 时退回内部 endpoint
+        return S3Presigner.builder().region(getRegion()).credentialsProvider(credentialsProvider()).endpointOverride(getPresignerUri()).serviceConfiguration(config)
                 .build();
     }
 
@@ -90,11 +91,31 @@ public class S3Configuration {
         return ossProperties.getProvider().equals(OssProviderEnum.MINIO);
     }
 
+    /**
+     * 获取内部 endpoint URI（用于 S3Client 直接操作 MinIO）
+     */
     private URI getUri() {
         if (ossProperties.getEndpoint().startsWith("https://") || ossProperties.getEndpoint().startsWith("http://")) {
             return URI.create(ossProperties.getEndpoint());
         }
         String scheme = ossProperties.getScheme().toString();
         return URI.create(scheme + "://" + ossProperties.getEndpoint());
+    }
+
+    /**
+     * 获取预签名 URL 的 endpoint URI。
+     * 优先使用公网域名（domain），确保浏览器可直接访问预签名 URL；
+     * 未配置 domain 时退回内部 endpoint。
+     */
+    private URI getPresignerUri() {
+        String domain = ossProperties.getDomain();
+        if (domain != null && !domain.isBlank()) {
+            if (domain.startsWith("https://") || domain.startsWith("http://")) {
+                return URI.create(domain);
+            }
+            String scheme = ossProperties.getScheme().toString();
+            return URI.create(scheme + "://" + domain);
+        }
+        return getUri();
     }
 }

@@ -345,33 +345,55 @@ REDIS_PASSWORD=glowxq123456       # 容器内 Redis 密码
 <details>
 <summary><b>🌐 宿主机 Nginx SSL 反代配置示例</b></summary>
 
-当 `WEB_PORT=80` 时，宿主机 Nginx 配置：
+宿主机已有 Nginx 时，将以下配置放入 `/etc/nginx/conf.d/oj.conf`（完整配置见项目根目录 `nginx.conf`）：
 
 ```nginx
+# HTTP → HTTPS 重定向
 server {
-    listen 443 ssl;
+    listen 80;
     server_name oj.example.com;
+    return 301 https://$host$request_uri;
+}
+
+# HTTPS 反向代理到 OJ 容器
+server {
+    server_name oj.example.com;
+    listen 443 ssl;
+    http2 on;
 
     ssl_certificate     /path/to/cert.pem;
     ssl_certificate_key /path/to/cert.key;
 
     location / {
-        proxy_pass http://127.0.0.1:80;
+        proxy_pass http://127.0.0.1:80;  # 对应 .env.allinone 中的 WEB_PORT
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         proxy_set_header X-Forwarded-Proto $scheme;
 
-        # WebSocket 支持
+        # WebSocket 支持（在线通知、踢人下线等功能依赖 WebSocket）
         proxy_http_version 1.1;
         proxy_set_header Upgrade $http_upgrade;
         proxy_set_header Connection "upgrade";
 
+        # 超时设置
+        proxy_connect_timeout 60s;
+        proxy_send_timeout 120s;
         proxy_read_timeout 120s;
+
+        # 文件上传大小限制
         client_max_body_size 50m;
+    }
+
+    location /health {
+        access_log off;
+        return 200 "healthy\n";
+        add_header Content-Type text/plain;
     }
 }
 ```
+
+> **注意**：`proxy_pass` 端口需与 `.env.allinone` 中的 `WEB_PORT` 一致，WebSocket 相关头部（`Upgrade`、`Connection`）不可省略。
 
 </details>
 
