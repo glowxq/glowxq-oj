@@ -712,9 +712,9 @@ JAVA_OPTS=-Xms512m -Xmx1024m
 
 | 渠道       | 详情                                                              |
 | ---------- | ----------------------------------------------------------------- |
-| 接单平台   | [case.glowxq.com](https://case.glowxq.com)                       |
+| 接单案例   | [case.glowxq.com](https://case.glowxq.com)                       |
 | 邮箱       | [glowxq@qq.com](mailto:glowxq@qq.com)                            |
-| 电话/微信  | 19323030408                                                       |
+| 微信  | glowxq                                                       |
 
 > 提供全栈开发、系统架构设计、技术咨询等服务，欢迎洽谈合作。
 
