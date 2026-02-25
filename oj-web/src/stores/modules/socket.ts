@@ -9,32 +9,31 @@ import { ElMessageBox } from 'element-plus';
 import { useAuthStore } from '@/stores/modules/auth';
 import { matchCode, WebsocketBusinessType } from '@/enums/oj/websocket/BusinessType';
 
-// 是否使用socket 当 import.meta.env.VITE_SOCKET_URL 不为空时，启用websocket
-const useSocket = Object.hasOwn(import.meta.env, 'VITE_SOCKET_URL') && import.meta.env.VITE_SOCKET_URL;
-
-// 获取WebSocket URL并确保协议正确
+// 获取WebSocket URL：优先使用 VITE_SOCKET_URL 环境变量，否则根据当前页面地址自适应
 const getSocketUrl = () => {
   const configUrl = import.meta.env.VITE_SOCKET_URL;
-  if (!configUrl) return '';
 
-  // 如果配置的URL已经是正确的WebSocket协议，直接使用
-  if (configUrl.startsWith('ws://') || configUrl.startsWith('wss://')) {
-    return configUrl;
+  // 如果显式配置了 VITE_SOCKET_URL，使用配置值
+  if (configUrl) {
+    if (configUrl.startsWith('ws://') || configUrl.startsWith('wss://')) {
+      return configUrl;
+    }
+    if (configUrl.startsWith('https://')) {
+      return configUrl.replace('https://', 'wss://');
+    }
+    if (configUrl.startsWith('http://')) {
+      return configUrl.replace('http://', 'ws://');
+    }
+    const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+    return `${protocol}//${configUrl}`;
   }
 
-  // 如果配置的是HTTP协议，转换为对应的WebSocket协议
-  if (configUrl.startsWith('https://')) {
-    return configUrl.replace('https://', 'wss://');
-  }
-  if (configUrl.startsWith('http://')) {
-    return configUrl.replace('http://', 'ws://');
-  }
-
-  // 根据当前页面协议自动选择WebSocket协议
+  // 未配置时，根据当前页面地址自动推导（适配 Nginx 反代部署）
   const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
-  return `${protocol}//${configUrl}`;
+  return `${protocol}//${window.location.host}/api/socket`;
 };
 
+const useSocket = true;
 const socketUrl = getSocketUrl();
 const MAX_RECONNECT_COUNT = 10;
 

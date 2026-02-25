@@ -2,7 +2,7 @@
 glowxq:
   tenant:
     # 是否启用多租户功能
-    enable: true
+    enable: false
     # 需要忽略租户过滤的表名列表（这些表不会添加租户条件）
     ignore-table:
       # 系统基础表（通常是所有租户共享的）
