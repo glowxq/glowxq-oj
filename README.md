@@ -1,16 +1,21 @@
 <div align="center">
 
-# GlowXQ OJ
+<img src="docs/svg/header.svg" alt="GlowXQ OJ" width="100%"/>
 
-### 全栈在线判题系统 | Online Judge Platform
+<br/>
+<br/>
 
-支持 C++ / Java / Python / Rust / JavaScript 多语言评测
-内置代码游戏与代码画画两大趣味编程模块
+<h3>全栈在线判题系统 | Online Judge Platform</h3>
+
+<p>
+  支持 C++ / Java / Python / Rust / JavaScript 多语言评测<br/>
+  内置代码游戏与代码画画两大趣味编程模块
+</p>
 
 <br/>
 
 <p>
-  <img src="https://img.shields.io/badge/Java-21-blue?logo=openjdk&logoColor=white" alt="Java 21" />
+  <img src="https://img.shields.io/badge/Java-21-ED8B00?logo=openjdk&logoColor=white" alt="Java 21" />
   <img src="https://img.shields.io/badge/Spring%20Boot-3.4-6DB33F?logo=springboot&logoColor=white" alt="Spring Boot 3.4" />
   <img src="https://img.shields.io/badge/Vue-3.5-4FC08D?logo=vuedotjs&logoColor=white" alt="Vue 3.5" />
   <img src="https://img.shields.io/badge/Vite-5-646CFF?logo=vite&logoColor=white" alt="Vite 5" />
@@ -19,16 +24,28 @@
 </p>
 
 <p>
-  <a href="https://oj.glowxq.com"><strong>在线体验</strong></a>
+  <a href="https://oj.glowxq.com"><strong>🌐 在线体验</strong></a>
   &nbsp;&middot;&nbsp;
-  <a href="#-快速开始"><strong>快速开始</strong></a>
+  <a href="#-快速开始"><strong>🚀 快速开始</strong></a>
   &nbsp;&middot;&nbsp;
-  <a href="#-功能特性"><strong>功能特性</strong></a>
+  <a href="#-功能特性"><strong>✨ 功能特性</strong></a>
   &nbsp;&middot;&nbsp;
   <a href="https://github.com/glowxq/glowxq-oj"><strong>GitHub</strong></a>
+  &nbsp;&middot;&nbsp;
+  <a href="https://gitee.com/glowxq/glowxq-oj"><strong>Gitee</strong></a>
 </p>
 
+<br/>
+
+> 📢 **国内用户**：如果 GitHub 访问较慢，可使用 Gitee 镜像仓库克隆项目
+>
+> `git clone https://gitee.com/glowxq/glowxq-oj.git`
+
 </div>
+
+<br/>
+
+<img src="docs/svg/divider.svg" width="100%"/>
 
 <br/>
 
@@ -36,22 +53,21 @@
 
 |  | 地址 | 账号 | 密码 |
 |---|---|---|---|
-| 管理员 | [oj.glowxq.com](https://oj.glowxq.com) | 13667753053 | 123456 |
-| 学生 | [oj.glowxq.com](https://oj.glowxq.com) | 13667753055 | 123456 |
-| 老师 | [oj.glowxq.com](https://oj.glowxq.com) | 13667753056 | 123456 |
+| 👨‍💼 管理员 | [oj.glowxq.com](https://oj.glowxq.com) | 13667753053 | 123456 |
+| 🎓 学生 | [oj.glowxq.com](https://oj.glowxq.com) | 13667753055 | 123456 |
+| 👩‍🏫 老师 | [oj.glowxq.com](https://oj.glowxq.com) | 13667753056 | 123456 |
 
 <br/>
 
----
-
-## 目录
+## 📑 目录
 
 - [功能特性](#-功能特性)
 - [代码游戏 & 代码画画](#-代码游戏--代码画画)
 - [技术栈](#-技术栈)
 - [快速开始](#-快速开始)
-  - [Docker Compose 部署](#docker-compose-一键部署自带数据库)
-  - [All-in-One 单容器部署](#all-in-one-单容器部署)
+  - [Docker Compose 部署](#-docker-compose-一键部署自带数据库)
+  - [All-in-One 单容器部署](#-all-in-one-单容器部署全家桶)
+- [服务架构](#-服务架构)
 - [开发指南](#-开发指南)
 - [项目结构](#-项目结构)
 - [环境变量说明](#-环境变量说明)
@@ -59,23 +75,31 @@
 - [联系方式](#-联系方式--技术服务)
 - [License](#-license)
 
----
+<br/>
+
+<img src="docs/svg/divider.svg" width="100%"/>
 
 <br/>
 
 ## ✨ 功能特性
 
+<div align="center">
+  <img src="docs/svg/features.svg" alt="Features" width="100%"/>
+</div>
+
+<br/>
+
 <table>
   <tr>
     <td width="50%">
 
-**多语言在线评测**
+**💻 多语言在线评测**
 支持 C++ / Java / Python / Rust / JavaScript，基于 go-judge 安全沙盒，同时支持 x86_64 与 arm64 架构
 
 </td>
     <td width="50%">
 
-**多题型支持**
+**📝 多题型支持**
 编程题、单选题、多选题、判断题、填空题、简答题，满足多样化教学与考核需求
 
 </td>
@@ -83,13 +107,13 @@
   <tr>
     <td>
 
-**代码游戏**
+**🎮 代码游戏**
 关卡式编程挑战，通过编写代码控制角色移动、战斗、收集宝藏，寓教于乐
 
 </td>
     <td>
 
-**代码画画**
+**🎨 代码画画**
 可视化编程环境，支持画笔绘图及数组/网格/树/链表等数据结构动态可视化
 
 </td>
@@ -97,13 +121,13 @@
   <tr>
     <td>
 
-**一键 Docker 部署**
-两种方案可选：Docker Compose（全家桶）和 All-in-One 单容器（复用已有数据库），无需宿主机安装 Java/Maven/Node
+**🐳 一键 Docker 部署**
+两种方案可选：Docker Compose（多容器）和 All-in-One 单容器全家桶，无需宿主机安装 Java/Maven/Node
 
 </td>
     <td>
 
-**跨架构支持**
+**🏗 跨架构支持**
 同时兼容 x86_64 (amd64) 和 aarch64 (arm64 / Apple Silicon)，Docker 构建自动适配
 
 </td>
@@ -112,7 +136,7 @@
 
 <br/>
 
----
+<img src="docs/svg/divider.svg" width="100%"/>
 
 <br/>
 
@@ -120,7 +144,7 @@
 
 除了传统 OJ 评测，GlowXQ OJ 还提供两个独立的趣味编程模块，可单独访问：
 
-### 代码游戏 (Code Game)
+### 🕹 代码游戏 (Code Game)
 
 > 在线体验：[coderun.glowxq.com/code-game](https://coderun.glowxq.com/code-game)&ensp;|&ensp;组件：`oj-web/src/components/Oj/Games/MoveCodeGame/`
 
@@ -131,7 +155,7 @@
 - **地图编辑器** — 可视化拖拽设计关卡，支持 JSON 导入/导出
 - **实时反馈** — 代码执行后动画展示角色移动、战斗、宝藏收集过程
 
-### 代码画画 (Glowc)
+### 🖌 代码画画 (Glowc)
 
 > 在线体验：[coderun.glowxq.com/code-draw](https://coderun.glowxq.com/code-draw)&ensp;|&ensp;组件：`oj-web/src/components/Oj/Glowc/`
 
@@ -146,11 +170,17 @@
 
 <br/>
 
----
+<img src="docs/svg/divider.svg" width="100%"/>
 
 <br/>
 
 ## 🛠 技术栈
+
+<div align="center">
+  <img src="docs/svg/tech-stack.svg" alt="Tech Stack" width="100%"/>
+</div>
+
+<br/>
 
 | 层级 | 技术 |
 |---|---|
@@ -175,7 +205,7 @@
 
 <br/>
 
----
+<img src="docs/svg/divider.svg" width="100%"/>
 
 <br/>
 
@@ -193,17 +223,26 @@
 | JDK 21 / Maven 3.6+ | >= 21 | 仅本地开发 |
 | pnpm / Node 20 | >= 20 | 仅本地开发 |
 
-> **两种部署方案**：
-> - 首次体验 / 想一站式全搞定 → [Docker Compose 方案](#docker-compose-一键部署自带数据库)
-> - 服务器已有 MySQL / Redis → [All-in-One 单容器方案](#all-in-one-单容器部署)
+> **两种部署方案对比**：
+>
+> | 方案 | 适用场景 | 容器数 | 是否自带数据库 |
+> |---|---|---|---|
+> | [Docker Compose](#-docker-compose-一键部署自带数据库) | 本地开发 / 首次体验 / 需要独立管理各服务 | 5 个 | ✅ 独立 MySQL + Redis 容器 |
+> | [All-in-One 全家桶](#-all-in-one-单容器部署全家桶) | 生产部署 / 一台服务器 / 追求极简 | 1 个 | ✅ 内置 MySQL + Redis |
 
 <br/>
 
-### Docker Compose 一键部署（自带数据库）
+<img src="docs/svg/wave.svg" width="100%"/>
+
+<br/>
+
+### 🐳 Docker Compose 一键部署（自带数据库）
 
 ```bash
-# 1. 克隆项目
+# 1. 克隆项目（GitHub 或 Gitee 二选一）
 git clone https://github.com/glowxq/glowxq-oj.git
+# git clone https://gitee.com/glowxq/glowxq-oj.git    # 国内镜像
+
 cd glowxq-oj
 
 # 2. 一键部署（自动检查环境 → 生成配置 → 构建 → 启动）
@@ -223,7 +262,7 @@ chmod +x deploy.sh
 > 端口可在 `.env` 中自定义，详见 [环境变量说明](#-环境变量说明)
 
 <details>
-<summary><b>Docker Compose 脚本命令一览</b></summary>
+<summary><b>📋 Docker Compose 脚本命令一览</b></summary>
 
 ```bash
 # ─── 部署 ─────────────────────────────────
@@ -255,52 +294,35 @@ chmod +x deploy.sh
 
 <br/>
 
-### All-in-One 单容器部署
+<img src="docs/svg/wave.svg" width="100%"/>
 
-适用于 **服务器上已有 MySQL / Redis** 的场景。将前端、后端、go-judge、MinIO 打包成**单个 Docker 容器**，仅暴露一个端口。
+<br/>
 
-<details open>
-<summary><b>架构图</b></summary>
+### 📦 All-in-One 单容器部署（全家桶）
 
-```
-宿主机 Nginx (443/SSL)
-        │
-        ▼
-┌─── Docker 容器 (:80) ──────────────────┐
-│                                         │
-│   Nginx        → 前端 SPA + /api 反代   │
-│   Spring Boot  → 后端 API (:7101 内部)  │
-│   go-judge     → 代码沙盒 (:5050 内部)  │
-│   MinIO        → 文件存储 (:9000 内部)  │
-│                                         │
-│   进程管理器: supervisord               │
-└────────┬──────────────┬─────────────────┘
-         │              │
-         ▼              ▼
-  宿主机 MySQL    宿主机 Redis
-    (:3306)        (:6379)
-```
+**6 个服务打包成 1 个 Docker 容器**，内置 MySQL + Redis + Nginx + Spring Boot + go-judge + MinIO，仅暴露 80 端口，数据持久化到 Docker Volume。零依赖，开箱即用。
 
-</details>
+<div align="center">
+  <img src="docs/svg/architecture-allinone.svg" alt="All-in-One Architecture" width="100%"/>
+</div>
+
+<br/>
 
 #### 快速开始
 
 ```bash
-# 1. 克隆项目
+# 1. 克隆项目（GitHub 或 Gitee 二选一）
 git clone https://github.com/glowxq/glowxq-oj.git
+# git clone https://gitee.com/glowxq/glowxq-oj.git    # 国内镜像
+
 cd glowxq-oj
 chmod +x deploy-allinone.sh
 
-# 2. 首次运行（自动生成 .env.allinone 配置文件）
+# 2. 一键部署（自动生成配置 → 构建 → 启动 → 初始化数据库）
 ./deploy-allinone.sh
 
-# 3. 根据实际环境编辑配置（MySQL/Redis 地址等）
-vim .env.allinone
-
-# 4. 初始化数据库（仅首次，导入 init.sql）
-./deploy-allinone.sh init-db
-
-# 5. 重启容器使配置生效
+# 3. （可选）编辑配置后重启
+vim .env.allinone       # 修改站点 URL、密码等
 ./deploy-allinone.sh restart
 ```
 
@@ -311,24 +333,18 @@ vim .env.allinone
 SITE_URL=https://oj.example.com   # 生产环境必填，决定文件 URL 域名
 WEB_PORT=80                       # 容器 80 → 宿主机端口
 
-# ─── MySQL（宿主机已有）──────────────────
-MYSQL_HOST=host.docker.internal
-MYSQL_PORT=3306
-MYSQL_DATABASE=glowxq_oj
-MYSQL_ROOT_PASSWORD=your_password
-
-# ─── Redis（宿主机已有）──────────────────
-REDIS_HOST=host.docker.internal
-REDIS_PORT=6379
-REDIS_PASSWORD=your_password
+# ─── 内置数据库密码 ─────────────────────
+MYSQL_ROOT_PASSWORD=glowxq123456  # 容器内 MySQL root 密码
+MYSQL_DATABASE=glowxq_oj          # 数据库名
+REDIS_PASSWORD=glowxq123456       # 容器内 Redis 密码
 ```
 
-> **`SITE_URL` 的作用**：后端生成文件 URL（头像、附件等）需要浏览器可访问的域名前缀。文件通过容器内 Nginx `/nexus-oj/` 路径代理到 MinIO。
+> **全自动初始化**：首次启动时自动创建数据库、导入表结构、初始化 MinIO。无需手动操作。
 
 <details>
-<summary><b>宿主机 Nginx SSL 反代配置示例</b></summary>
+<summary><b>🌐 宿主机 Nginx SSL 反代配置示例</b></summary>
 
-当 `WEB_PORT=7101` 时，宿主机 Nginx 配置：
+当 `WEB_PORT=80` 时，宿主机 Nginx 配置：
 
 ```nginx
 server {
@@ -339,7 +355,7 @@ server {
     ssl_certificate_key /path/to/cert.key;
 
     location / {
-        proxy_pass http://127.0.0.1:7101;
+        proxy_pass http://127.0.0.1:80;
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
@@ -359,7 +375,7 @@ server {
 </details>
 
 <details>
-<summary><b>All-in-One 脚本命令一览</b></summary>
+<summary><b>📋 All-in-One 脚本命令一览</b></summary>
 
 ```bash
 ./deploy-allinone.sh              # 构建 + 启动（默认）
@@ -369,13 +385,13 @@ server {
 ./deploy-allinone.sh logs         # 查看日志
 ./deploy-allinone.sh status       # 查看状态
 ./deploy-allinone.sh shell        # 进入容器 Shell
-./deploy-allinone.sh init-db      # 导入数据库
+./deploy-allinone.sh reset-db     # 重置数据库（删除所有数据）
 ```
 
 </details>
 
 <details>
-<summary><b>等效 docker run 命令</b></summary>
+<summary><b>🐳 等效 docker run 命令</b></summary>
 
 ```bash
 docker build -f Dockerfile.allinone -t glowxq-oj:allinone .
@@ -385,37 +401,33 @@ docker run -d --name glowxq-oj \
   -p 80:80 \
   -v oj-data:/data \
   -v oj-judge:/goj \
-  -e MYSQL_HOST=host.docker.internal \
-  -e MYSQL_PORT=3306 \
+  -e MYSQL_ROOT_PASSWORD=glowxq123456 \
   -e MYSQL_DATABASE=glowxq_oj \
-  -e MYSQL_ROOT_PASSWORD=xxx \
-  -e REDIS_HOST=host.docker.internal \
-  -e REDIS_PORT=6379 \
-  -e REDIS_PASSWORD=xxx \
+  -e REDIS_PASSWORD=glowxq123456 \
   -e SITE_URL=https://oj.example.com \
-  -e JWT_SECRET_KEY=xxx \
+  -e JWT_SECRET_KEY=your_jwt_secret \
   glowxq-oj:allinone
 ```
-
-> Linux 需额外添加 `--add-host=host.docker.internal:host-gateway`
 
 </details>
 
 <details>
-<summary><b>数据持久化</b></summary>
+<summary><b>💾 数据持久化</b></summary>
 
 通过 Docker Volume 持久化，容器重建后数据不丢失：
 
 | Volume | 容器路径 | 说明 |
 |---|---|---|
-| `oj-data` | `/data` | MinIO 文件存储 |
+| `oj-data` | `/data` | MySQL 数据 + Redis 数据 + MinIO 文件 |
 | `oj-judge` | `/goj` | 测试用例、上传文件等 |
+
+> 如需完全重置数据：`./deploy-allinone.sh reset-db`
 
 </details>
 
 <br/>
 
----
+<img src="docs/svg/divider.svg" width="100%"/>
 
 <br/>
 
@@ -423,29 +435,11 @@ docker run -d --name glowxq-oj \
 
 ### Docker Compose 方案
 
-```
-                     ┌──────────────┐
-                     │   Browser    │
-                     └──────┬───────┘
-                            │
-                     ┌──────▼───────┐
-                     │  Nginx (:80) │  ← 前端 SPA + /api 反向代理
-                     └──────┬───────┘
-                            │ /api/*
-                     ┌──────▼───────────────┐
-                     │  OJ API (:7101)      │  ← Spring Boot
-                     │  + go-judge (:5050)  │  ← 代码沙盒
-                     └──┬────┬────┬─────────┘
-                        │    │    │
-           ┌────────────┘    │    └───────────┐
-           ▼                 ▼                ▼
-    ┌────────────┐   ┌────────────┐   ┌────────────┐
-    │ MySQL      │   │ Redis      │   │ MinIO      │
-    │ (:3306)    │   │ (:6379)    │   │ (:9000)    │
-    └────────────┘   └────────────┘   └────────────┘
-```
+<div align="center">
+  <img src="docs/svg/architecture-compose.svg" alt="Docker Compose Architecture" width="100%"/>
+</div>
 
-### 服务说明
+<br/>
 
 | 服务 | 容器名 | 端口 | 说明 |
 |---|---|---|---|
@@ -455,11 +449,22 @@ docker run -d --name glowxq-oj \
 | OJ API | oj-api | 7101 / 5050 | 后端 + 判题沙盒 |
 | OJ Web | oj-web | 80 | 前端 Nginx 托管 |
 
-> All-in-One 方案架构图见 [All-in-One 单容器部署](#all-in-one-单容器部署) 章节。
+### All-in-One 方案
+
+单容器内通过 **supervisord** 管理 6 个进程，仅暴露 80 端口：
+
+| 进程 | 内部端口 | 说明 |
+|---|---|---|
+| MySQL | 3306 | 内置数据库 |
+| Redis | 6379 | 内置缓存 |
+| Nginx | 80 | 前端 SPA + /api 反代 |
+| Spring Boot | 7101 | 后端 API |
+| go-judge | 5050 | 代码沙盒 |
+| MinIO | 9000 | 文件存储 |
 
 <br/>
 
----
+<img src="docs/svg/divider.svg" width="100%"/>
 
 <br/>
 
@@ -528,7 +533,7 @@ pnpm format               # 格式化
 
 <br/>
 
----
+<img src="docs/svg/divider.svg" width="100%"/>
 
 <br/>
 
@@ -549,6 +554,10 @@ glowxq-oj/
 │       ├── components/Oj/Games/   # 代码游戏
 │       └── components/Oj/Glowc/   # 代码画画
 │
+├── docs/                      # 文档资源
+│   ├── svg/                   #   架构图 & 装饰性 SVG
+│   └── img/                   #   二维码等图片
+│
 ├── docker-compose.yml         # Docker Compose 编排
 ├── deploy.sh                  # Compose 部署脚本
 ├── Dockerfile.allinone        # All-in-One 多阶段构建
@@ -563,7 +572,7 @@ glowxq-oj/
 
 <br/>
 
----
+<img src="docs/svg/divider.svg" width="100%"/>
 
 <br/>
 
@@ -615,16 +624,15 @@ DATA_DIR=./data                    # 持久化目录
 
 <br/>
 
----
-
-<br/>
-
 ## 手动部署
 
 如果不使用一键脚本，可手动操作（仅需 Docker）：
 
 ```bash
+# GitHub 或 Gitee 二选一
 git clone https://github.com/glowxq/glowxq-oj.git
+# git clone https://gitee.com/glowxq/glowxq-oj.git
+
 cd glowxq-oj
 
 cp .env.example .env
@@ -638,7 +646,7 @@ docker compose down       # 停止服务
 
 <br/>
 
----
+<img src="docs/svg/divider.svg" width="100%"/>
 
 <br/>
 
@@ -674,8 +682,11 @@ MINIO_CONSOLE_PORT=9003
 <summary><b>如何重置数据库？</b></summary>
 
 ```bash
+# Docker Compose 方案
 ./deploy.sh reset-db
-# 停止 MySQL → 删除数据 → 重启 → 自动执行 init.sql
+
+# All-in-One 方案
+./deploy-allinone.sh reset-db
 ```
 
 </details>
@@ -719,25 +730,21 @@ docker compose up -d --build oj-web                     # 前端
 
 | 场景 | 推荐 | 原因 |
 |---|---|---|
-| 首次体验 / 本地开发 | Docker Compose | 自带数据库，开箱即用 |
-| 服务器已有 MySQL / Redis | All-in-One | 单容器单端口，管理简单 |
-| 需要独立扩展数据库 | Docker Compose | 各服务独立，灵活扩展 |
-| 多项目共享基础设施 | All-in-One | 复用已有数据库 |
+| 首次体验 / 本地开发 | Docker Compose | 各服务独立，方便调试 |
+| 一台服务器生产部署 | All-in-One | 单容器零依赖，管理简单 |
+| 需要独立扩展数据库 | Docker Compose | 灵活扩展各组件 |
+| 追求极简一键部署 | All-in-One | 内置全部服务，开箱即用 |
 
 </details>
 
 <details>
 <summary><b>All-in-One API 返回 404？</b></summary>
 
-通常是 Spring Boot 连不上 MySQL / Redis 导致应用崩溃重启：
+通常是 Spring Boot 尚未启动完成（首次启动需初始化数据库，约 1-2 分钟）：
 
 ```bash
-./deploy-allinone.sh logs   # 查看日志
-
-# 常见原因：
-# 1. MySQL / Redis 未在宿主机运行
-# 2. .env.allinone 中地址或密码配置错误
-# 3. Linux 上手动 docker run 需加 --add-host=host.docker.internal:host-gateway
+./deploy-allinone.sh logs    # 查看日志
+./deploy-allinone.sh status  # 查看各进程状态
 ```
 
 </details>
@@ -773,9 +780,20 @@ JAVA_OPTS=-Xms512m -Xmx1024m  # 大内存（8GB+）
 
 </details>
 
+<details>
+<summary><b>GitHub 克隆太慢？</b></summary>
+
+使用 Gitee 国内镜像：
+
+```bash
+git clone https://gitee.com/glowxq/glowxq-oj.git
+```
+
+</details>
+
 <br/>
 
----
+<img src="docs/svg/divider.svg" width="100%"/>
 
 <br/>
 
@@ -809,10 +827,25 @@ JAVA_OPTS=-Xms512m -Xmx1024m  # 大内存（8GB+）
 
 <br/>
 
----
+<img src="docs/svg/divider.svg" width="100%"/>
 
 <br/>
 
 ## 📄 License
 
 [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0) &copy; 2025 GlowXQ
+
+<div align="center">
+  <br/>
+  <img src="docs/svg/wave.svg" width="60%"/>
+  <br/>
+  <br/>
+  <sub>Made with ❤️ by <a href="https://github.com/glowxq">GlowXQ</a></sub>
+  <br/>
+  <br/>
+  <a href="https://github.com/glowxq/glowxq-oj">GitHub</a>
+  &nbsp;&middot;&nbsp;
+  <a href="https://gitee.com/glowxq/glowxq-oj">Gitee</a>
+  &nbsp;&middot;&nbsp;
+  <a href="https://oj.glowxq.com">在线体验</a>
+</div>

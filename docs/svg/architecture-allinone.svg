@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="680" height="420" viewBox="0 0 680 420">
+  <defs>
+    <linearGradient id="abg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0f0c29"/>
+      <stop offset="100%" style="stop-color:#24243e"/>
+    </linearGradient>
+    <linearGradient id="aaccent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#00d2ff"/>
+      <stop offset="100%" style="stop-color:#7b2ff7"/>
+    </linearGradient>
+    <linearGradient id="agreen" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#00b09b"/>
+      <stop offset="100%" style="stop-color:#96c93d"/>
+    </linearGradient>
+    <linearGradient id="aorange" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#f7971e"/>
+      <stop offset="100%" style="stop-color:#ffd200"/>
+    </linearGradient>
+    <linearGradient id="apink" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#ee0979"/>
+      <stop offset="100%" style="stop-color:#ff6a00"/>
+    </linearGradient>
+    <linearGradient id="ablue" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#2196F3"/>
+      <stop offset="100%" style="stop-color:#00BCD4"/>
+    </linearGradient>
+    <linearGradient id="apurple" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#7b2ff7"/>
+      <stop offset="100%" style="stop-color:#c471f5"/>
+    </linearGradient>
+    <linearGradient id="ared" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#e53935"/>
+      <stop offset="100%" style="stop-color:#e35d5b"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="680" height="420" rx="12" fill="url(#abg)"/>
+
+  <!-- Title -->
+  <text x="340" y="30" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif" font-size="15" fill="#a8b2d1" font-weight="bold" letter-spacing="2">ALL-IN-ONE ARCHITECTURE</text>
+  <rect x="200" y="38" width="280" height="2" rx="1" fill="url(#aaccent)" opacity="0.5"/>
+
+  <!-- Browser -->
+  <rect x="260" y="52" width="160" height="36" rx="8" fill="none" stroke="#a8b2d1" stroke-width="1.5"/>
+  <text x="340" y="75" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif" font-size="13" fill="#ccd6f6">Browser</text>
+
+  <!-- Arrow Browser → Nginx host -->
+  <line x1="340" y1="88" x2="340" y2="108" stroke="#a8b2d1" stroke-width="1.5" marker-end="url(#arrowA)"/>
+  <defs><marker id="arrowA" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="#a8b2d1"/></marker></defs>
+
+  <!-- Host Nginx (optional) -->
+  <rect x="220" y="108" width="240" height="32" rx="6" fill="none" stroke="#a8b2d1" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="340" y="129" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif" font-size="11" fill="#8892b0">Host Nginx (443/SSL) — optional</text>
+
+  <!-- Arrow → Container -->
+  <line x1="340" y1="140" x2="340" y2="158" stroke="#a8b2d1" stroke-width="1.5" marker-end="url(#arrowA)"/>
+
+  <!-- Container box -->
+  <rect x="40" y="158" width="600" height="240" rx="10" fill="none" stroke="url(#aaccent)" stroke-width="2"/>
+  <rect x="40" y="158" width="600" height="28" rx="10" fill="url(#aaccent)" opacity="0.15"/>
+  <text x="340" y="177" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif" font-size="12" fill="#00d2ff" font-weight="bold" letter-spacing="1">Docker Container :80  ·  supervisord</text>
+
+  <!-- Row 1: Nginx + Spring Boot + go-judge -->
+  <!-- Nginx -->
+  <rect x="65" y="200" width="155" height="50" rx="8" fill="url(#agreen)" opacity="0.2"/>
+  <rect x="65" y="200" width="155" height="50" rx="8" fill="none" stroke="url(#agreen)" stroke-width="1.5"/>
+  <text x="142" y="221" text-anchor="middle" font-family="monospace" font-size="13" fill="#96c93d" font-weight="bold">Nginx</text>
+  <text x="142" y="240" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif" font-size="10" fill="#8892b0">SPA + /api proxy</text>
+
+  <!-- Spring Boot -->
+  <rect x="235" y="200" width="195" height="50" rx="8" fill="url(#agreen)" opacity="0.2"/>
+  <rect x="235" y="200" width="195" height="50" rx="8" fill="none" stroke="#6DB33F" stroke-width="1.5"/>
+  <text x="332" y="221" text-anchor="middle" font-family="monospace" font-size="13" fill="#6DB33F" font-weight="bold">Spring Boot</text>
+  <text x="332" y="240" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif" font-size="10" fill="#8892b0">API :7101</text>
+
+  <!-- go-judge -->
+  <rect x="445" y="200" width="170" height="50" rx="8" fill="url(#apurple)" opacity="0.2"/>
+  <rect x="445" y="200" width="170" height="50" rx="8" fill="none" stroke="url(#apurple)" stroke-width="1.5"/>
+  <text x="530" y="221" text-anchor="middle" font-family="monospace" font-size="13" fill="#c471f5" font-weight="bold">go-judge</text>
+  <text x="530" y="240" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif" font-size="10" fill="#8892b0">Sandbox :5050</text>
+
+  <!-- Row 2: MySQL + Redis + MinIO -->
+  <!-- MySQL -->
+  <rect x="65" y="270" width="170" height="50" rx="8" fill="url(#ablue)" opacity="0.2"/>
+  <rect x="65" y="270" width="170" height="50" rx="8" fill="none" stroke="url(#ablue)" stroke-width="1.5"/>
+  <text x="150" y="291" text-anchor="middle" font-family="monospace" font-size="13" fill="#2196F3" font-weight="bold">MySQL 8.0</text>
+  <text x="150" y="310" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif" font-size="10" fill="#8892b0">:3306 internal</text>
+
+  <!-- Redis -->
+  <rect x="255" y="270" width="170" height="50" rx="8" fill="url(#ared)" opacity="0.2"/>
+  <rect x="255" y="270" width="170" height="50" rx="8" fill="none" stroke="url(#ared)" stroke-width="1.5"/>
+  <text x="340" y="291" text-anchor="middle" font-family="monospace" font-size="13" fill="#e53935" font-weight="bold">Redis 7</text>
+  <text x="340" y="310" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif" font-size="10" fill="#8892b0">:6379 internal</text>
+
+  <!-- MinIO -->
+  <rect x="445" y="270" width="170" height="50" rx="8" fill="url(#aorange)" opacity="0.2"/>
+  <rect x="445" y="270" width="170" height="50" rx="8" fill="none" stroke="url(#aorange)" stroke-width="1.5"/>
+  <text x="530" y="291" text-anchor="middle" font-family="monospace" font-size="13" fill="#ffd200" font-weight="bold">MinIO</text>
+  <text x="530" y="310" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif" font-size="10" fill="#8892b0">OSS :9000 internal</text>
+
+  <!-- Volume info -->
+  <rect x="65" y="340" width="550" height="42" rx="6" fill="#1a1a2e" opacity="0.6"/>
+  <text x="340" y="359" text-anchor="middle" font-family="monospace" font-size="11" fill="#8892b0">Docker Volume</text>
+  <text x="340" y="375" text-anchor="middle" font-family="monospace" font-size="10" fill="#a8b2d1">oj-data:/data (MySQL + Redis + MinIO)  |  oj-judge:/goj (testcases)</text>
+
+  <!-- Port label -->
+  <text x="340" y="410" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif" font-size="11" fill="#8892b0">Only port 80 exposed  ·  All data persisted via Docker Volumes</text>
+</svg>
