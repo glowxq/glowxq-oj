@@ -4,8 +4,9 @@ set -eo pipefail
 # ============================================================
 # GlowXQ OJ - All-in-One 单容器部署脚本
 #
-# 将 OJ 打包成单个 Docker 容器（Nginx + Spring Boot + go-judge + MinIO）
-# 仅暴露 80 端口，连接宿主机已有的 MySQL/Redis
+# 将 OJ 全部服务打包成单个 Docker 容器：
+# MySQL + Redis + Nginx + Spring Boot + go-judge + MinIO
+# 仅暴露 80 端口，数据通过 Docker Volume 持久化
 #
 # 用法:
 #   ./deploy-allinone.sh           构建 + 启动（默认）
@@ -14,7 +15,7 @@ set -eo pipefail
 #   ./deploy-allinone.sh logs      查看日志
 #   ./deploy-allinone.sh status    查看状态
 #   ./deploy-allinone.sh update    重新构建部署
-#   ./deploy-allinone.sh init-db   首次导入数据库
+#   ./deploy-allinone.sh reset-db  重置数据库（删除数据后重新初始化）
 # ============================================================
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
@@ -57,8 +58,8 @@ show_banner() {
    ║     │ ┬│  │ ││││┌┘ │ │├┤   │ │ │           ║
    ║     └─┘┴─┘└─┘└┴┘┴└─┴ └┘   └─┘└┘           ║
    ║                                              ║
-   ║     All-in-One 单容器部署 (v1.0)             ║
-   ║     Nginx + Spring Boot + go-judge + MinIO   ║
+   ║     All-in-One 全家桶部署 (v2.0)             ║
+   ║     MySQL+Redis+Nginx+API+Judge+MinIO        ║
    ║                                              ║
    ╚══════════════════════════════════════════════╝
 BANNER
@@ -76,26 +77,28 @@ show_usage() {
     echo -e "  ${GREEN}stop${NC}         停止容器"
     echo -e "  ${GREEN}restart${NC}      重启容器"
     echo -e "  ${GREEN}update${NC}       重新构建并部署（保留数据）"
+    echo -e "  ${RED}reset-db${NC}     重置数据库（删除 MySQL 数据后重新初始化）"
     echo ""
     echo -e "${BOLD}运维命令:${NC}"
     echo -e "  ${CYAN}logs${NC}         查看容器日志"
     echo -e "  ${CYAN}status${NC}       查看容器状态"
     echo -e "  ${CYAN}shell${NC}        进入容器 Shell"
     echo ""
-    echo -e "${BOLD}数据库:${NC}"
-    echo -e "  ${YELLOW}init-db${NC}      首次部署时导入 init.sql 到外部 MySQL"
-    echo ""
     echo -e "${BOLD}其他:${NC}"
     echo -e "  ${DIM}help${NC}         显示此帮助信息"
     echo ""
     echo -e "${BOLD}配置方式:${NC}"
     echo -e "  所有配置通过 ${CYAN}.env.allinone${NC} 文件管理（首次运行自动生成）"
-    echo -e "  编辑 .env.allinone 修改 MySQL/Redis 地址、端口映射、站点 URL 等"
+    echo -e "  编辑 .env.allinone 修改端口映射、数据库密码、站点 URL 等"
+    echo ""
+    echo -e "${BOLD}数据管理:${NC}"
+    echo -e "  MySQL/Redis 数据持久化在 Docker Volume 中，容器重建不丢失"
+    echo -e "  如需完全重置：${RED}docker volume rm oj-data${NC}（会丢失所有数据！）"
     echo ""
     echo -e "${BOLD}示例:${NC}"
-    echo -e "  $0              ${DIM}# 首次部署（自动生成 .env.allinone）${NC}"
-    echo -e "  $0 init-db      ${DIM}# 导入数据库${NC}"
-    echo -e "  $0 update       ${DIM}# 代码更新后重新部署${NC}"
+    echo -e "  $0              ${DIM}# 首次部署（全自动构建+启动）${NC}"
+    echo -e "  $0 update       ${DIM}# 代码更新后重新构建部署${NC}"
+    echo -e "  $0 logs         ${DIM}# 查看运行日志${NC}"
     echo ""
 }
 
@@ -119,41 +122,37 @@ setup_env() {
     cat > "$ENV_FILE" << EOF
 # ============================================================
 # GlowXQ OJ - All-in-One 部署配置
-# 首次生成，请根据实际环境修改
+# 所有服务（MySQL/Redis/MinIO/API）均在容器内部运行
+# 首次生成，可根据需要修改
 # ============================================================
 
 # ==================== 站点配置 ====================
-# 站点公网地址（用于生成 OSS 文件可访问 URL）
-# 本地测试可不设置，生产必须设置为实际域名
-# 示例: https://oj.example.com 或 http://your-server-ip:7101
+# 站点公网地址（用于生成文件可访问 URL）
+# 本地测试可不设置，生产部署设置为实际域名
+# 示例: https://oj.example.com
 SITE_URL=
 
-# 宿主机端口映射（容器 80 端口映射到宿主机的哪个端口）
-# 默认 80，如果 80 被占用可改为其他端口如 7101
+# 宿主机端口映射（容器 80 端口映射到宿主机端口）
+# 默认 80，如果 80 被占用可改为其他端口如 8080
 WEB_PORT=80
 
-# ==================== MySQL 配置（宿主机已有） ====================
-MYSQL_HOST=host.docker.internal
-MYSQL_PORT=3306
-MYSQL_DATABASE=glowxq_oj
-MYSQL_USER=root
+# ==================== 数据库密码 ====================
+# 容器内部 MySQL root 密码
 MYSQL_ROOT_PASSWORD=glowxq123456
+MYSQL_DATABASE=glowxq_oj
 
-# ==================== Redis 配置（宿主机已有） ====================
-REDIS_HOST=host.docker.internal
-REDIS_PORT=6379
+# 容器内部 Redis 密码
 REDIS_PASSWORD=glowxq123456
-REDIS_DATABASE=1
-
-# ==================== MinIO（容器内部，一般不需改） ====================
-OSS_ACCESS_KEY=minioadmin
-OSS_SECRET_KEY=minioadmin
 
 # ==================== JWT 密钥（已自动生成） ====================
 JWT_SECRET_KEY=${jwt_key}
 
 # ==================== JVM 配置 ====================
 JAVA_OPTS="-Xms256m -Xmx512m"
+
+# ==================== MinIO（容器内部，一般不需改）====================
+OSS_ACCESS_KEY=minioadmin
+OSS_SECRET_KEY=minioadmin
 
 # ==================== 飞书集成（可选） ====================
 # FEISHU_INTERNAL_WEBHOOK=
@@ -163,7 +162,6 @@ JAVA_OPTS="-Xms256m -Xmx512m"
 EOF
 
     log_info ".env.allinone 已生成（JWT 密钥已自动随机生成）"
-    log_info "请根据实际环境修改 .env.allinone 中的 MySQL/Redis 配置"
 }
 
 # ============================================================
@@ -205,7 +203,7 @@ start_container() {
 
     load_env
 
-    # 检查镜像是否存在（防止未构建就尝试启动，导致 Docker 去远程拉取不存在的镜像）
+    # 检查镜像是否存在
     if ! docker image inspect "${IMAGE_NAME}:${IMAGE_TAG}" &>/dev/null; then
         log_error "镜像 ${IMAGE_NAME}:${IMAGE_TAG} 不存在，请先构建：$0 或 $0 update"
         exit 1
@@ -217,48 +215,30 @@ start_container() {
         docker rm -f "${CONTAINER_NAME}" >/dev/null 2>&1 || true
     fi
 
-    # Linux 需要 --add-host 才能让容器访问宿主机服务
-    # macOS Docker Desktop 自带 host.docker.internal 支持
-    local extra_args=""
-    if [[ "$(uname)" == "Linux" ]]; then
-        extra_args="--add-host=host.docker.internal:host-gateway"
-    fi
-
-    # SITE_URL: 站点公网地址，用于生成 OSS 文件的可访问 URL
-    # 文件通过 Nginx /nexus-oj/ 代理到 MinIO，浏览器可直接访问
+    # SITE_URL
     local site_url="${SITE_URL:-}"
     if [ -n "$site_url" ]; then
         log_info "站点地址: ${site_url}"
     else
         log_warn "未配置 SITE_URL，文件 URL 将使用容器内部地址（本地测试可用）"
-        log_warn "生产部署请在 .env 中设置 SITE_URL=https://your-domain.com"
     fi
 
     docker run -d \
         --name "${CONTAINER_NAME}" \
         --privileged \
         --restart unless-stopped \
-        ${extra_args} \
         -p "${WEB_PORT:-80}:80" \
         -v oj-data:/data \
         -v oj-judge:/goj \
-        -e MYSQL_HOST="${MYSQL_HOST:-host.docker.internal}" \
-        -e MYSQL_PORT="${MYSQL_PORT:-3306}" \
-        -e MYSQL_DATABASE="${MYSQL_DATABASE:-glowxq_oj}" \
-        -e MYSQL_USER="${MYSQL_USER:-root}" \
         -e MYSQL_ROOT_PASSWORD="${MYSQL_ROOT_PASSWORD:-glowxq123456}" \
-        -e REDIS_HOST="${REDIS_HOST:-host.docker.internal}" \
-        -e REDIS_PORT="${REDIS_PORT:-6379}" \
+        -e MYSQL_DATABASE="${MYSQL_DATABASE:-glowxq_oj}" \
         -e REDIS_PASSWORD="${REDIS_PASSWORD:-glowxq123456}" \
-        -e REDIS_DATABASE="${REDIS_DATABASE:-1}" \
         -e OSS_ENDPOINT="http://127.0.0.1:9000" \
-        -e OSS_DOMAIN="${OSS_DOMAIN:-}" \
         -e OSS_ACCESS_KEY="${OSS_ACCESS_KEY:-minioadmin}" \
         -e OSS_SECRET_KEY="${OSS_SECRET_KEY:-minioadmin}" \
         -e SITE_URL="${site_url}" \
         -e JWT_SECRET_KEY="${JWT_SECRET_KEY:-please_change_me}" \
         -e JAVA_OPTS="${JAVA_OPTS:--Xms256m -Xmx512m}" \
-        -e SPRING_PROFILES_ACTIVE="${SPRING_PROFILES_ACTIVE:-prod}" \
         -e FEISHU_INTERNAL_WEBHOOK="${FEISHU_INTERNAL_WEBHOOK:-}" \
         -e FEISHU_BUSINESS_WEBHOOK="${FEISHU_BUSINESS_WEBHOOK:-}" \
         -e FEISHU_APP_ID="${FEISHU_APP_ID:-}" \
@@ -278,30 +258,31 @@ wait_for_services() {
     local port="${WEB_PORT:-80}"
 
     echo ""
-    # 等待前端 + API 就绪
-    echo -n "  OJ 服务 (:${port})  "
-    for i in $(seq 1 60); do
+    # 等待前端
+    echo -n "  前端页面 (:${port})  "
+    for i in $(seq 1 30); do
         if curl -sf "http://localhost:${port}/" &>/dev/null; then
             echo -e "${GREEN}● 就绪${NC}"
-
-            # 进一步检查 API
-            echo -n "  后端 API          "
-            for j in $(seq 1 45); do
-                if curl -sf "http://localhost:${port}/api/doc.html" &>/dev/null; then
-                    echo -e "${GREEN}● 就绪${NC}"
-                    return 0
-                fi
-                echo -n "."
-                sleep 3
-            done
-            echo -e "${YELLOW}● 仍在启动中（Spring Boot 启动需要时间）${NC}"
-            return 0
+            break
         fi
         echo -n "."
         sleep 2
     done
-    echo -e "${YELLOW}● 仍在启动中${NC}"
+
+    # 等待 API（MySQL 初始化 + Spring Boot 启动需要时间）
+    echo -n "  后端 API          "
+    for j in $(seq 1 60); do
+        if curl -sf "http://localhost:${port}/api/doc.html" &>/dev/null; then
+            echo -e "${GREEN}● 就绪${NC}"
+            echo ""
+            return 0
+        fi
+        echo -n "."
+        sleep 3
+    done
+    echo -e "${YELLOW}● 仍在启动中（首次启动需初始化数据库，约 1-2 分钟）${NC}"
     log_warn "可使用 $0 logs 查看详细日志"
+    echo ""
 }
 
 # ============================================================
@@ -322,6 +303,15 @@ show_result() {
     echo -e "  │  API 文档       http://localhost:${port}/api/doc.html"
     echo -e "  └──────────────────────────────────────────────┘"
     echo ""
+    echo -e "  ${BOLD}容器内部服务:${NC}"
+    echo -e "  ┌──────────────────────────────────────────────┐"
+    echo -e "  │  MySQL     127.0.0.1:3306/${MYSQL_DATABASE:-glowxq_oj} (容器内部)"
+    echo -e "  │  Redis     127.0.0.1:6379 (容器内部)"
+    echo -e "  │  MinIO     127.0.0.1:9000 (容器内部)"
+    echo -e "  │  API       127.0.0.1:7101 (容器内部)"
+    echo -e "  │  go-judge  127.0.0.1:5050 (容器内部)"
+    echo -e "  └──────────────────────────────────────────────┘"
+    echo ""
     echo -e "  ${BOLD}常用命令:${NC}"
     echo -e "  ┌──────────────────────────────────────────────┐"
     echo -e "  │  查看日志  ${CYAN}$0 logs${NC}"
@@ -330,12 +320,6 @@ show_result() {
     echo -e "  │  重启服务  ${CYAN}$0 restart${NC}"
     echo -e "  │  更新部署  ${CYAN}$0 update${NC}"
     echo -e "  │  进入容器  ${CYAN}$0 shell${NC}"
-    echo -e "  └──────────────────────────────────────────────┘"
-    echo ""
-    echo -e "  ${BOLD}外部服务:${NC}"
-    echo -e "  ┌──────────────────────────────────────────────┐"
-    echo -e "  │  MySQL  ${MYSQL_HOST:-host.docker.internal}:${MYSQL_PORT:-3306}/${MYSQL_DATABASE:-glowxq_oj}"
-    echo -e "  │  Redis  ${REDIS_HOST:-host.docker.internal}:${REDIS_PORT:-6379}"
     echo -e "  └──────────────────────────────────────────────┘"
     echo ""
 }
@@ -396,12 +380,48 @@ cmd_status() {
         echo -e "${BOLD}资源使用:${NC}"
         docker stats --no-stream --format "  CPU: {{.CPUPerc}}  Memory: {{.MemUsage}}" "${CONTAINER_NAME}" 2>/dev/null
         echo ""
+
+        echo -e "${BOLD}内部进程:${NC}"
+        docker exec "${CONTAINER_NAME}" supervisorctl status 2>/dev/null || \
+            docker exec "${CONTAINER_NAME}" ps aux --no-headers 2>/dev/null
+        echo ""
     fi
 }
 
 # 进入容器 shell
 cmd_shell() {
     docker exec -it "${CONTAINER_NAME}" /bin/bash 2>/dev/null || log_error "容器不存在或未运行"
+}
+
+# 重置数据库
+cmd_reset_db() {
+    show_banner
+    log_step ">>> 重置数据库"
+
+    echo -e "${RED}${BOLD}  ⚠️  警告：此操作将删除所有 MySQL 数据！${NC}"
+    echo -e "  包括：所有数据库、表、用户数据"
+    echo -e "  Redis 缓存数据也将被清除"
+    echo ""
+    read -p "  确定要重置吗？输入 yes 继续: " confirm
+    if [ "$confirm" != "yes" ]; then
+        log_info "已取消"
+        return
+    fi
+
+    # 停止容器
+    if docker ps --format '{{.Names}}' | grep -q "^${CONTAINER_NAME}$"; then
+        log_info "停止容器..."
+        docker rm -f "${CONTAINER_NAME}" >/dev/null 2>&1 || true
+    fi
+
+    # 删除数据 volume
+    log_info "删除数据卷 oj-data..."
+    docker volume rm oj-data 2>/dev/null || true
+
+    log_info "数据已重置，下次启动容器时将自动重新初始化数据库"
+    echo ""
+    echo -e "  ${BOLD}下一步:${NC} 运行 ${CYAN}$0${NC} 或 ${CYAN}$0 update${NC} 重新启动"
+    echo ""
 }
 
 # 更新部署
@@ -425,63 +445,6 @@ cmd_update() {
     show_result
 }
 
-# 首次导入数据库
-cmd_init_db() {
-    load_env
-
-    local sql_file="$SCRIPT_DIR/glowxq-api/script/init.sql"
-    local mysql_host="${MYSQL_HOST:-127.0.0.1}"
-    local mysql_port="${MYSQL_PORT:-3306}"
-    local mysql_db="${MYSQL_DATABASE:-glowxq_oj}"
-    local mysql_user="${MYSQL_USER:-root}"
-    local mysql_pass="${MYSQL_ROOT_PASSWORD:-glowxq123456}"
-
-    if [ ! -f "$sql_file" ]; then
-        log_error "初始化 SQL 文件不存在: $sql_file"
-        exit 1
-    fi
-
-    log_step ">>> 初始化数据库"
-    echo ""
-    echo -e "  目标: ${mysql_user}@${mysql_host}:${mysql_port}/${mysql_db}"
-    echo -e "  SQL:  ${sql_file}"
-    echo ""
-
-    # 检查 mysql 客户端
-    if command -v mysql &>/dev/null; then
-        # 宿主机有 mysql 客户端，直接导入
-        log_info "使用宿主机 mysql 客户端导入..."
-
-        # 先创建数据库（如不存在）
-        mysql -h "$mysql_host" -P "$mysql_port" -u "$mysql_user" -p"$mysql_pass" \
-            -e "CREATE DATABASE IF NOT EXISTS \`${mysql_db}\` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;" 2>/dev/null
-
-        # 导入 SQL
-        mysql -h "$mysql_host" -P "$mysql_port" -u "$mysql_user" -p"$mysql_pass" \
-            "$mysql_db" < "$sql_file"
-
-        log_info "数据库初始化完成！"
-    else
-        # 使用临时 Docker 容器导入
-        log_info "宿主机无 mysql 客户端，使用 Docker 临时容器导入..."
-
-        # 如果连接宿主机 MySQL，需要使用 host.docker.internal
-        local docker_mysql_host="$mysql_host"
-        if [ "$mysql_host" = "127.0.0.1" ] || [ "$mysql_host" = "localhost" ]; then
-            docker_mysql_host="host.docker.internal"
-        fi
-
-        # 先创建数据库
-        docker run --rm \
-            --add-host=host.docker.internal:host-gateway \
-            -v "$sql_file:/init.sql:ro" \
-            mysql:8.0 \
-            sh -c "mysql -h '$docker_mysql_host' -P '$mysql_port' -u '$mysql_user' -p'$mysql_pass' -e \"CREATE DATABASE IF NOT EXISTS \\\`${mysql_db}\\\` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;\" 2>/dev/null && mysql -h '$docker_mysql_host' -P '$mysql_port' -u '$mysql_user' -p'$mysql_pass' '$mysql_db' < /init.sql"
-
-        log_info "数据库初始化完成！"
-    fi
-}
-
 # ============================================================
 # 主入口
 # ============================================================
@@ -490,10 +453,10 @@ case "${1:-deploy}" in
     stop)           cmd_stop ;;
     restart)        cmd_restart ;;
     update)         cmd_update ;;
+    reset-db)       cmd_reset_db ;;
     logs)           cmd_logs ;;
     status)         cmd_status ;;
     shell)          cmd_shell ;;
-    init-db)        cmd_init_db ;;
     help|-h|--help) show_usage ;;
     *)
         log_error "未知命令: $1"
