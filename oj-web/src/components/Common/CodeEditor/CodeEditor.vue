@@ -32,9 +32,25 @@
               保存
             </el-button>
 
-            <el-button plain size="small" @click="copyCode">
-              <el-icon><CopyDocument /></el-icon>
-              复制
+            <el-button 
+              plain 
+              size="small" 
+              @click="copyCode"
+              :class="{
+                'copy-button-success': copyStatus === 'success',
+                'copy-button-error': copyStatus === 'error',
+                'copy-button-copying': copyStatus === 'copying'
+              }"
+              :disabled="copyStatus === 'copying'"
+            >
+              <el-icon v-if="copyStatus === 'copying'"><Loading /></el-icon>
+              <el-icon v-else-if="copyStatus === 'success'"><CircleCheck /></el-icon>
+              <el-icon v-else-if="copyStatus === 'error'"><CircleClose /></el-icon>
+              <el-icon v-else><CopyDocument /></el-icon>
+              <span v-if="copyStatus === 'copying'">复制中</span>
+              <span v-else-if="copyStatus === 'success'">已复制</span>
+              <span v-else-if="copyStatus === 'error'">复制失败</span>
+              <span v-else>复制</span>
             </el-button>
 
             <el-button plain size="small" type="danger" @click="clearEditor">
@@ -301,6 +317,9 @@ import {
   Timer,
   CopyDocument,
   Upload,
+  Loading,
+  CircleCheck,
+  CircleClose,
 } from "@element-plus/icons-vue";
 
 // 定义组件属性
@@ -352,9 +371,15 @@ const showLineNumbers = ref(true);
 const lineWrapping = ref(true);
 const fontSize = ref(props.defaultFontSize);
 const tabSize = ref(props.defaultTabSize);
+// 高亮行输入
 const highlightLineInput = ref("");
 const highlightedLines = ref<number[]>([]);
 const isToolbarExpanded = ref(false);
+
+// 复制状态
+type CopyStatus = 'idle' | 'copying' | 'success' | 'error';
+const copyStatus = ref<CopyStatus>('idle');
+const copyStatusTimer = ref<number | null>(null);
 
 // 计时器相关状态
 const timerStartTime = ref<number>(Date.now());
@@ -928,36 +953,215 @@ onBeforeUnmount(() => {
     codeMonitorInterval.value = null;
   }
 
+  // 清除复制状态定时器
+  if (copyStatusTimer.value) {
+    clearTimeout(copyStatusTimer.value);
+    copyStatusTimer.value = null;
+  }
+
   // 移除WebSocket推送代码事件监听
   mittBus.off(`socket.${WebsocketBusinessType.PUSH_COVERED_CODE.code}`, handlePushCoveredCode);
 });
+
+// 重置复制状态
+const resetCopyStatus = () => {
+  if (copyStatusTimer.value) {
+    clearTimeout(copyStatusTimer.value);
+    copyStatusTimer.value = null;
+  }
+  copyStatus.value = 'idle';
+};
+
+// 设置复制状态并自动重置
+const setCopyStatusWithTimeout = (status: CopyStatus, duration: number = 2000) => {
+  copyStatus.value = status;
+  
+  if (copyStatusTimer.value) {
+    clearTimeout(copyStatusTimer.value);
+  }
+  
+  copyStatusTimer.value = window.setTimeout(() => {
+    resetCopyStatus();
+  }, duration);
+};
+
+// 使用 Clipboard API 复制
+const copyWithClipboardAPI = async (text: string): Promise<boolean> => {
+  try {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      // 检查是否在安全上下文中（HTTPS 或 localhost）
+      if (window.isSecureContext) {
+        await navigator.clipboard.writeText(text);
+        return true;
+      }
+      // 非安全上下文但支持 clipboard API（某些浏览器可能允许）
+      try {
+        await navigator.clipboard.writeText(text);
+        return true;
+      } catch {
+        return false;
+      }
+    }
+    return false;
+  } catch {
+    return false;
+  }
+};
+
+// 使用传统 execCommand 复制（兼容旧浏览器）
+const copyWithExecCommand = (text: string): boolean => {
+  try {
+    const textArea = document.createElement('textarea');
+    textArea.value = text;
+    
+    // 样式设置确保不影响页面布局
+    textArea.style.position = 'fixed';
+    textArea.style.left = '-9999px';
+    textArea.style.top = '-9999px';
+    textArea.style.width = '1px';
+    textArea.style.height = '1px';
+    textArea.style.opacity = '0';
+    textArea.style.pointerEvents = 'none';
+    textArea.style.zIndex = '-1';
+    textArea.readOnly = true;
+    
+    document.body.appendChild(textArea);
+    
+    // 选择文本
+    textArea.focus();
+    textArea.select();
+    textArea.setSelectionRange(0, textArea.value.length);
+    
+    // 执行复制
+    const result = document.execCommand('copy');
+    
+    // 清理
+    document.body.removeChild(textArea);
+    
+    return result;
+  } catch {
+    return false;
+  }
+};
+
+// 使用 selection API 作为备选方案
+const copyWithSelection = (text: string): boolean => {
+  try {
+    // 创建一个临时元素
+    const tempDiv = document.createElement('div');
+    tempDiv.textContent = text;
+    
+    // 样式设置
+    tempDiv.style.position = 'fixed';
+    tempDiv.style.left = '-9999px';
+    tempDiv.style.top = '-9999px';
+    tempDiv.style.opacity = '0';
+    tempDiv.style.pointerEvents = 'none';
+    tempDiv.style.zIndex = '-1';
+    tempDiv.style.whiteSpace = 'pre-wrap';
+    tempDiv.style.userSelect = 'text';
+    
+    document.body.appendChild(tempDiv);
+    
+    // 创建选区
+    const selection = window.getSelection();
+    const range = document.createRange();
+    range.selectNodeContents(tempDiv);
+    
+    // 清除现有选区并添加新选区
+    if (selection) {
+      selection.removeAllRanges();
+      selection.addRange(range);
+    }
+    
+    // 执行复制
+    const result = document.execCommand('copy');
+    
+    // 清理
+    if (selection) {
+      selection.removeAllRanges();
+    }
+    document.body.removeChild(tempDiv);
+    
+    return result;
+  } catch {
+    return false;
+  }
+};
 
 // 复制代码
 const copyCode = async () => {
   if (!view) return;
 
   const code = view.state.doc.toString();
+  
+  // 如果代码为空，提示用户
+  if (!code || code.trim() === '') {
+    ElMessage.warning('代码为空，无需复制');
+    return;
+  }
+  
+  // 设置复制中状态
+  copyStatus.value = 'copying';
+  
   try {
-    // 优先使用新的 Clipboard API
-    if (navigator.clipboard && window.isSecureContext) {
-      await navigator.clipboard.writeText(code);
-    } else {
-      // 降级使用传统的复制方法
-      const textArea = document.createElement('textarea');
-      textArea.value = code;
-      textArea.style.position = 'fixed';
-      textArea.style.left = '-999999px';
-      textArea.style.top = '-999999px';
-      document.body.appendChild(textArea);
-      textArea.focus();
-      textArea.select();
-      document.execCommand('copy');
-      textArea.remove();
+    // 1. 优先使用 Clipboard API（现代浏览器推荐）
+    let copied = await copyWithClipboardAPI(code);
+    
+    // 2. 如果 Clipboard API 失败，使用 execCommand
+    if (!copied) {
+      copied = copyWithExecCommand(code);
     }
-    ElMessage.success('代码已复制到剪贴板');
+    
+    // 3. 如果 execCommand 失败，使用 Selection API 作为备选
+    if (!copied) {
+      copied = copyWithSelection(code);
+    }
+    
+    if (copied) {
+      // 复制成功
+      setCopyStatusWithTimeout('success', 2500);
+      ElMessage({
+        message: '代码已复制到剪贴板',
+        type: 'success',
+        duration: 2000,
+        showClose: true
+      });
+    } else {
+      // 所有方法都失败
+      setCopyStatusWithTimeout('error', 3000);
+      
+      // 显示更详细的错误信息和解决方案
+      ElMessage({
+        message: '复制失败，请使用快捷键 Ctrl+C (Windows) 或 Cmd+C (Mac) 手动复制',
+        type: 'error',
+        duration: 5000,
+        showClose: true
+      });
+      
+      // 尝试聚焦编辑器，方便用户手动复制
+      view.focus();
+      
+      // 如果有选中文本，保持选中；否则全选
+      if (view.state.selection.main.empty) {
+        view.dispatch({
+          selection: { anchor: 0, head: view.state.doc.length }
+        });
+      }
+    }
   } catch (err) {
-    ElMessage.error('复制失败，请手动复制');
-    console.error('复制失败:', err);
+    // 捕获意外错误
+    setCopyStatusWithTimeout('error', 3000);
+    
+    const errorMessage = err instanceof Error ? err.message : String(err);
+    console.error('复制代码时发生错误:', errorMessage);
+    
+    ElMessage({
+      message: `复制失败：${errorMessage}，请尝试手动复制`,
+      type: 'error',
+      duration: 5000,
+      showClose: true
+    });
   }
 };
 
@@ -1637,5 +1841,76 @@ defineExpose({
 /* 设置下拉菜单不会被压缩 */
 :deep(.el-dropdown) {
   flex-shrink: 0;
+}
+
+/* 复制按钮状态样式 */
+.copy-button-success {
+  background-color: #34c759 !important;
+  color: white !important;
+  border-color: #34c759 !important;
+  animation: success-pulse 0.3s ease-out;
+}
+
+.copy-button-success:hover {
+  background-color: #32d760 !important;
+  color: white !important;
+}
+
+.copy-button-error {
+  background-color: #ff3b30 !important;
+  color: white !important;
+  border-color: #ff3b30 !important;
+  animation: error-shake 0.5s ease-out;
+}
+
+.copy-button-error:hover {
+  background-color: #ff453a !important;
+  color: white !important;
+}
+
+.copy-button-copying {
+  background-color: #0071e3 !important;
+  color: white !important;
+  border-color: #0071e3 !important;
+}
+
+/* 成功提示动画 */
+@keyframes success-pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* 错误提示动画 */
+@keyframes error-shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  10%, 30%, 50%, 70%, 90% {
+    transform: translateX(-3px);
+  }
+  20%, 40%, 60%, 80% {
+    transform: translateX(3px);
+  }
+}
+
+/* Loading 图标旋转动画 */
+.copy-button-copying :deep(.el-icon) {
+  animation: loading-spin 1s linear infinite;
+}
+
+@keyframes loading-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 </style>
